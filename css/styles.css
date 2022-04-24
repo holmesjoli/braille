@@ -3,13 +3,22 @@ html, body {
 
 }
 
+header {
+    padding: 20px;
+}
+
 p {
     font-size: 12pt;
-    line-height: 1.5;
+    line-height: 1.4;
+    margin: 10px 0;
 }
 
 img {
     margin: 3.8mm 1.7mm;
+}
+
+blockquote {
+    font-style: italic;
 }
 
 /* all scrolling positions set to relative */
@@ -26,10 +35,24 @@ img {
     flex-direction: row;
 }
 
-.intro-left,
-.intro-right {
-    max-width: 500px;
+.intro-left {
+    max-width: 700px;
     padding: 20px;
+}
+
+.intro-right {
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid grey;
+}
+
+.intro-right p {
+    font-size: 10pt;
+}
+
+.intro-right blockquote {
+    font-size: 10pt;
+    text-align: center;
 }
 
 .outro {
