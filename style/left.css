@@ -82,9 +82,9 @@ p {
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-  }
+}
 
-  .step p {
+.step p {
     margin: 0 auto;
     height: 300px;
     background-color: white;
