@@ -32,8 +32,6 @@ img {
     padding: 20px;
 }
 
-
-
 .outro {
     max-width: 500px;
     padding: 20px;
@@ -107,4 +105,5 @@ img {
     max-width: 3.7mm;
     display: inline-block;
     font-size: 16pt;
+    margin: 3.8mm 1.7mm;
 }
