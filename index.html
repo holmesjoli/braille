@@ -9,31 +9,36 @@
 </head>
 
 <body>
-    <div class="intro">
-        <div alt="Braille cells spell out the title of Braille">
-            <img class="cell" alt="Braille cell spelling the letter B" src="./svg/B.svg">
-            <img class="cell" alt="Braille cell spelling the letter R" src="./svg/R.svg">
-            <img class="cell" alt="Braille cell spelling the letter A" src="./svg/A.svg">
-            <img class="cell" alt="Braille cell spelling the letter I" src="./svg/I.svg">
-            <img class="cell" alt="Braille cell spelling the letter L" src="./svg/L.svg">
-            <img class="cell" alt="Braille cell spelling the letter L" src="./svg/L.svg">
-            <img class="cell" alt="Braille cell spelling the letter E" src="./svg/E.svg">
-        </div>
-        <div>
-            <div class="cell" alt="The letter B">B</div>
-            <div class="cell" alt="The letter R">R</div>
-            <div class="cell" alt="The letter A">A</div>
-            <div class="cell" alt="The letter I">I</div>
-            <div class="cell" alt="The letter L">L</div>
-            <div class="cell" alt="The letter L">L</div>
-            <div class="cell" alt="The letter E">E</div>
-        </div>
-        <!-- <h1>Let's make a scrolly!</h1> -->
-        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
-            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
-            magic...</p>
 
+    <div class="intro">
+        <div class="intro-left">
+            <div alt="Braille cells spell out the title of Braille">
+                <img class="cell" alt="Braille cell spelling the letter B" src="./svg/B.svg">
+                <img class="cell" alt="Braille cell spelling the letter R" src="./svg/R.svg">
+                <img class="cell" alt="Braille cell spelling the letter A" src="./svg/A.svg">
+                <img class="cell" alt="Braille cell spelling the letter I" src="./svg/I.svg">
+                <img class="cell" alt="Braille cell spelling the letter L" src="./svg/L.svg">
+                <img class="cell" alt="Braille cell spelling the letter L" src="./svg/L.svg">
+                <img class="cell" alt="Braille cell spelling the letter E" src="./svg/E.svg">
+            </div>
+            <div>
+                <div class="cell" alt="The letter B">B</div>
+                <div class="cell" alt="The letter R">R</div>
+                <div class="cell" alt="The letter A">A</div>
+                <div class="cell" alt="The letter I">I</div>
+                <div class="cell" alt="The letter L">L</div>
+                <div class="cell" alt="The letter L">L</div>
+                <div class="cell" alt="The letter E">E</div>
+            </div>
+            <!-- <h1>Let's make a scrolly!</h1> -->
+            <p>Braille is a notational system developed in the early 1800s. Notational systems represent the sounds or words of a language. In the case of braille, the notational system is tactile instead of visual.</p>
+            <p>Each letter of the alphabet is encoded in a single braille cell. In English Braille, this cell is arranged using six dots in a 2 by 3 matrix.</p>
+        </div>
+        <div class="intro-right">
+            <img width="200px" alt="2 by 3 matrix of a braille cell. Numbers 1 through 6 show the positioning of each dot." src="./svg/matrix.svg">
+        </div>
     </div>
+
     <section id='scroll'>
         <!--  graphic container  -->
         <div class='scroll__graphic'>

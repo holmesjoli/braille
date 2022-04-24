@@ -3,20 +3,13 @@ html, body {
 
 }
 
-.intro {
-    max-width: 500px;
-    padding: 20px;
-}
-
-.outro {
-    max-width: 500px;
-    padding: 20px;
-    margin-bottom: 200px
-}
-
 p {
     font-size: 12pt;
     line-height: 1.5;
+}
+
+img {
+    margin: 3.8mm 1.7mm;
 }
 
 /* all scrolling positions set to relative */
@@ -26,6 +19,25 @@ p {
 
 #chart {
     background-color: blanchedalmond;
+}
+
+.intro {
+    display: flex;
+    flex-direction: row;
+}
+
+.intro-left,
+.intro-right {
+    max-width: 500px;
+    padding: 20px;
+}
+
+
+
+.outro {
+    max-width: 500px;
+    padding: 20px;
+    margin-bottom: 200px
 }
 
 /* set scroll graphic to absolute and lock in the position */
@@ -93,7 +105,6 @@ p {
     width: 3.7mm;
     min-width: 3.7mm;
     max-width: 3.7mm;
-    margin: 3.8mm 1.7mm;
     display: inline-block;
     font-size: 16pt;
 }
