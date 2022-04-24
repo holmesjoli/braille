@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <link rel="stylesheet" type="text/css" href="./style/left.css">
+</head>
+
+<body>
+    <div class="intro">
+        <h1>Let's make a scrolly!</h1>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
+
+    </div>
+    <section id='scroll'>
+        <!--  graphic container  -->
+        <div class='scroll__graphic'>
+            <!--   actual graphic/chart   -->
+            <div id='chart'>
+            </div>
+        </div>
+
+        <!--  step/text container  -->
+        <div class='scroll__text'>
+            <div class='step' data-step='1'>
+                <p>STEP 1</p>
+            </div>
+            <div class='step' data-step='2'>
+                <p>STEP 2</p>
+            </div>
+            <div class='step' data-step='3'>
+                <p>STEP 3</p>
+            </div>
+            <div class='step' data-step='4'>
+                <p>STEP 4</p>
+            </div>
+        </div>
+    </section>
+    <div class="outro">
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
+    </div>
+
+</body>
+<script src="./main.js"></script>
+
+</html>
