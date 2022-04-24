@@ -14,8 +14,8 @@ html, body {
     margin-bottom: 200px
 }
 
-p{
-    font-size: 20px;
+p {
+    font-size: 12pt;
     line-height: 1.5;
 }
 
@@ -93,7 +93,7 @@ p{
     width: 3.7mm;
     min-width: 3.7mm;
     max-width: 3.7mm;
-    margin: 0 1.7mm;
+    margin: 3.8mm 1.7mm;
     display: inline-block;
     font-size: 16pt;
 }
