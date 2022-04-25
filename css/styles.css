@@ -1,6 +1,5 @@
 html, body {
     font-family: Helvetica, sans-serif;
-
 }
 
 header {
@@ -32,7 +31,7 @@ blockquote {
 
 .intro {
     display: grid;
-    grid-template-columns: 1fr minmax(150px, 25%)
+    grid-template-columns: 1fr minmax(150px, 35%)
 }
 
 .intro-left {
@@ -45,7 +44,7 @@ blockquote {
     padding: 20px;
     border: 1px solid #D7D7D7;
     background-color: rgba(215, 215, 215, .12);
-    margin-right: 50px;
+    margin: 0 50px;
 }
 
 .intro-right p {
