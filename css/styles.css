@@ -25,19 +25,21 @@ p {
 .quote {
     display: flex;
     flex-wrap: wrap;
+    margin: 20px;
 }
 
 span {
     flex: 0 1 80px;
     text-transform: uppercase;
     font-style: italic;
-    border-right: 2px solid #D7D7D7;
     text-align: center;
 }
 
 .quote p {
+    border-left: 2px solid #D7D7D7;
     flex: 0 1 500px;
     font-size: 10pt;
+    padding-left: 20px;
 }
 
 #scroll .quote p {
@@ -46,28 +48,27 @@ span {
 
 .content {
     margin: auto 0;
-    padding: 20px;
 }
 
-.intro {
+.intro, .outro {
     display: grid;
     grid-template-columns: 1fr minmax(150px, 35%)
 }
 
-.intro-right {
+.right {
     padding: 20px;
     border: 1px solid #D7D7D7;
     background-color: rgba(215, 215, 215, .12);
     margin: 0 50px;
 }
 
-.intro-right blockquote {
+.right blockquote {
     font-size: 10pt;
     text-align: center;
 }
 
 .outro {
-    max-width: 500px;
+    /* max-width: 500px; */
     padding: 20px;
     margin-bottom: 200px
 }
