@@ -82,15 +82,15 @@ export function encode(svg, spacing, position, glyph = null, index = 0, addText 
 export function spell(chart, spacing, position, params, glyph, addText) {
 
     let text = glyph;
-
-    if (glyph == null) {
-        text = "empty cell";
-    }
-
     var svg = chart.append('svg')
         .attr("width", params.width)
         .attr("height", params.height)
-        .attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
+
+
+    if (glyph == null) {
+        text = "empty cell";
+        glyph = " "
+    }
 
     if (glyph.length > 0) {
         for(let i = 0; i < glyph.length; i++) {
@@ -99,4 +99,6 @@ export function spell(chart, spacing, position, params, glyph, addText) {
     } else {
         encode(svg, spacing, position, glyph, 1, addText);
     }
+
+    svg.attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
 }
