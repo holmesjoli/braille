@@ -143,7 +143,18 @@ function drawVis(spacing, position) {
 
     // Cell.create(svg, spacing, position, chartWidth, chartHeight, 20, true);
 
-    Cell.create(chart, spacing, position, params, "c")
+    let c1 = d3.select("#title")
+
+    let paramsC = {
+        width: 300,
+        height: 75
+    }
+
+    let list = ["B", "R", "A", "I", "L", "L", "E"]
+
+    Cell.spell(c1, spacing, position, paramsC, list)
+
+    // Cell.create(chart, spacing, position, params, "c")
 }
 
 // function updateChart() {

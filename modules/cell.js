@@ -2,32 +2,23 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function create(chart, spacing, position, params, glyph = null, convert = 3.7795275591, addText = false) {
+export function create(svg, spacing, position, glyph = null, index = 1, convert = 3.7795275591, addText = false) {
 
-    const margin = {x: 3.1, y:3.1}
+    const margin = {x: 6*index, y:3.1}
     const r = .6;
-    let text;
 
     if (glyph != null) {
-        text = glyph;
         position = position.filter(function(d) {
-            return d.glyph === glyph;
+            return d.glyph === glyph.toLowerCase();
         });
-
-    } else {
-        text = "empty cell";
     }
 
     const fillScale = d3.scaleOrdinal()
         .domain([0, 1])
         .range(["#FFFFFF", "#000000"]);
 
-    var svg = chart.append('svg')
-        .attr("width", params.width)
-        .attr("height", params.height)
-        .attr("title", `A single 3 by 2 braille cell which codes for the glyph: ${text}`);
-
-    svg.selectAll('circle')
+    svg.append("g")
+        .selectAll('circle')
         .data(spacing)
         .join('circle')
         .attr('cy',  function (d) {
@@ -45,6 +36,7 @@ export function create(chart, spacing, position, params, glyph = null, convert =
             }
         })
         .attr("stroke", "#000000")
+        .attr("stroke-width", .5)
         .attr('r', r*convert);
 
     if (addText) {
@@ -66,5 +58,30 @@ export function create(chart, spacing, position, params, glyph = null, convert =
         })
         .attr("text-anchor", "middle")
         .attr("font-size", 2*convert)
+    }
+}
+
+export function spell(chart, spacing, position, params, glyph) {
+
+    let text;
+
+    if (glyph != null) {
+        text = glyph.join("");
+    } else {
+        text = "empty cell";
+    }
+
+    var svg = chart.append('svg')
+        .attr("width", params.width)
+        .attr("height", params.height)
+        .attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
+
+    if (glyph.length > 0) {
+        for(let i = 1; i < glyph.length + 1; i++) {
+            console.log(glyph[i-1])
+            create(svg, spacing, position, glyph[i-1], i)
+        }
+    } else {
+        create(svg, spacing, position, glyph)
     }
 }
