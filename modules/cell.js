@@ -79,13 +79,13 @@ export function encode(svg, spacing, position, glyph = null, index = 0, addText 
 }
 
 // Converts latin alphabet to braille positionings
-export function spell(chart, spacing, position, params, glyph, addText) {
+export function spell(chart, spacing, position, params, glyph = null, index = 0, addText = false, convert = 3.7795275591) {
 
+    console.log(convert)
     let text = glyph;
     var svg = chart.append('svg')
         .attr("width", params.width)
         .attr("height", params.height)
-
 
     if (glyph == null) {
         text = "empty cell";
@@ -94,10 +94,10 @@ export function spell(chart, spacing, position, params, glyph, addText) {
 
     if (glyph.length > 0) {
         for(let i = 0; i < glyph.length; i++) {
-            encode(svg, spacing, position, glyph[i], i, addText);
+            encode(svg, spacing, position, glyph[i], i, addText, convert);
         }
     } else {
-        encode(svg, spacing, position, glyph, 1, addText);
+        encode(svg, spacing, position, glyph, 1, addText, convert);
     }
 
     svg.attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
