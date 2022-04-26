@@ -83,8 +83,38 @@ function handleProgress(response) {
     console.log(response)
 }
 
-// kick-off code to run once on load
-function init(spacing, position) {
+const files = {
+    spacing: {
+        pth: "./data/spacing.csv",
+        parse: function(j) {
+            return {
+                position: +j.position,
+                x: +j.x,
+                y: +j.y
+            }
+        }
+    },
+    position: {
+        pth: "./data/position.csv",
+        parse: function(j) {
+            return {
+                alphanumeric: j.alphanumeric,
+                position: j.position,
+                value: +j.value
+            }
+        }
+    }
+}
+
+let promises = [];
+
+for (var key of Object.keys(files)) {
+    var fl = files[key];
+    Helper.read(fl.pth, fl.parse, promises);
+}
+
+Promise.all(promises).then(function (values) {
+
     // 1. call a resize on load to update width/height/position of elements
     handleResize();
 
@@ -107,48 +137,7 @@ function init(spacing, position) {
     window.addEventListener('resize', handleResize);
 
     updateData();
-    drawVis(spacing, position);
-}
-
-const files = {
-    spacing: {
-        pth: "./data/spacing.csv",
-        parse: function(j) {
-            return {
-                position: j.position,
-                x: +j.x,
-                y: +j.y
-            }
-        }
-    },
-    position: {
-        pth: "./data/position.csv",
-        parse: function(j) {
-            return {
-                alpha: j.alpha,
-                numeric: +j.numeric,
-                p1: +j.p1,
-                p2: +j.p2,
-                p3: +j.p3,
-                p4: +j.p4,
-                p5: +j.p5,
-                p6: +j.p6
-            }
-        }
-    }
-}
-
-let promises = [];
-
-for (var key of Object.keys(files)) {
-    var fl = files[key];
-    Helper.read(fl.pth, fl.parse, promises);
-}
-
-Promise.all(promises).then(function (values) {
-
-    // start it up
-    init(values[0], values[1]);
+    drawVis(values[0], values[1]);
 });
 
 
