@@ -110,7 +110,7 @@ export function createTitle(spacing, position) {
         height: 75
     }
 
-    let list = ["B", "R", "A", "I", "L", "L", "E"];
+    let string = "BRAILLE".split("");
 
-    spell(d3.select("#title"), spacing, position, paramsC, list, true);
+    spell(d3.select("#title"), spacing, position, paramsC, string, true);
 }
