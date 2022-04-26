@@ -2,7 +2,7 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function create(chart, spacing, position, width, height, glyph = null, convert = 3.7795275591, addText = false) {
+export function create(chart, spacing, position, params, glyph = null, convert = 3.7795275591, addText = false) {
 
     const margin = {x: 3.1, y:3.1}
     const r = .6;
@@ -23,8 +23,8 @@ export function create(chart, spacing, position, width, height, glyph = null, co
         .range(["#FFFFFF", "#000000"]);
 
     var svg = chart.append('svg')
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", params.width)
+        .attr("height", params.height)
         .attr("title", `A single 3 by 2 braille cell which codes for the glyph: ${text}`);
 
     svg.selectAll('circle')

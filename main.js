@@ -2,15 +2,18 @@ import * as Cell from "./modules/cell.js";
 import * as Helper from "./modules/helper.js"
 
 // using d3 for convenience, and storing a selected elements
-var container = d3.select('#scroll');
-var graphic = container.select('.scroll__graphic');
-var chart = graphic.select('#chart');
-var text = container.select('.scroll__text');
-var step = text.selectAll('.step');
+let container = d3.select('#scroll');
+let graphic = container.select('.scroll__graphic');
+let chart = graphic.select('#chart');
+let text = container.select('.scroll__text');
+let step = text.selectAll('.step');
 
 // define some global vars
-var chartWidth;
-var chartHeight;
+let params = {
+    width: null,
+    height: null,
+    margin: 32
+}
 
 // let data = [];
 // function updateData() {
@@ -21,31 +24,29 @@ var chartHeight;
 // }
 
 // initialize the scrollama
-var scroller = scrollama();
+let scroller = scrollama();
 
 // resize function to set dimensions on load and on page resize
 function handleResize() {
     // 1. update height of step elements for breathing room between steps
     // changing the multiplier here will define how much white space between steps
-    var stepHeight = Math.floor(window.innerHeight * 0.7);
+    let stepHeight = Math.floor(window.innerHeight * 0.7);
     step.style('height', stepHeight + 'px');
 
     // 2. update height of graphic element
-    var bodyWidth = d3.select('body').node().offsetWidth;
+    let bodyWidth = d3.select('body').node().offsetWidth;
     graphic.style('height', window.innerHeight + 'px');
 
     // 3. update width of chart by subtracting from text width
-    var chartMargin = 32;
-    var textWidth = text.node().offsetWidth;
 
-    chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
+    params.width = graphic.node().offsetWidth - text.node().offsetWidth; - params.margin; // left
 
     // make the height 1/2 of viewport
-    chartHeight = Math.floor(window.innerHeight / 2);
+    params.height = Math.floor(window.innerHeight / 2);
 
     chart
-        .style('width', chartWidth + 'px')
-        .style('height', chartHeight + 'px');
+        .style('width', params.width + 'px')
+        .style('height', params.height + 'px');
 
     // 4. tell scrollama to update new element dimensions
     scroller.resize();
@@ -98,8 +99,8 @@ const files = {
 
 let promises = [];
 
-for (var key of Object.keys(files)) {
-    var fl = files[key];
+for (let key of Object.keys(files)) {
+    let fl = files[key];
     Helper.read(fl.pth, fl.parse, promises);
 }
 
@@ -142,7 +143,7 @@ function drawVis(spacing, position) {
 
     // Cell.create(svg, spacing, position, chartWidth, chartHeight, 20, true);
 
-    Cell.create(chart, spacing, position, chartWidth, chartHeight, "c")
+    Cell.create(chart, spacing, position, params, "c")
 }
 
 // function updateChart() {
