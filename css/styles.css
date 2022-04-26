@@ -105,7 +105,7 @@ span {
 .step {
     opacity: 0.5;
     padding: 1rem;
-    background-color: lightgray;
+    /* background-color: lightgray; */
     border: 1px solid gray;
     max-width: 800px;
     /* height: 200px; */
