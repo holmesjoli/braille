@@ -152,7 +152,7 @@ function drawVis(spacing, position) {
 
     let list = ["B", "R", "A", "I", "L", "L", "E"]
 
-    Cell.spell(c1, spacing, position, paramsC, list)
+    Cell.spell(c1, spacing, position, paramsC, list, true)
 
     // Cell.create(chart, spacing, position, params, "c")
 }

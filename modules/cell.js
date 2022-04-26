@@ -2,9 +2,9 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function create(svg, spacing, position, glyph = null, index = 1, convert = 3.7795275591, addText = false) {
+export function create(svg, spacing, position, glyph = null, index = 0, addText = false, convert = 3.7795275591) {
 
-    const margin = {x: 6*index, y:3.1}
+    const margin = {left: 3.1, right: 3.1, y: 3.1}
     const r = .6;
 
     if (glyph != null) {
@@ -18,6 +18,7 @@ export function create(svg, spacing, position, glyph = null, index = 1, convert 
         .range(["#FFFFFF", "#000000"]);
 
     svg.append("g")
+        .attr("id", glyph)
         .selectAll('circle')
         .data(spacing)
         .join('circle')
@@ -25,7 +26,11 @@ export function create(svg, spacing, position, glyph = null, index = 1, convert 
             return d.y*convert + margin.y*convert;
         })
         .attr('cx', function (d) {
-            return d.x*convert + margin.x*convert;
+            if (index === 0) {
+                return d.x*convert + margin.left*convert/2;
+            } else {
+                return d.x*convert + margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index;
+            }
         })
         .attr("fill", function(d) {
             if (glyph != null) {
@@ -39,29 +44,42 @@ export function create(svg, spacing, position, glyph = null, index = 1, convert 
         .attr("stroke-width", .5)
         .attr('r', r*convert);
 
+    console.log(glyph);
     if (addText) {
-        svg.selectAll('text')
-        .data(spacing)
-        .join('text')
-        .attr('y',  function (d) {
-            return d.y*convert + margin.y*convert + r*convert;
-        })
-        .attr('x', function (d) {
-            if(d.position % 2 == 0) {
-                return d.x*convert + margin.x*convert*1.5;
-            } else {
-                return d.x*convert + margin.x*convert - margin.x*convert*.5;
-            }
-        })
-        .text(function (d) {
-            return d.position;
-        })
-        .attr("text-anchor", "middle")
-        .attr("font-size", 2*convert)
+
+        svg
+            .append("text")
+            .attr("x", function (d) {
+                if (index === 0) {
+                    return margin.left*convert/2 - r*convert;
+                } else {
+                    return margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index - r*convert;
+                }
+            })
+            .attr("y", 50)
+            .text(glyph)
+    //     svg.selectAll('text')
+    //     .data(spacing)
+    //     .join('text')
+    //     .attr('y',  function (d) {
+    //         return d.y*convert + margin.y*convert + r*convert;
+    //     })
+    //     .attr('x', function (d) {
+    //         if(d.position % 2 == 0) {
+    //             return d.x*convert + margin.left*convert*1.5;
+    //         } else {
+    //             return d.x*convert + margin.left*convert - margin.left*convert*.5;
+    //         }
+    //     })
+    //     .text(function (d) {
+    //         return d.position;
+    //     })
+    //     .attr("text-anchor", "middle")
+    //     .attr("font-size", 2*convert)
     }
 }
 
-export function spell(chart, spacing, position, params, glyph) {
+export function spell(chart, spacing, position, params, glyph, addText) {
 
     let text;
 
@@ -77,11 +95,10 @@ export function spell(chart, spacing, position, params, glyph) {
         .attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
 
     if (glyph.length > 0) {
-        for(let i = 1; i < glyph.length + 1; i++) {
-            console.log(glyph[i-1])
-            create(svg, spacing, position, glyph[i-1], i)
+        for(let i = 0; i < glyph.length; i++) {
+            create(svg, spacing, position, glyph[i], i, addText);
         }
     } else {
-        create(svg, spacing, position, glyph)
+        create(svg, spacing, position, glyph, 1, addText);
     }
 }
