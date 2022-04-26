@@ -100,23 +100,3 @@ export function spell(chart, spacing, position, params, glyph, addText) {
         encode(svg, spacing, position, glyph, 1, addText);
     }
 }
-
-// Creates the title
-export function createTitle(spacing, position) {
-    let paramsC = {
-        width: 300,
-        height: 75
-    }
-
-    spell(d3.select("#title"), spacing, position, paramsC, "BRAILLE", true);
-}
-
-// Creates the initial cell
-export function createCell(spacing, position) {
-    let paramsC = {
-        width: 300,
-        height: 300
-    }
-
-    spell(d3.select("#cell"), spacing, position, paramsC, "BLAH", true);
-}
