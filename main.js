@@ -133,6 +133,7 @@ Promise.all(promises).then(function (values) {
     // updateData();
     drawVis(spacing, position);
     Cell.createTitle(spacing, position);
+    Cell.createCell(spacing, position);
 });
 
 
@@ -145,9 +146,16 @@ function drawVis(spacing, position) {
     console.log(spacing)
     console.log(position)
 
-    // Cell.create(svg, spacing, position, chartWidth, chartHeight, 20, true);
+    let paramsC = {
+        width: 300,
+        height: 75
+    }
 
-    // Cell.create(chart, spacing, position, params, "c")
+    let string = "ABCDEFGHIJ".split("");
+    // let string2 = "KLMNOPQRST".split("");
+    // let string = "UVXYZ    ".split("");
+
+    Cell.spell(chart, spacing, position, params, string, true);
 }
 
 // function updateChart() {

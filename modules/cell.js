@@ -81,11 +81,9 @@ export function encode(svg, spacing, position, glyph = null, index = 0, addText 
 // Converts latin alphabet to braille positionings
 export function spell(chart, spacing, position, params, glyph, addText) {
 
-    let text;
+    let text = glyph;
 
-    if (glyph != null) {
-        text = glyph.join("");
-    } else {
+    if (glyph == null) {
         text = "empty cell";
     }
 
@@ -110,7 +108,15 @@ export function createTitle(spacing, position) {
         height: 75
     }
 
-    let string = "BRAILLE".split("");
+    spell(d3.select("#title"), spacing, position, paramsC, "BRAILLE", true);
+}
 
-    spell(d3.select("#title"), spacing, position, paramsC, string, true);
+// Creates the initial cell
+export function createCell(spacing, position) {
+    let paramsC = {
+        width: 300,
+        height: 300
+    }
+
+    spell(d3.select("#cell"), spacing, position, paramsC, "BLAH", true);
 }
