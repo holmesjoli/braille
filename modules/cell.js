@@ -2,7 +2,7 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function createCell(svg, spacing, width, height) {
+export function create(svg, spacing, width, height) {
 
     const convert = 3.7795275591;
     const margin = {left: 10, right: 10, top:10, bottom: 10}
