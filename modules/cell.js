@@ -4,17 +4,19 @@
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
 export function create(svg, spacing, position, width, height, glyph = null, convert = 3.7795275591, addText = false) {
 
-    let margin = {x: 3.1, y:3.1}
-    let r = .6;
+    const margin = {x: 3.1, y:3.1}
+    const r = .6;
+    let text;
 
-    position = position.filter(function(d) {
-
-        if (glyph != null) {
+    if (glyph != null) {
+        text = glyph;
+        position = position.filter(function(d) {
             return d.glyph === glyph;
-        }
-    });
+        });
 
-    console.log(position)
+    } else {
+        text = "empty cell";
+    }
 
     const fillScale = d3.scaleOrdinal()
         .domain([0, 1])
@@ -23,7 +25,7 @@ export function create(svg, spacing, position, width, height, glyph = null, conv
     svg
         .attr("width", width)
         .attr("height", height)
-        .attr("title", "A single 3 by 2 braille cell sized to the true size.");
+        .attr("title", `A single 3 by 2 braille cell which codes for the glyph: ${text}`);
 
     svg.selectAll('circle')
         .data(spacing)
@@ -35,8 +37,12 @@ export function create(svg, spacing, position, width, height, glyph = null, conv
             return d.x*convert + margin.x*convert;
         })
         .attr("fill", function(d) {
-            let m = position.find(el => el.position === d.position);
-            return fillScale(m.value)
+            if (glyph != null) {
+                let m = position.find(el => el.position === d.position);
+                return fillScale(m.value)
+            } else {
+                return fillScale(0);
+            }
         })
         .attr("stroke", "#000000")
         .attr('r', r*convert);
