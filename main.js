@@ -99,7 +99,7 @@ const files = {
         parse: function(j) {
             return {
                 alphanumeric: j.alphanumeric,
-                position: j.position,
+                position: +j.position,
                 value: +j.value
             }
         }
@@ -150,7 +150,7 @@ function drawVis(spacing, position) {
     console.log(spacing)
     console.log(position)
 
-    Cell.create(svg, spacing, chartWidth, chartHeight);
+    Cell.create(svg, spacing, chartWidth, chartHeight, 20, true);
 }
 
 function updateChart() {
