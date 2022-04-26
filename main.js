@@ -161,12 +161,7 @@ function drawVis(spacing, position) {
     console.log(spacing)
     console.log(position)
 
-    // define the width/height of SVG
-    svg.
-    attr('width', chartWidth).
-    attr('height', chartHeight);
-
-    Cell.createCell(svg, spacing);
+    Cell.createCell(svg, spacing, chartWidth, chartHeight);
 }
 
 function updateChart() {
