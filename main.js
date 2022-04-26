@@ -1,3 +1,6 @@
+import * as Cell from "./modules/cell.js";
+import * as Helper from "./modules/helper.js"
+
 // using d3 for convenience, and storing a selected elements
 var container = d3.select('#scroll');
 var graphic = container.select('.scroll__graphic');
@@ -69,10 +72,10 @@ function handleStepEnter(response) {
         return i === response.index;
     })
 
-    updateData();
-    updateChart();
+    // updateData();
+    // updateChart();
 
-    console.log(response)
+    // console.log(response)
 }
 
 // optional to view precise percent progress on callback
@@ -81,7 +84,7 @@ function handleProgress(response) {
 }
 
 // kick-off code to run once on load
-function init() {
+function init(spacing, position) {
     // 1. call a resize on load to update width/height/position of elements
     handleResize();
 
@@ -104,17 +107,61 @@ function init() {
     window.addEventListener('resize', handleResize);
 
     updateData();
-    initChart();
+    drawVis(spacing, position);
 }
 
-// start it up
-init();
+const files = {
+    spacing: {
+        pth: "./data/spacing.csv",
+        parse: function(j) {
+            return {
+                position: j.position,
+                x: +j.x,
+                y: +j.y,
+                r: +j.r
+            }
+        }
+    },
+    position: {
+        pth: "./data/position.csv",
+        parse: function(j) {
+            return {
+                alpha: j.alpha,
+                numeric: +j.numeric,
+                p1: +j.p1,
+                p2: +j.p2,
+                p3: +j.p3,
+                p4: +j.p4,
+                p5: +j.p5,
+                p6: +j.p6
+            }
+        }
+    }
+}
+
+let promises = [];
+
+for (var key of Object.keys(files)) {
+    var fl = files[key];
+    Helper.read(fl.pth, fl.parse, promises);
+}
+
+Promise.all(promises).then(function (values) {
+
+    // start it up
+    init(values[0], values[1]);
+});
+
 
 /////////////////////////////////
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart() {
+function drawVis(spacing, position) {
+
+    console.log(spacing)
+    console.log(position)
+
     // define the width/height of SVG
     svg.attr('width', chartWidth).attr('height', chartHeight);
 
@@ -129,6 +176,21 @@ function initChart() {
         .attr('cx', function (d) {
             return d;
         });
+
+    for (var i = 1; i < 4; i++) {
+
+        svg
+            .append("circle")
+            .attr("cx", 10)
+            .attr("cy", i*10)
+            .attr("r", 3)
+
+            svg
+            .append("circle")
+            .attr("cx", 20)
+            .attr("cy", (i)*10)
+            .attr("r", 3)
+    }
 }
 
 function updateChart() {
