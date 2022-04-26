@@ -2,7 +2,7 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function create(svg, spacing, position, glyph = null, index = 0, addText = false, convert = 3.7795275591) {
+export function encode(svg, spacing, position, glyph = null, index = 0, addText = false, convert = 3.7795275591) {
 
     const margin = {left: 3.1, right: 3.1, y: 3.1}
     const r = .6;
@@ -44,7 +44,6 @@ export function create(svg, spacing, position, glyph = null, index = 0, addText 
         .attr("stroke-width", .5)
         .attr('r', r*convert);
 
-    console.log(glyph);
     if (addText) {
 
         svg
@@ -79,6 +78,7 @@ export function create(svg, spacing, position, glyph = null, index = 0, addText 
     }
 }
 
+// Converts latin alphabet to braille positionings
 export function spell(chart, spacing, position, params, glyph, addText) {
 
     let text;
@@ -96,10 +96,10 @@ export function spell(chart, spacing, position, params, glyph, addText) {
 
     if (glyph.length > 0) {
         for(let i = 0; i < glyph.length; i++) {
-            create(svg, spacing, position, glyph[i], i, addText);
+            encode(svg, spacing, position, glyph[i], i, addText);
         }
     } else {
-        create(svg, spacing, position, glyph, 1, addText);
+        encode(svg, spacing, position, glyph, 1, addText);
     }
 }
 
