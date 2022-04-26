@@ -102,3 +102,15 @@ export function spell(chart, spacing, position, params, glyph, addText) {
         create(svg, spacing, position, glyph, 1, addText);
     }
 }
+
+// Creates the title
+export function createTitle(spacing, position) {
+    let paramsC = {
+        width: 300,
+        height: 75
+    }
+
+    let list = ["B", "R", "A", "I", "L", "L", "E"];
+
+    spell(d3.select("#title"), spacing, position, paramsC, list, true);
+}

@@ -127,8 +127,12 @@ Promise.all(promises).then(function (values) {
     // setup resize event
     window.addEventListener('resize', handleResize);
 
+    let spacing = values[0];
+    let position = values[1];
+
     // updateData();
-    drawVis(values[0], values[1]);
+    drawVis(spacing, position);
+    Cell.createTitle(spacing, position);
 });
 
 
@@ -142,17 +146,6 @@ function drawVis(spacing, position) {
     console.log(position)
 
     // Cell.create(svg, spacing, position, chartWidth, chartHeight, 20, true);
-
-    let c1 = d3.select("#title")
-
-    let paramsC = {
-        width: 300,
-        height: 75
-    }
-
-    let list = ["B", "R", "A", "I", "L", "L", "E"]
-
-    Cell.spell(c1, spacing, position, paramsC, list, true)
 
     // Cell.create(chart, spacing, position, params, "c")
 }
