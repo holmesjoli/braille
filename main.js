@@ -117,8 +117,7 @@ const files = {
             return {
                 position: j.position,
                 x: +j.x,
-                y: +j.y,
-                r: +j.r
+                y: +j.y
             }
         }
     },
@@ -163,34 +162,11 @@ function drawVis(spacing, position) {
     console.log(position)
 
     // define the width/height of SVG
-    svg.attr('width', chartWidth).attr('height', chartHeight);
+    svg.
+    attr('width', chartWidth).
+    attr('height', chartHeight);
 
-    // draw the circles
-    svg.selectAll('circle')
-        .data(data)
-        .join('circle')
-        .attr('cy', 50)
-        .attr('r', 0)
-        .attr('fill', 'purple')
-        .attr('opacity', 0.7)
-        .attr('cx', function (d) {
-            return d;
-        });
-
-    for (var i = 1; i < 4; i++) {
-
-        svg
-            .append("circle")
-            .attr("cx", 10)
-            .attr("cy", i*10)
-            .attr("r", 3)
-
-            svg
-            .append("circle")
-            .attr("cx", 20)
-            .attr("cy", (i)*10)
-            .attr("r", 3)
-    }
+    Cell.createCell(svg, spacing);
 }
 
 function updateChart() {
