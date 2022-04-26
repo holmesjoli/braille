@@ -4,7 +4,7 @@
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
 export function encode(svg, spacing, position, glyph, index, addText, convert, addNumber) {
 
-    const margin = {left: 3.1, right: 3.1, y: 3.1}
+    const margin = {left: 3.1, right: 3.1, top: 3.1}
     const r = .6;
 
     if (glyph != null) {
@@ -23,7 +23,7 @@ export function encode(svg, spacing, position, glyph, index, addText, convert, a
         .data(spacing)
         .join('circle')
         .attr('cy',  function (d) {
-            return d.y*convert + margin.y*convert;
+            return d.y*convert + margin.top*convert;
         })
         .attr('cx', function (d) {
             if (index === 0) {
@@ -63,20 +63,16 @@ export function encode(svg, spacing, position, glyph, index, addText, convert, a
             .data(spacing)
             .join('text')
             .attr('y',  function (d) {
-                return d.y*convert + margin.top*convert + r*convert;
+                return d.y*convert + margin.top*convert + r*convert/2;
             })
             .attr('x', function (d) {
-                if(d.position % 2 == 0) {
-                    return d.x*convert + margin.left*convert*1.5;
-                } else {
-                    return d.x*convert + margin.left*convert - margin.left*convert*.5;
-                }
+                return d.x*convert + convert*margin.left/2;
             })
             .text(function (d) {
                 return d.position;
             })
             .attr("text-anchor", "middle")
-            .attr("font-size", 2*convert);
+            .attr("font-size", convert);
     }
 }
 
