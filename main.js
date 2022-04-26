@@ -12,23 +12,13 @@ var step = text.selectAll('.step');
 var chartWidth;
 var chartHeight;
 
-let data = [];
-function updateData() {
-    data = [];
-    for (let i = 0; i < 5; i++) {
-        data.push(Math.random() * 800);
-    }
-}
-var svg = chart.append('svg')
-
-
-const newData = [
-    { x: 4, size: 9 },
-    { x: 1, size: 8 },
-    { x: 2, size: 1 },
-    { x: 9, size: 3 },
-    { x: 2, size: 2 }
-]
+// let data = [];
+// function updateData() {
+//     data = [];
+//     for (let i = 0; i < 5; i++) {
+//         data.push(Math.random() * 800);
+//     }
+// }
 
 // initialize the scrollama
 var scroller = scrollama();
@@ -136,7 +126,7 @@ Promise.all(promises).then(function (values) {
     // setup resize event
     window.addEventListener('resize', handleResize);
 
-    updateData();
+    // updateData();
     drawVis(values[0], values[1]);
 });
 
@@ -152,19 +142,19 @@ function drawVis(spacing, position) {
 
     // Cell.create(svg, spacing, position, chartWidth, chartHeight, 20, true);
 
-    Cell.create(svg, spacing, position, chartWidth, chartHeight, "c")
+    Cell.create(chart, spacing, position, chartWidth, chartHeight, "c")
 }
 
-function updateChart() {
-    svg
-        .selectAll('circle')
-        .data(data)
-        .join('circle')
-        .attr('cy', 100)
-        .attr('r', 40)
-        .attr('cx', function (d) {
-            return d;
-        });
-}
+// function updateChart() {
+//     svg
+//         .selectAll('circle')
+//         .data(data)
+//         .join('circle')
+//         .attr('cy', 100)
+//         .attr('r', 40)
+//         .attr('cx', function (d) {
+//             return d;
+//         });
+// }
 
 
