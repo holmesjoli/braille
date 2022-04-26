@@ -56,7 +56,7 @@ export function create(svg, spacing, position, glyph = null, index = 0, addText 
                     return margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index - r*convert;
                 }
             })
-            .attr("y", 50)
+            .attr("y", 60)
             .text(glyph)
     //     svg.selectAll('text')
     //     .data(spacing)
