@@ -79,7 +79,7 @@ export function encode(svg, spacing, position, glyph = null, index = 0, addText 
 }
 
 // Converts latin alphabet to braille positionings
-export function spell(chart, spacing, position, params, glyph = null, index = 0, addText = false, convert = 3.7795275591) {
+export function spell(chart, spacing, position, params, glyph = null, addText = false, convert = 3.7795275591) {
 
     console.log(convert)
     let text = glyph;

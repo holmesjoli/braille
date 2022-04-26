@@ -133,7 +133,7 @@ Promise.all(promises).then(function (values) {
     // updateData();
     drawVis(spacing, position);
     Cell.spell(d3.select("#title"), spacing, position, {width: 300, height: 75}, "BRAILLE", true);
-    Cell.spell(d3.select("#cell"), spacing, position, {width: 110, height: 175}, null, 0, false, 20)
+    Cell.spell(d3.select("#cell"), spacing, position, {width: 110, height: 175}, null, false, 20)
 });
 
 
