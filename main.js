@@ -133,7 +133,7 @@ Promise.all(promises).then(function (values) {
     // updateData();
     drawVis(spacing, position);
     Cell.spell(d3.select("#title"), spacing, position, {width: 300, height: 75}, "BRAILLE", true);
-    Cell.spell(d3.select("#cell"), spacing, position, {width: 110, height: 175}, null, false, 20)
+    Cell.spell(d3.select("#cell"), spacing, position, {width: 110, height: 175}, null, false, 20, true)
 });
 
 
@@ -146,16 +146,11 @@ function drawVis(spacing, position) {
     console.log(spacing)
     console.log(position)
 
-    let paramsC = {
-        width: 300,
-        height: 75
-    }
-
     let string = "ABCDEFGHIJ".split("");
     // let string2 = "KLMNOPQRST".split("");
     // let string = "UVXYZ    ".split("");
 
-    Cell.spell(chart, spacing, position, params, string, true);
+    Cell.spell(chart, spacing, position, {width: 300, height: 75}, string, true);
 }
 
 // function updateChart() {

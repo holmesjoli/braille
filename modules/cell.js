@@ -2,7 +2,7 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function encode(svg, spacing, position, glyph = null, index = 0, addText = false, convert = 3.7795275591) {
+export function encode(svg, spacing, position, glyph, index, addText, convert, addNumber) {
 
     const margin = {left: 3.1, right: 3.1, y: 3.1}
     const r = .6;
@@ -45,7 +45,6 @@ export function encode(svg, spacing, position, glyph = null, index = 0, addText 
         .attr('r', r*convert);
 
     if (addText) {
-
         svg
             .append("text")
             .attr("x", function (d) {
@@ -57,29 +56,32 @@ export function encode(svg, spacing, position, glyph = null, index = 0, addText 
             })
             .attr("y", 60)
             .text(glyph)
-    //     svg.selectAll('text')
-    //     .data(spacing)
-    //     .join('text')
-    //     .attr('y',  function (d) {
-    //         return d.y*convert + margin.y*convert + r*convert;
-    //     })
-    //     .attr('x', function (d) {
-    //         if(d.position % 2 == 0) {
-    //             return d.x*convert + margin.left*convert*1.5;
-    //         } else {
-    //             return d.x*convert + margin.left*convert - margin.left*convert*.5;
-    //         }
-    //     })
-    //     .text(function (d) {
-    //         return d.position;
-    //     })
-    //     .attr("text-anchor", "middle")
-    //     .attr("font-size", 2*convert)
+    }
+
+    if (addNumber) {
+        svg.selectAll('text')
+            .data(spacing)
+            .join('text')
+            .attr('y',  function (d) {
+                return d.y*convert + margin.top*convert + r*convert;
+            })
+            .attr('x', function (d) {
+                if(d.position % 2 == 0) {
+                    return d.x*convert + margin.left*convert*1.5;
+                } else {
+                    return d.x*convert + margin.left*convert - margin.left*convert*.5;
+                }
+            })
+            .text(function (d) {
+                return d.position;
+            })
+            .attr("text-anchor", "middle")
+            .attr("font-size", 2*convert);
     }
 }
 
 // Converts latin alphabet to braille positionings
-export function spell(chart, spacing, position, params, glyph = null, addText = false, convert = 3.7795275591) {
+export function spell(chart, spacing, position, params, glyph = null, addText = false, convert = 3.7795275591, addNumber = false) {
 
     console.log(convert)
     let text = glyph;
@@ -94,10 +96,10 @@ export function spell(chart, spacing, position, params, glyph = null, addText = 
 
     if (glyph.length > 0) {
         for(let i = 0; i < glyph.length; i++) {
-            encode(svg, spacing, position, glyph[i], i, addText, convert);
+            encode(svg, spacing, position, glyph[i], i, addText, convert, addNumber);
         }
     } else {
-        encode(svg, spacing, position, glyph, 1, addText, convert);
+        encode(svg, spacing, position, glyph, 1, addText, convert, addNumber);
     }
 
     svg.attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
