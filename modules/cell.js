@@ -2,15 +2,29 @@
 // Create cell
 // Creates the Braille cell with approximate real dimentions. 
 // Converts takes 1 millimeter and converts it to the appropriate pixel size
-export function create(svg, spacing, width, height, convert = 3.7795275591, addText = false) {
+export function create(svg, spacing, position, width, height, glyph = null, convert = 3.7795275591, addText = false) {
+
+    let margin = {x: 3.1, y:3.1}
+    let r = .6;
+
+    position = position.filter(function(d) {
+
+        if (glyph != null) {
+            return d.glyph === glyph;
+        }
+    });
+
+    console.log(position)
+
+    const fillScale = d3.scaleOrdinal()
+        .domain([0, 1])
+        .range(["#FFFFFF", "#000000"]);
 
     svg
         .attr("width", width)
         .attr("height", height)
         .attr("title", "A single 3 by 2 braille cell sized to the true size.");
 
-    let margin = {x: 3.1, y:3.1}
-    let r = .6;
     svg.selectAll('circle')
         .data(spacing)
         .join('circle')
@@ -20,7 +34,10 @@ export function create(svg, spacing, width, height, convert = 3.7795275591, addT
         .attr('cx', function (d) {
             return d.x*convert + margin.x*convert;
         })
-        .attr("fill", "#FFFFFF")
+        .attr("fill", function(d) {
+            let m = position.find(el => el.position === d.position);
+            return fillScale(m.value)
+        })
         .attr("stroke", "#000000")
         .attr('r', r*convert);
 
