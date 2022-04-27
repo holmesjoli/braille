@@ -121,7 +121,7 @@ Promise.all(promises).then(function (values) {
             debug: false, // display the trigger offset for testing
             progress: false
         })
-        // .onStepProgress(handleProgress)
+        .onStepProgress(handleProgress)
         .onStepEnter(handleStepEnter);
 
     // setup resize event
