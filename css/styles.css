@@ -22,6 +22,10 @@ p {
     background-color: blanchedalmond;
 }
 
+/* .intro {
+    margin-bottom: -500px;
+} */
+
 .quote {
     display: flex;
     flex-wrap: wrap;
