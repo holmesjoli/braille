@@ -17,11 +17,30 @@ export function encode(svg, spacing, position, glyph, index, addText, convert, a
         .domain([0, 1])
         .range(["#FFFFFF", "#000000"]);
 
-    svg.append("g")
+    let g = svg.append("g")
         .attr("id", glyph)
+        .attr("role", "list")
+        .attr("aria-label", `braille cell showing the glyph ${glyph}`)
+
+    if (addText) {
+        g
+            .append("text")
+            .attr("x", function (d) {
+                if (index === 0) {
+                    return margin.left*convert/2 - r*convert;
+                } else {
+                    return margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index - r*convert;
+                }
+            })
+            .attr("y", 60)
+            .text(glyph)
+    }
+
+    g
         .selectAll('circle')
         .data(spacing)
         .join('circle')
+        .attr("role", "listitem")
         .attr('cy',  function (d) {
             return d.y*convert + margin.top*convert;
         })
@@ -44,22 +63,8 @@ export function encode(svg, spacing, position, glyph, index, addText, convert, a
         .attr("stroke-width", .5)
         .attr('r', r*convert);
 
-    if (addText) {
-        svg
-            .append("text")
-            .attr("x", function (d) {
-                if (index === 0) {
-                    return margin.left*convert/2 - r*convert;
-                } else {
-                    return margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index - r*convert;
-                }
-            })
-            .attr("y", 60)
-            .text(glyph)
-    }
-
     if (addNumber) {
-        svg.selectAll('text')
+        g.selectAll('text')
             .data(spacing)
             .join('text')
             .attr('y',  function (d) {
@@ -77,6 +82,7 @@ export function encode(svg, spacing, position, glyph, index, addText, convert, a
 }
 
 // Converts latin alphabet to braille positionings
+// SVG accessibility suggestions from https://css-tricks.com/accessible-svgs/
 export function spell(chart, spacing, position, params, glyph = null, addText = false, convert = 3.7795275591, addNumber = false) {
 
     let text = glyph;
