@@ -64,12 +64,28 @@ span {
     border: 1px solid #D7D7D7;
     background-color: rgba(215, 215, 215, .12);
     margin: 0 50px;
-    max-height: 50%;
+    display: flex;
+    flex-direction: column;
+    min-height: 10%;
+    max-height: 40%;
 }
+
 
 .right blockquote {
     font-size: 10pt;
     text-align: center;
+}
+
+.right p {
+    font-size: 10pt;
+}
+
+.right p:first-child {
+    margin-top: 0;
+}
+
+.right p:last-child {
+    margin-bottom: 0;
 }
 
 .outro {
