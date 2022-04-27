@@ -79,7 +79,6 @@ export function encode(svg, spacing, position, glyph, index, addText, convert, a
 // Converts latin alphabet to braille positionings
 export function spell(chart, spacing, position, params, glyph = null, addText = false, convert = 3.7795275591, addNumber = false) {
 
-    console.log(convert)
     let text = glyph;
     var svg = chart.append('svg')
         .attr("width", params.width)
@@ -90,6 +89,11 @@ export function spell(chart, spacing, position, params, glyph = null, addText = 
         glyph = " "
     }
 
+    svg
+        .attr("aria-labelledby","titleID")
+        .append("title")
+            .attr("titleID", `A visual representation of the glyph or word ${text} in Braille`);
+
     if (glyph.length > 0) {
         for(let i = 0; i < glyph.length; i++) {
             encode(svg, spacing, position, glyph[i], i, addText, convert, addNumber);
@@ -97,6 +101,4 @@ export function spell(chart, spacing, position, params, glyph = null, addText = 
     } else {
         encode(svg, spacing, position, glyph, 1, addText, convert, addNumber);
     }
-
-    svg.attr("title", `A visual representation of an individual or set of braille cells representing the glyph or word: ${text}`);
 }
