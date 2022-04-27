@@ -97,6 +97,7 @@ export function spell(chart, spacing, position, params, glyph = null, addText = 
 
     svg
         .attr("aria-labelledby","titleID")
+        .attr("role", "image")
         .append("title")
             .attr("titleID", `A visual representation of the glyph or word ${text} in Braille`);
 
