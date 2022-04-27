@@ -146,11 +146,10 @@ function drawVis(spacing, position) {
     console.log(spacing)
     console.log(position)
 
-    let string = "ABCDEFGHIJ".split("");
     // let string2 = "KLMNOPQRST".split("");
     // let string = "UVXYZ    ".split("");
 
-    Cell.spell(chart, spacing, position, {width: 300, height: 75}, string, true);
+    Cell.spell(chart, spacing, position, {width: 300, height: 75},  "ABCDEFGHIJ", true);
 }
 
 // function updateChart() {
