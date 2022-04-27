@@ -4,7 +4,7 @@ html, body {
 }
 
 body {
-    padding: 20px;
+    padding: 30px 20px;
 }
 
 p {
@@ -60,6 +60,7 @@ span {
     border: 1px solid #D7D7D7;
     background-color: rgba(215, 215, 215, .12);
     margin: 0 50px;
+    max-height: 50%;
 }
 
 .right blockquote {
@@ -70,7 +71,7 @@ span {
 .outro {
     /* max-width: 500px; */
     padding: 20px;
-    margin-bottom: 200px
+    /* margin-bottom: 50px */
 }
 
 /* set scroll graphic to absolute and lock in the position */
