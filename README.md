@@ -52,13 +52,13 @@ I began by researching how the Braille system works by interviewing Megan, watch
 <html lang="en">
 ```
 
-* HTML should include a descriptive title tag to assist people moving between open tabs
+* HTML should include a descriptive title tag to assist people moving between open tabs[^5]
 
 ```
 <title>A descriptive page title</title>
 ```
 
-* HTML images should always include alt tags that describe an image that is useful for interacting and understanding page content
+* HTML images should always include alt tags that describe an image that is useful for interacting and understanding page content[^6]
 
 ```
 <img alt="Image of ..." src="">
@@ -68,7 +68,7 @@ I began by researching how the Braille system works by interviewing Megan, watch
 
 One of the nice things about using D3 from an accessibility perspective is its reliance on SVG. SVG is more accessible than alternative image formats such as PNG or JPG because it contains structured content accessible to a screen reader. With a PNG or JPG, the screen reader can only access content that is available in the `<alt>` tag. While SVG is more accessible than PNG or JPG, a designer can aid navigation by grouping content and adding additional labels to the SVG. 
 
-Several elements can make an SVG more accessible to screen readers [^5]
+Several elements can make an SVG more accessible to screen readers [^7]
 
 * Add a `<title>` tag inside the SVG as the first child of its parent element
 * Add an `aria-labelledby` attribute to the `<svg>` tag that links to the title
@@ -98,7 +98,7 @@ let svg = d3.select("#chart")
 An additional steps a designer can take are to add aria labels to group elements
 
 * Adding grouping elements to the SVG
-* Append `<aria-label>` tag and `<role>` tag [^6]
+* Append `<aria-label>` tag and `<role>` tag [^8]
 
 
 In D3, this looks like this:
@@ -116,7 +116,9 @@ let svg = svg
 [^2]: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment#:~:text=Globally%2C%20at%20least%202.2%20billion,uncorrected%20refractive%20errors%20and%20cataracts. 
 [^3]: https://www.w3.org/WAI/fundamentals/accessibility-intro/
 [^4]: Ibid.
-[^5]: https://css-tricks.com/accessible-svgs/
-[^6]: https://www.a11ywithlindsey.com/blog/accessibility-d3-bar-charts
+[^5]: https://www.w3.org/WAI/test-evaluate/preliminary/
+[^6]: Ibid.
+[^7]: https://css-tricks.com/accessible-svgs/
+[^8]: https://www.a11ywithlindsey.com/blog/accessibility-d3-bar-charts
 
 
