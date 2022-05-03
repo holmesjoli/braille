@@ -21,6 +21,7 @@ function updateData() {
 let svg = chart.append('svg')
 let spacing;
 let position;
+let circles;
 
 const newData = [
     { x: 4, size: 9 },
@@ -60,6 +61,14 @@ for (let key of Object.keys(files)) {
     let fl = files[key];
     Helper.read(fl.pth, fl.parse, promises);
 }
+
+
+const fillScale = d3.scaleOrdinal()
+    .domain([0, 1])
+    .range(["#FFFFFF", "#000000"]);
+
+const r = .6;
+const margin = {left: 3.1, right: 3.1, top: 3.1};
 
 
 // initialize the scrollama
@@ -104,8 +113,8 @@ function handleStepEnter(response) {
         return i === response.index;
     })
 
-    updateData();
-    updateChart();
+    // updateData();
+    // updateChart();
 
     console.log(response)
 }
@@ -147,7 +156,7 @@ function init() {
     console.log(spacing)
     console.log(position)
 
-    updateData();
+    // updateData();
     initChart();
 
     });
@@ -160,21 +169,30 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart() {
-    // define the width/height of SVG
-    svg.attr('width', chartWidth).attr('height', chartHeight);
+function initChart(convert = 20, index = 1) {
+
+    svg
+        .attr('width', chartWidth)
+        .attr('height', chartHeight);
 
     // draw the circles
-    svg.selectAll('circle')
-        .data(data)
+    circles = svg.selectAll('circle')
+        .data(spacing)
         .join('circle')
-        .attr('cy', 50)
-        .attr('r', 0)
-        .attr('fill', 'purple')
-        .attr('opacity', 0.7)
+        .attr("role", "listitem")
+        .attr('cy',  function (d) {
+            return d.y*convert + margin.top*convert;
+        })
         .attr('cx', function (d) {
-            return d;
-        });
+            if (index === 0) {
+                return d.x*convert + margin.left*convert/2;
+            } else {
+                return d.x*convert + margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index;
+            }
+        })
+        .attr('r', r*convert)
+        .attr('fill', '#FFFFFF')
+        .attr('stroke', "#000000");
 }
 
 function updateChart() {
