@@ -208,14 +208,14 @@ function updateChart(convert) {
     c
     .enter()
     .append("circle")
-        .attr('cy',  function (d) {
-            return d.y*convert + margin.top*convert;
-        })
-        .attr('cx', function (d) {
-            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
-        })
-        .attr("r", r*convert)
-        .attr("opacity", 1)
+        // .attr('cy',  function (d) {
+        //     return d.y*convert + margin.top*convert;
+        // })
+        // .attr('cx', function (d) {
+        //     return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+        // })
+        // .attr("r", r*convert)
+        // .attr("opacity", 1)
     .merge(c)
         .transition()
         .duration(1000)
