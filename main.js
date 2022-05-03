@@ -117,7 +117,7 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        initChart(20);
+        updateChart(20);
     }
 
     if (response.index === 1) {
@@ -165,7 +165,7 @@ function init() {
     console.log(position)
 
     // updateData();
-    initChart(20);
+    initChart();
 
     });
 }
@@ -194,44 +194,63 @@ function drawCell(convert) {
         .attr('stroke', "#000000");
 }
 
-function initChart(convert) {
+function initChart(convert = 1) {
 
     svg
         .attr('width', chartWidth)
         .attr('height', chartHeight);
 
-    drawCell(convert);
+    circles = svg.selectAll('circle')
+        .data(spacing)
+        .join('circle')
+        .attr("role", "listitem")
+        .attr('cy',  function (d) {
+            return d.y*convert + margin.top*convert;
+        })
+        .attr('cx', function (d) {
+            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+        })
+        .attr('r', 0)
+        .attr('fill', '#FFFFFF')
+        .attr('stroke', "#000000")
+        .attr('opacity', 0);
 }
 
 function updateChart(convert) {
 
-    drawCell(convert);
 
-    // let c = svg.selectAll("circle")
-    // // .data(spring2019); // new data matched to the wrong old circles
-    // .data(spring2019, function(d) {return d.area;});
+    let c = svg.selectAll("circle")
+    .data(spacing, function(d) {return d.position;});
 
-    // c
-    // .enter()
-    // .append("circle")
-    //     .attr("cx", function(d) { return xScale(d.income); })
-    //     .attr("cy", function(d) { return yScale(d.rent); })
-    //     .attr("r", 0)
-    //     .attr("fill","steelblue")
-    // .merge(c)
-    //     .transition()
-    //     .duration(1000)
-    //     .delay(1000)
-    //     .attr("cx", function(d) { return xScale(d.income); })
-    //     .attr("cy", function(d) { return yScale(d.rent); })
-    //     .attr("r", 10);
+    c
+    .enter()
+    .append("circle")
+        .attr('cy',  function (d) {
+            return d.y*convert + margin.top*convert;
+        })
+        .attr('cx', function (d) {
+            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+        })
+        .attr("r", r*convert)
+        .attr("opacity", 1)
+    .merge(c)
+        .transition()
+        .duration(1000)
+        .attr('cy',  function (d) {
+            return d.y*convert + margin.top*convert;
+        })
+        .attr('cx', function (d) {
+            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+        })
+        .attr("r", r*convert)
+        .attr("opacity", 1);
 
-    // c.exit()
-    //     .transition()
-    //     .duration(1000)
-    //     .delay(1000)
-    //     .attr("r", 0)
-    //     .remove();
+    c.exit()
+        .transition()
+        .duration(1000)
+        .delay(1000)
+        .attr("r", 0)
+        .remove();
 }
 
 
