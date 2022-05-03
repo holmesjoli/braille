@@ -13,9 +13,9 @@ For this project, all of my data were hand-collected. The most important part of
 
 ## Sources
 
-[^1] https://www.clintoneye.com/color-blindness.html#:~:text=There%20are%20an%20estimated%20300,are%20color%20blind%20(0.5%25).
-[^2] https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment#:~:text=Globally%2C%20at%20least%202.2%20billion,uncorrected%20refractive%20errors%20and%20cataracts. 
-[^3] https://www.w3.org/WAI/fundamentals/accessibility-intro/ 
+[^1]: https://www.clintoneye.com/color-blindness.html#:~:text=There%20are%20an%20estimated%20300,are%20color%20blind%20(0.5%25).
+[^2]: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment#:~:text=Globally%2C%20at%20least%202.2%20billion,uncorrected%20refractive%20errors%20and%20cataracts. 
+[^3]: https://www.w3.org/WAI/fundamentals/accessibility-intro/ 
 
 
 ### Youtube
