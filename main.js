@@ -20,6 +20,7 @@ function updateData() {
 }
 let svg = chart
     .append('svg')
+let g;
 let spacing;
 let position;
 let circles;
@@ -179,11 +180,18 @@ init();
 
 function initChart(convert = 1) {
 
+    const glyph = "A";
+
     svg
         .attr('width', chartWidth)
         .attr('height', chartHeight);
 
-    circles = svg.selectAll('circle')
+    g = svg.append("g")
+        .attr("id", glyph)
+        .attr("role", "list")
+        .attr("aria-label", `braille cell showing the glyph ${glyph}`)
+
+    circles = g.selectAll('circle')
         .data(spacing)
         .join('circle')
         .attr("role", "listitem")
@@ -202,7 +210,7 @@ function initChart(convert = 1) {
 function updateChart(convert) {
 
 
-    let c = svg.selectAll("circle")
+    let c = g.selectAll("circle")
     .data(spacing, function(d) {return d.position;});
 
     c
