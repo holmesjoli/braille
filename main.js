@@ -1,13 +1,15 @@
+import * as Helper from "./modules/helper.js"
+
 // using d3 for convenience, and storing a selected elements
-var container = d3.select('#scroll');
-var graphic = container.select('.scroll__graphic');
-var chart = graphic.select('#chart');
-var text = container.select('.scroll__text');
-var step = text.selectAll('.step');
+let container = d3.select('#scroll');
+let graphic = container.select('.scroll__graphic');
+let chart = graphic.select('#chart');
+let text = container.select('.scroll__text');
+let step = text.selectAll('.step');
 
 // define some global vars
-var chartWidth;
-var chartHeight;
+let chartWidth;
+let chartHeight;
 
 let data = [];
 function updateData() {
@@ -16,8 +18,9 @@ function updateData() {
         data.push(Math.random() * 800);
     }
 }
-var svg = chart.append('svg')
-
+let svg = chart.append('svg')
+let spacing;
+let position;
 
 const newData = [
     { x: 4, size: 9 },
@@ -26,6 +29,38 @@ const newData = [
     { x: 9, size: 3 },
     { x: 2, size: 2 }
 ]
+
+
+const files = {
+    spacing: {
+        pth: "./data/spacing.csv",
+        parse: function(j) {
+            return {
+                position: +j.position,
+                x: +j.x,
+                y: +j.y
+            }
+        }
+    },
+    position: {
+        pth: "./data/position.csv",
+        parse: function(j) {
+            return {
+                glyph: j.glyph,
+                position: +j.position,
+                value: +j.value
+            }
+        }
+    }
+}
+
+let promises = [];
+
+for (let key of Object.keys(files)) {
+    let fl = files[key];
+    Helper.read(fl.pth, fl.parse, promises);
+}
+
 
 // initialize the scrollama
 var scroller = scrollama();
@@ -82,6 +117,9 @@ function handleProgress(response) {
 
 // kick-off code to run once on load
 function init() {
+
+    Promise.all(promises).then(function (values) {
+
     // 1. call a resize on load to update width/height/position of elements
     handleResize();
 
@@ -94,7 +132,7 @@ function init() {
             text: '.scroll__text', // the step container
             step: '.scroll__text .step', // the step elements
             offset: 0.5, // set the trigger to be 1/2 way down screen
-            debug: true, // display the trigger offset for testing
+            debug: false, // display the trigger offset for testing
             progress: false
         })
         // .onStepProgress(handleProgress)
@@ -103,8 +141,16 @@ function init() {
     // setup resize event
     window.addEventListener('resize', handleResize);
 
+    spacing = values[0];
+    position = values[1];
+
+    console.log(spacing)
+    console.log(position)
+
     updateData();
     initChart();
+
+    });
 }
 
 // start it up
