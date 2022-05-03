@@ -19,11 +19,13 @@ For this project, all of my data were hand-collected. The most important part of
 
 ## Research
 
-I began by researching how the Braille system works by interviewing Megan, watching several Youtube videos, and reading literature on the development of the system. Additionally, I researched how other visual designers have shown language systems.
+I began by researching how the Braille system works by interviewing Megan, watching several Youtube videos on Braille and web accessibility more generally. Additionally, I read literature on the development of the system and researched how other visual designers have shown language systems.
 
 ### Videos
+
 * https://www.youtube.com/watch?v=fbUmaUV02gg
 * https://www.youtube.com/watch?v=sqQ3gdE7ks0
+* https://www.youtube.com/watch?v=3f31oufqFSM
 
 ### Language systems visualized
 
@@ -57,7 +59,8 @@ I began by researching how the Braille system works by interviewing Megan, watch
 
 [^1]: https://www.clintoneye.com/color-blindness.html#:~:text=There%20are%20an%20estimated%20300,are%20color%20blind%20(0.5%25).
 [^2]: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment#:~:text=Globally%2C%20at%20least%202.2%20billion,uncorrected%20refractive%20errors%20and%20cataracts. 
-[^3]: https://www.w3.org/WAI/fundamentals/accessibility-intro/ 
-
-
+[^3]: https://www.w3.org/WAI/fundamentals/accessibility-intro/
+[^4]: Ibid.
+[^5]: https://www.a11ywithlindsey.com/blog/accessibility-d3-bar-charts 
+[^6]: https://css-tricks.com/accessible-svgs/ 
 
