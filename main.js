@@ -1,52 +1,58 @@
-import * as Cell from "./modules/cell.js";
-import * as Helper from "./modules/helper.js"
-
 // using d3 for convenience, and storing a selected elements
-let container = d3.select('#scroll');
-let graphic = container.select('.scroll__graphic');
-let chart = graphic.select('#chart');
-let text = container.select('.scroll__text');
-let step = text.selectAll('.step');
+var container = d3.select('#scroll');
+var graphic = container.select('.scroll__graphic');
+var chart = graphic.select('#chart');
+var text = container.select('.scroll__text');
+var step = text.selectAll('.step');
 
 // define some global vars
-let params = {
-    width: null,
-    height: null,
-    margin: 32
-}
+var chartWidth;
+var chartHeight;
 
-// let data = [];
-// function updateData() {
-//     data = [];
-//     for (let i = 0; i < 5; i++) {
-//         data.push(Math.random() * 800);
-//     }
-// }
+let data = [];
+function updateData() {
+    data = [];
+    for (let i = 0; i < 5; i++) {
+        data.push(Math.random() * 800);
+    }
+}
+var svg = chart.append('svg')
+
+
+const newData = [
+    { x: 4, size: 9 },
+    { x: 1, size: 8 },
+    { x: 2, size: 1 },
+    { x: 9, size: 3 },
+    { x: 2, size: 2 }
+]
 
 // initialize the scrollama
-let scroller = scrollama();
+var scroller = scrollama();
 
 // resize function to set dimensions on load and on page resize
 function handleResize() {
     // 1. update height of step elements for breathing room between steps
     // changing the multiplier here will define how much white space between steps
-    let stepHeight = Math.floor(window.innerHeight * 0.7);
+    var stepHeight = Math.floor(window.innerHeight * 0.7);
     step.style('height', stepHeight + 'px');
 
     // 2. update height of graphic element
-    let bodyWidth = d3.select('body').node().offsetWidth;
+    var bodyWidth = d3.select('body').node().offsetWidth;
     graphic.style('height', window.innerHeight + 'px');
 
     // 3. update width of chart by subtracting from text width
+    var chartMargin = 32;
+    var textWidth = text.node().offsetWidth;
 
-    params.width = graphic.node().offsetWidth - text.node().offsetWidth; - params.margin; // left
+    chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
 
     // make the height 1/2 of viewport
-    params.height = Math.floor(window.innerHeight / 2);
+    chartHeight = Math.floor(window.innerHeight / 2);
 
     chart
-        .style('width', params.width + 'px')
-        .style('height', params.height + 'px');
+        .style('width', chartWidth + 'px')
+        .style('height', chartHeight + 'px');
 
     // 4. tell scrollama to update new element dimensions
     scroller.resize();
@@ -63,10 +69,10 @@ function handleStepEnter(response) {
         return i === response.index;
     })
 
-    // updateData();
-    // updateChart();
+    updateData();
+    updateChart();
 
-    // console.log(response)
+    console.log(response)
 }
 
 // optional to view precise percent progress on callback
@@ -74,38 +80,8 @@ function handleProgress(response) {
     console.log(response)
 }
 
-const files = {
-    spacing: {
-        pth: "./data/spacing.csv",
-        parse: function(j) {
-            return {
-                position: +j.position,
-                x: +j.x,
-                y: +j.y
-            }
-        }
-    },
-    position: {
-        pth: "./data/position.csv",
-        parse: function(j) {
-            return {
-                glyph: j.glyph,
-                position: +j.position,
-                value: +j.value
-            }
-        }
-    }
-}
-
-let promises = [];
-
-for (let key of Object.keys(files)) {
-    let fl = files[key];
-    Helper.read(fl.pth, fl.parse, promises);
-}
-
-Promise.all(promises).then(function (values) {
-
+// kick-off code to run once on load
+function init() {
     // 1. call a resize on load to update width/height/position of elements
     handleResize();
 
@@ -118,50 +94,53 @@ Promise.all(promises).then(function (values) {
             text: '.scroll__text', // the step container
             step: '.scroll__text .step', // the step elements
             offset: 0.5, // set the trigger to be 1/2 way down screen
-            debug: false, // display the trigger offset for testing
+            debug: true, // display the trigger offset for testing
             progress: false
         })
-        .onStepProgress(handleProgress)
+        // .onStepProgress(handleProgress)
         .onStepEnter(handleStepEnter);
 
     // setup resize event
     window.addEventListener('resize', handleResize);
 
-    let spacing = values[0];
-    let position = values[1];
+    updateData();
+    initChart();
+}
 
-    // updateData();
-    drawVis(spacing, position);
-    Cell.spell(d3.select("#title"), spacing, position, {width: 300, height: 75}, "BRAILLE", true);
-    Cell.spell(d3.select("#cell"), spacing, position, {width: 150, height: 175}, null, false, 20, true)
-});
-
+// start it up
+init();
 
 /////////////////////////////////
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function drawVis(spacing, position) {
+function initChart() {
+    // define the width/height of SVG
+    svg.attr('width', chartWidth).attr('height', chartHeight);
 
-    console.log(spacing)
-    console.log(position)
-
-    // let string2 = "KLMNOPQRST".split("");
-    // let string = "UVXYZ    ".split("");
-
-    Cell.spell(chart, spacing, position, {width: 300, height: 75},  "ABCDEFGHIJ", true);
+    // draw the circles
+    svg.selectAll('circle')
+        .data(data)
+        .join('circle')
+        .attr('cy', 50)
+        .attr('r', 0)
+        .attr('fill', 'purple')
+        .attr('opacity', 0.7)
+        .attr('cx', function (d) {
+            return d;
+        });
 }
 
-// function updateChart() {
-//     svg
-//         .selectAll('circle')
-//         .data(data)
-//         .join('circle')
-//         .attr('cy', 100)
-//         .attr('r', 40)
-//         .attr('cx', function (d) {
-//             return d;
-//         });
-// }
+function updateChart() {
+    svg
+        .selectAll('circle')
+        .data(data)
+        .join('circle')
+        .attr('cy', 100)
+        .attr('r', 40)
+        .attr('cx', function (d) {
+            return d;
+        });
+}
 
 

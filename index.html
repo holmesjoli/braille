@@ -6,36 +6,16 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/scrollama"></script>
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
-    <title>Visualizing the Braille system</title>
 </head>
 
 <body>
-
-    <header>
-        <div id="title"></div>
-    </header>
-
     <div class="intro">
-        <div class="left">
-            <p>Braille is a notational system developed for people with blindness, deafblindness, and low vision. Notational systems represent the sounds or words of a language. In the case of Braille, the notational system is interpreted by the user tactilely instead of visually. While, Frenchman Louis Braille is credited with the development in the early 1800s, Braille was not the first touch-based reading system.</p>
-            <p>In the late 1900s,  Frenchman Valentine Hauy embossed the roman letters in common texts. However, the reliance on typographic composition made the system challenging to learn and resulted in very low literacy among people with low vision. The system which led to the development of Braille was developed by artillery captain Charles Barbier de la Serre in 1822. The code that Barbier developed was known as night writing and developed as a military technology to give soliders the ability to be able to communicate silently and without a light source at night. Barbier's system was phonetic, relied on a 12-dot pattern which did not easily fit under a finger tip pad.</p>
-            <p>Since Louis Braille's redesign, the language not changed drastically. Since the 1950s there have been efforts to standardize the language by UNESCO. In 2005, the released a statement saying the Braille system is a <i>"vital language of communication, as legitimate as all other languages in the world."</i></p>
-            <div class="quote">
-                <span class="content">Megan</span>
-                <p class="content">Braille has not changed since it was invented. At first when I started learning Braille I was not a fan of Braille. Initially, I fought against learning Braille because it's ancient and there are lots of advanced audio technologies which can read signs and pictures. However, Braille is always going to be there when computers are not so it's important to be able to read it.</p>
-            </div>
-            <div class="cell-container" style="text-align: center;">
-                <p style="font-size: 8pt">Cell not too sized to actual scale.</p>
-                <div id="cell"></div>
-            </div>
-        </div>
-        <div class="right">
-            <p style="margin-top:0"><em>Author note:</em> The following webpage visualizes the notational system of Braille. The irony of this is not lost on me as the author and I have tried to include many features that will make this page accessible to people with vision impairment. As someone who has not needed to rely on Braille as an assistive technology, I felt it it would be insensitive to research this topic without including input from those who are regular users of Braille. I relied on the knowledge of a friend of mine, Megan, who has a visual impairment.</p>
-            <p>To echo the disability rights movement motto:</p>
-            <p style="margin-bottom:0"><em>"Nothing about us, without us."</em></p>
-        </div>      
-    </div>
+        <h1>Let's make a scrolly!</h1>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
 
+    </div>
     <section id='scroll'>
         <!--  graphic container  -->
         <div class='scroll__graphic'>
@@ -47,25 +27,12 @@
         <!--  step/text container  -->
         <div class='scroll__text'>
             <div class='step' data-step='1'>
-                <div>
-                    <h3>Matrix</h3>
-                    <p>Each letter of the alphabet is encoded in a single braille cell. In English Braille, this cell is arranged using six dots in a 2 by 3 matrix.</p>
-                    <div class="quote">
-                        <span class="content">Megan</span>
-                        <p class="content">A Braille cell contains a-z. It is a dot numbering system that you have to program into your brain.</p>
-                    </div>
-                </div>
+                <p>STEP 1</p>
             </div>
             <div class='step' data-step='2'>
-                <h3>Grade 1</h3>
-                <p>Each letter is derived from the Latin alphabet, resulting in a dot pattern system that corresponds to alphabetic letting order within the alphabet. The Braille system is based on the first ten letters in the alphabet A-J. To create the rest of the alphabet dots A-J are repeated with small changes to create a system. Visually, the system is quite simple, however learning Braille can be extremely challenging.</p>
-                <div class="quote">
-                    <span class="content">Megan</span>
-                    <p class="content">It's much harder without vision. You can hear the Braille instructor repeat the dot positions. You can feel them with your hand, but there's nothing like physically seeming something. I have to visualize what I think it may look like and then process what my brain says it looks like.</p>
-                </div>
+                <p>STEP 2</p>
             </div>
             <div class='step' data-step='3'>
-                <h3>Grade 2</h3>
                 <p>STEP 3</p>
             </div>
             <div class='step' data-step='4'>
@@ -74,23 +41,18 @@
         </div>
     </section>
     <div class="outro">
-        <div class="left">
-            <p>Assistive technologies are associated with accessibility. However, while Braille does assist many in the visually impaired community, like any technology it isn't accessible to the entire community. </p>
-            <div class="quote">
-                <span class="content">Megan</span>
-                <p class="content">The braille cell is no bigger than the tip of your finger. Because it's tactile, people with sensory issues may find it more challenging to learn Braille.</p>
-            </div>
-            <p>Special thanks to Megan Hoskins, for whom this project would not have been possible. Thank you for taking the time to walk me one way in which you experience the world.</p>
-        </div>
-        <div class="right">
-            <ul>
-                <li>2009. Jimenez, J. et al. <a href="https://reader.elsevier.com/reader/sd/pii/S0039625708001860?token=1CE4460D379F9FA0A159363BEF392E3B3F498B1B8A6F2C1078F67DF5C2DF92F5FC055B08ADB36764DBE0A4A50CF5C765&originRegion=us-east-1&originCreation=20220426151252"><i>Biography of Louis Braille and Invention of the Braille Alphabet.</i></a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Braille">Wikipedia</a></li>
-            </ul>
-        </div>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
+        <p>Scrollytelling is all the rage these days. Though it seems fancy, under the hood it uses many of the basic
+            Javascript patterns you already know from D3! To fully understand it, we also need to work a bit of CSS
+            magic...</p>
     </div>
 
 </body>
-<script type="module" src="./main.js"></script>
+<script src="./main.js"></script>
 
 </html>

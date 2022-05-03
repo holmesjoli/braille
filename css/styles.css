@@ -1,16 +1,17 @@
-html, body {
-    font-family: Helvetica, sans-serif;
-    margin: 0;
+.intro {
+    max-width: 500px;
+    padding: 20px;
 }
 
-body {
-    padding: 30px 20px;
+.outro {
+    max-width: 500px;
+    padding: 20px;
+    margin-bottom: 200px
 }
 
-p {
-    font-size: 12pt;
+p{
+    font-size: 20px;
     line-height: 1.5;
-    margin: 10px 0;
 }
 
 /* all scrolling positions set to relative */
@@ -20,78 +21,6 @@ p {
 
 #chart {
     background-color: blanchedalmond;
-}
-
-/* .intro {
-    margin-bottom: -500px;
-} */
-
-.quote {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px;
-}
-
-span {
-    flex: 0 1 80px;
-    text-transform: uppercase;
-    font-style: italic;
-    text-align: center;
-}
-
-.quote p {
-    border-left: 2px solid #D7D7D7;
-    flex: 0 1 500px;
-    font-size: 10pt;
-    padding-left: 20px;
-}
-
-#scroll .quote p {
-    flex: 0 1 250px;
-}
-
-.content {
-    margin: auto 0;
-}
-
-.intro, .outro {
-    display: grid;
-    grid-template-columns: 1fr minmax(150px, 35%)
-}
-
-.right {
-    padding: 20px;
-    border: 1px solid #D7D7D7;
-    background-color: rgba(215, 215, 215, .12);
-    margin: 0 50px;
-    display: flex;
-    flex-direction: column;
-    min-height: 10%;
-    max-height: 40%;
-}
-
-
-.right blockquote {
-    font-size: 10pt;
-    text-align: center;
-}
-
-.right p {
-    font-size: 10pt;
-}
-
-.right p:first-child {
-    margin-top: 0;
-}
-
-.right p:last-child {
-    margin-bottom: 0;
-}
-
-.outro {
-    /* max-width: 500px; */
-    padding: 20px;
-    /* margin-bottom: 50px */
 }
 
 /* set scroll graphic to absolute and lock in the position */
@@ -129,7 +58,7 @@ span {
     background-color: lightgray;
     border: 1px solid gray;
     max-width: 800px;
-    /* height: 200px; */
+    height: 300px;
     margin: 10px;
     margin-top: 80px;
     margin-bottom: 80px;
@@ -148,19 +77,10 @@ span {
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-}
+  }
 
-.step p {
+  .step p {
     margin: 0 auto;
-    /* height: 300px; */
+    height: 300px;
     background-color: white;
-}
-
-.cell {
-    width: 3.7mm;
-    min-width: 3.7mm;
-    max-width: 3.7mm;
-    display: inline-block;
-    font-size: 16pt;
-    margin: 3.8mm 1.7mm;
 }
