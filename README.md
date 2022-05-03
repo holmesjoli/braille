@@ -57,7 +57,7 @@ I began by researching how the Braille system works by interviewing Megan, watch
 Several elements can make an SVG more accessible to screen readers [^5]
 
 * Add a `<title>` tag inside the SVG as the first child of the its parent element
-* Add an `aria-labelledby` attribute to the `<svg>` tagthat links to the title
+* Add an `aria-labelledby` attribute to the `<svg>` tag that links to the title
 * Add a `<role>` tag
 
 In SVG this looks like:
@@ -73,8 +73,6 @@ In D3 this looks like:
 ```
 let svg = d3.select("#chart")
         .append('svg')
-            .attr("width", width)
-            .attr("height", height)
             .attr("role", "image")
             .attr("aria-labelledby","titleID")
             .append("title")
@@ -83,7 +81,20 @@ let svg = d3.select("#chart")
 ```
 
 
-* Append `<aria-label>` tag and `<role>` tag 
+An additional steps a designer can take are to add aria labels to group elements
+
+* Adding grouping elements to the SVG
+* Append `<aria-label>` tag and `<role>` tag [^6]
+
+
+In D3 this looks like:
+
+```
+let svg = svg
+    .append("g")
+        .attr('role', 'list')
+        .attr('aria-label', 'chart type');
+```
 
 ## Sources
 
