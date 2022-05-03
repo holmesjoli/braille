@@ -17,15 +17,32 @@ For this project, all of my data were hand-collected. The most important part of
 
 ## Research
 
-### Youtube
+I began by researching how the Braille system works by interviewing Megan, watching several Youtube videos, and reading literature on the development of the system. Additionally, I researched how other visual designers have shown language systems.
+
+### Videos
 * https://www.youtube.com/watch?v=fbUmaUV02gg
 * https://www.youtube.com/watch?v=sqQ3gdE7ks0
 
-### HTML
-HTML should include a language attribute so that a screen reader can correctly accent and pronounce the content on the screen.
+### Language systems visualized
+
+![Image showing connections between Phoencian, Etrusan, and Modern English in pastel colors. Dotted lines show connections between characters.](/images/alphabet.jpg)
+[Image source](https://www.redbubble.com/i/art-board-print/Evolution-of-the-Alphabet-poster-by-iyaaad/70674745.ZL3U1)
+![Image showing connectios between Phoencian, Archaic Greek, Archaic Latic, Roman, and Modern Latin in rainbow colors on a black background. Dotted lines show connections between characters.](/images/Visualizing-the-Evolution-of-the-Alphabet.png)
+[Image source](https://www.visualcapitalist.com/from-greek-to-latin-visualizing-the-evolution-of-the-alphabet/)
+![Diagram showing connections between Futhark, Arabic, Latin, Green, Phoencian, Aramaic, Syriac, Cyrillic, Hebrew, Latin, and Greek. Characters are black text on a rainbow background. Lines of different weights show connections between characters. The diagram resembles a transportation diagram.](/images/maxresdefault.jpg)
+[Image source](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dul8NVfWKXZg&psig=AOvVaw1Xu1J5ezd5W6AqoSh2pwGI&ust=1651673942286000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPCfyIfDw_cCFQAAAAAdAAAAABAJ)
+
+### Code accessibility
+
+#### HTML
+
+* HTML should include a language attribute so that a screen reader can correctly accent and pronounce the content on the screen.
+
 ```
 <html lang="en">
 ```
+
+#### SVG
 
 
 ## Sources
