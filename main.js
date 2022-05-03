@@ -206,18 +206,6 @@ function initChart(convert) {
 function updateChart(convert) {
 
     drawCell(convert);
-    
-    
-    // svg
-    //     .selectAll('circle')
-    //     .data(data)
-    //     .join('circle')
-    //     .attr('cy', 100)
-    //     .attr('r', 40)
-    //     .attr('cx', function (d) {
-    //         return d;
-    //     });
-
 
     // let c = svg.selectAll("circle")
     // // .data(spring2019); // new data matched to the wrong old circles
