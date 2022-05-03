@@ -60,7 +60,6 @@ div p:last-child {
     margin-bottom: 0;
 }
 
-
 .callout {
     padding: 20px;
     border: 1px solid #D7D7D7;
@@ -69,6 +68,30 @@ div p:last-child {
 
 .callout p {
     font-size: 10pt;
+}
+
+.quote {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+span {
+    flex: 0 1 80px;
+    text-transform: uppercase;
+    font-style: italic;
+    text-align: center;
+}
+
+.quote p {
+    border-left: 2px solid #D7D7D7;
+    flex: 0 1 500px;
+    font-size: 10pt;
+    padding-left: 20px;
+}
+
+.content {
+    margin: auto 0;
 }
 
 .outro {
