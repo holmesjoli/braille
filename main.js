@@ -178,9 +178,7 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart(convert = 1) {
-
-    const glyph = "A";
+function initChart(convert = 1, glyph = "blank") {
 
     svg
         .attr('width', chartWidth)
