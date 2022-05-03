@@ -177,23 +177,6 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-
-function drawCell(convert) {
-    circles = svg.selectAll('circle')
-        .data(spacing)
-        .join('circle')
-        .attr("role", "listitem")
-        .attr('cy',  function (d) {
-            return d.y*convert + margin.top*convert;
-        })
-        .attr('cx', function (d) {
-            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
-        })
-        .attr('r', r*convert)
-        .attr('fill', '#FFFFFF')
-        .attr('stroke', "#000000");
-}
-
 function initChart(convert = 1) {
 
     svg
