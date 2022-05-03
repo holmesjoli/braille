@@ -13,7 +13,9 @@ I chose this topic because accessibility in information visualization is an unde
 For this project, all of my data were hand-collected. The most important part of the data collection process was an interview I conducted with my friend Megan who has blindness. Braille is a tactile language that is learned and used through embodied experience. Talking with Megan about their experience using Braille is central to this project because there is an inherent tension in the visual representation of a system that is experienced tactilely and fundamentally cannot be experienced visually, for whom this topic is most pertinent. Additionally, I collected matrix positioning and spacing information so that the visual cells can accurately represent physical Braille cells. 
 
 ![Braille cell spacing and positioning](/images/cell_spacing.gif)
+
 [Image source](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mkdesign.uk%2Fbraille-specifications.html&psig=AOvVaw02UPCiaC8gpEuYXovWpJwt&ust=1651672533226000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJj2pui9w_cCFQAAAAAdAAAAABAD)
+
 
 ## Research
 
@@ -26,11 +28,17 @@ I began by researching how the Braille system works by interviewing Megan, watch
 ### Language systems visualized
 
 ![Image showing connections between Phoencian, Etrusan, and Modern English in pastel colors. Dotted lines show connections between characters.](/images/alphabet.jpg)
+
 [Image source](https://www.redbubble.com/i/art-board-print/Evolution-of-the-Alphabet-poster-by-iyaaad/70674745.ZL3U1)
+
 ![Image showing connectios between Phoencian, Archaic Greek, Archaic Latic, Roman, and Modern Latin in rainbow colors on a black background. Dotted lines show connections between characters.](/images/Visualizing-the-Evolution-of-the-Alphabet.png)
+
 [Image source](https://www.visualcapitalist.com/from-greek-to-latin-visualizing-the-evolution-of-the-alphabet/)
+
 ![Diagram showing connections between Futhark, Arabic, Latin, Green, Phoencian, Aramaic, Syriac, Cyrillic, Hebrew, Latin, and Greek. Characters are black text on a rainbow background. Lines of different weights show connections between characters. The diagram resembles a transportation diagram.](/images/maxresdefault.jpg)
+
 [Image source](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dul8NVfWKXZg&psig=AOvVaw1Xu1J5ezd5W6AqoSh2pwGI&ust=1651673942286000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPCfyIfDw_cCFQAAAAAdAAAAABAJ)
+
 
 ### Code accessibility
 
