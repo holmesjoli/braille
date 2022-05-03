@@ -18,10 +18,13 @@ function updateData() {
         data.push(Math.random() * 800);
     }
 }
-let svg = chart.append('svg')
+let svg = chart
+    .append('svg')
 let spacing;
 let position;
 let circles;
+const convertMM = 3.7795275591;
+
 
 const newData = [
     { x: 4, size: 9 },
@@ -113,8 +116,13 @@ function handleStepEnter(response) {
         return i === response.index;
     })
 
-    // updateData();
-    // updateChart();
+    if (response.index === 0) {
+        initChart(20);
+    }
+
+    if (response.index === 1) {
+        updateChart(convertMM);
+    }
 
     console.log(response)
 }
@@ -157,7 +165,7 @@ function init() {
     console.log(position)
 
     // updateData();
-    initChart();
+    initChart(20);
 
     });
 }
@@ -169,13 +177,8 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart(convert = 20, index = 1) {
 
-    svg
-        .attr('width', chartWidth)
-        .attr('height', chartHeight);
-
-    // draw the circles
+function drawCell(convert) {
     circles = svg.selectAll('circle')
         .data(spacing)
         .join('circle')
@@ -184,27 +187,63 @@ function initChart(convert = 20, index = 1) {
             return d.y*convert + margin.top*convert;
         })
         .attr('cx', function (d) {
-            if (index === 0) {
-                return d.x*convert + margin.left*convert/2;
-            } else {
-                return d.x*convert + margin.left*convert/2 + margin.left*convert*index + margin.right*convert*index;
-            }
+            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
         })
         .attr('r', r*convert)
         .attr('fill', '#FFFFFF')
         .attr('stroke', "#000000");
 }
 
-function updateChart() {
+function initChart(convert) {
+
     svg
-        .selectAll('circle')
-        .data(data)
-        .join('circle')
-        .attr('cy', 100)
-        .attr('r', 40)
-        .attr('cx', function (d) {
-            return d;
-        });
+        .attr('width', chartWidth)
+        .attr('height', chartHeight);
+
+    drawCell(convert);
+}
+
+function updateChart(convert) {
+
+    drawCell(convert);
+    
+    
+    // svg
+    //     .selectAll('circle')
+    //     .data(data)
+    //     .join('circle')
+    //     .attr('cy', 100)
+    //     .attr('r', 40)
+    //     .attr('cx', function (d) {
+    //         return d;
+    //     });
+
+
+    // let c = svg.selectAll("circle")
+    // // .data(spring2019); // new data matched to the wrong old circles
+    // .data(spring2019, function(d) {return d.area;});
+
+    // c
+    // .enter()
+    // .append("circle")
+    //     .attr("cx", function(d) { return xScale(d.income); })
+    //     .attr("cy", function(d) { return yScale(d.rent); })
+    //     .attr("r", 0)
+    //     .attr("fill","steelblue")
+    // .merge(c)
+    //     .transition()
+    //     .duration(1000)
+    //     .delay(1000)
+    //     .attr("cx", function(d) { return xScale(d.income); })
+    //     .attr("cy", function(d) { return yScale(d.rent); })
+    //     .attr("r", 10);
+
+    // c.exit()
+    //     .transition()
+    //     .duration(1000)
+    //     .delay(1000)
+    //     .attr("r", 0)
+    //     .remove();
 }
 
 
