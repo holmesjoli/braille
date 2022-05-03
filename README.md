@@ -54,17 +54,36 @@ I began by researching how the Braille system works by interviewing Megan, watch
 
 #### SVG
 
-Healther Migliorisi when writing inline SVG, the designer can add several elements which make the SVG more accessible [^5].
+Several elements can make an SVG more accessible to screen readers [^5]
 
-* Add a title tag inside the SVG as the first child of the its parent element
-* Add an aria-labelledby attribute that links to the title
-* Add a role tag
+* Add a `<title>` tag inside the SVG as the first child of the its parent element
+* Add an `aria-labelledby` attribute to the `<svg>` tagthat links to the title
+* Add a `<role>` tag
+
+In SVG this looks like:
 
 ```
 <svg aria-labelledby="titleID" role="img">
     <title id="titleID">A short title</title>
 </svg>
 ```
+
+In D3 this looks like:
+
+```
+let svg = d3.select("#chart")
+        .append('svg')
+            .attr("width", width)
+            .attr("height", height)
+            .attr("role", "image")
+            .attr("aria-labelledby","titleID")
+            .append("title")
+                .attr("id", "titleID")
+                .attr("text", `SVG title`);
+```
+
+
+* Append `<aria-label>` tag and `<role>` tag 
 
 ## Sources
 
@@ -73,5 +92,6 @@ Healther Migliorisi when writing inline SVG, the designer can add several elemen
 [^3]: https://www.w3.org/WAI/fundamentals/accessibility-intro/
 [^4]: Ibid.
 [^5]: https://css-tricks.com/accessible-svgs/
+[^6]: https://www.a11ywithlindsey.com/blog/accessibility-d3-bar-charts
 
 
