@@ -46,7 +46,7 @@ I began by researching how the Braille system works by interviewing Megan, watch
 
 #### HTML
 
-* HTML should include a language attribute so that a screen reader can correctly accent and pronounce the content on the screen.
+* HTML should include a language attribute so that a screen reader can correctly accent and pronounce the content on the screen [^4].
 
 ```
 <html lang="en">
