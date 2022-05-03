@@ -54,13 +54,15 @@ I began by researching how the Braille system works by interviewing Megan, watch
 
 #### SVG
 
+One of the nice things about using D3 from an accessibility perspective is its reliance on SVG. SVG is more accessible than alternative image formats such as PNG or JPG because it contains structured content accessible to a screen reader. With a PNG or JPG, the screen reader can only access content that is available in the `<alt>` tag. While SVG is more accessible than PNG or JPG, a designer can aid navigation by grouping content and adding additional labels to the SVG. 
+
 Several elements can make an SVG more accessible to screen readers [^5]
 
-* Add a `<title>` tag inside the SVG as the first child of the its parent element
+* Add a `<title>` tag inside the SVG as the first child of its parent element
 * Add an `aria-labelledby` attribute to the `<svg>` tag that links to the title
 * Add a `<role>` tag
 
-In SVG this looks like:
+In SVG, this looks like this:
 
 ```
 <svg aria-labelledby="titleID" role="img">
@@ -68,7 +70,7 @@ In SVG this looks like:
 </svg>
 ```
 
-In D3 this looks like:
+In D3, this looks like this:
 
 ```
 let svg = d3.select("#chart")
@@ -87,7 +89,7 @@ An additional steps a designer can take are to add aria labels to group elements
 * Append `<aria-label>` tag and `<role>` tag [^6]
 
 
-In D3 this looks like:
+In D3, this looks like this:
 
 ```
 let svg = svg
