@@ -52,6 +52,18 @@ I began by researching how the Braille system works by interviewing Megan, watch
 <html lang="en">
 ```
 
+* HTML should include a descriptive title tag to assist people moving between open tabs
+
+```
+<title>A descriptive page title</title>
+```
+
+* HTML images should always include alt tags that describe an image that is useful for interacting and understanding page content
+
+```
+<img alt="Image of ..." src="">
+```
+
 #### SVG
 
 One of the nice things about using D3 from an accessibility perspective is its reliance on SVG. SVG is more accessible than alternative image formats such as PNG or JPG because it contains structured content accessible to a screen reader. With a PNG or JPG, the screen reader can only access content that is available in the `<alt>` tag. While SVG is more accessible than PNG or JPG, a designer can aid navigation by grouping content and adding additional labels to the SVG. 
