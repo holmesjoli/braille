@@ -54,6 +54,17 @@ I began by researching how the Braille system works by interviewing Megan, watch
 
 #### SVG
 
+Healther Migliorisi when writing inline SVG, the designer can add several elements which make the SVG more accessible [^5].
+
+* Add a title tag inside the SVG as the first child of the its parent element
+* Add an aria-labelledby attribute that links to the title
+* Add a role tag
+
+```
+<svg aria-labelledby="titleID" role="img">
+    <title id="titleID">A short title</title>
+</svg>
+```
 
 ## Sources
 
@@ -61,6 +72,6 @@ I began by researching how the Braille system works by interviewing Megan, watch
 [^2]: https://www.who.int/news-room/fact-sheets/detail/blindness-and-visual-impairment#:~:text=Globally%2C%20at%20least%202.2%20billion,uncorrected%20refractive%20errors%20and%20cataracts. 
 [^3]: https://www.w3.org/WAI/fundamentals/accessibility-intro/
 [^4]: Ibid.
-[^5]: https://www.a11ywithlindsey.com/blog/accessibility-d3-bar-charts 
-[^6]: https://css-tricks.com/accessible-svgs/ 
+[^5]: https://css-tricks.com/accessible-svgs/
+
 
