@@ -124,7 +124,7 @@ function handleStepEnter(response) {
     }
 
     if (response.index === 1) {
-        updateCell(convertMM, "abc", false, true);
+        updateCell(convertMM, "abcdefghij", false, true);
     }
 
     console.log(response)
