@@ -196,7 +196,7 @@ function initChart(convert = 1, glyph = " ") {
         .attr('opacity', 0);
 
     // Add Numbers
-    g.selectAll('text')
+    g.selectAll('cell-number')
         .data(spacing)
         .join('text')
         .attr("role", "listitem")
@@ -209,17 +209,17 @@ function initChart(convert = 1, glyph = " ") {
         .text("");
 
     // Add Glyph
-    // g.selectAll("text")
-    //     .data(glyphData)
-    //     .join('text')
-    //     .attr("role", "listitem")
-    //     .attr("class", "cell-glyph")
-    //     .attr('y', 0)
-    //     .attr('x', 0)
-    //     .attr("text-anchor", "middle")
-    //     .attr("font-size", 0)
-    //     .attr('opacity', 0)
-    //     .text("");
+    g.selectAll("cell-glyph")
+        .data(glyphData)
+        .join('text')
+        .attr("role", "listitem")
+        .attr("class", "cell-glyph")
+        .attr('y', 0)
+        .attr('x', 0)
+        .attr("text-anchor", "middle")
+        .attr("font-size", 0)
+        .attr('opacity', 0)
+        .text("");
 }
 
 // Filter position data
@@ -296,7 +296,6 @@ function updateCellCircle(convert, glyph) {
 // Description transitions the text between steps using entry and exit pattern of update
 function updateCellText(convert, addNumber) {
 
-    let opacity;
     let data;
 
     if (addNumber) {
@@ -325,7 +324,7 @@ function updateCellText(convert, addNumber) {
             })
             .attr("text-anchor", "middle")
             .attr("font-size", convert)
-            .attr("opacity", opacity);
+            .attr("opacity", 1);
 
     t.exit()
         .transition()
