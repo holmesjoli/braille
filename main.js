@@ -168,7 +168,6 @@ init();
 
 function initChart(convert = 1, glyph = " ") {
 
-
     filterPositionData(glyph);
 
     svg
@@ -221,25 +220,6 @@ function initChart(convert = 1, glyph = " ") {
         .attr("font-size", 0)
         .attr('opacity', 0)
         .text("");
-
-
-    // g.selectAll('text')
-    //     .data(glyphArray)
-    //     .join('text')
-    //     .attr("role", "listitem")
-    //     .attr("class", "cell-number")
-    //     .attr('y',  function (d) {
-    //         return d.y*convert + margin.top*convert + r*convert/2;
-    //     })
-    //     .attr('x', function (d) {
-    //         return d.x*convert + convert*margin.left/2*d.index;
-    //     })
-    //     .attr("text-anchor", "middle")
-    //     .attr("font-size", convert)
-    //     .attr('opacity', 0)
-    //     .text(function (d) {
-    //         return d.position;
-    //     });
 }
 
 // Filter position data
