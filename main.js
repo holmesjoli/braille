@@ -360,7 +360,7 @@ function updateCellGlyph(convert, addGlyph) {
     let data = [];
 
     if (addGlyph) {
-        opacity = .6;
+        opacity = 1;
         data = glyphData;
     } else {
         opacity = 0;
@@ -377,14 +377,15 @@ function updateCellGlyph(convert, addGlyph) {
             .duration(1000)
             .delay(function(d) {return 500*d.index})
             .attr('y',  function (d) {
-                return d.y*convert + margin.top*convert;
+                return 7*convert + margin.top*convert*2;
             })
             .attr('x', function (d) {
-                return d.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
+                return 2*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
             })
             .text(function (d) {return d.glyph; })
             .attr("text-anchor", "middle")
             .attr("font-size", convert*5)
+            .attr("fill", "grey")
             .attr("opacity", opacity);
 
     t.exit()
