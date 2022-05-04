@@ -118,11 +118,11 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateChart(20, true);
+        updateCell(20, true);
     }
 
     if (response.index === 1) {
-        updateChart(convertMM, false);
+        updateCell(convertMM, false);
     }
 
     console.log(response)
@@ -224,9 +224,8 @@ function initChart(convert = 1, glyph = "blank") {
         .attr('opacity', 0);;
 }
 
-function updateChart(convert, addNumber) {
-
-
+// Update the cell circle attributes
+function updateCellCircle(convert) {
     let c = g.selectAll("circle")
     .data(spacing, function(d) {return d.position;});
 
@@ -245,11 +244,30 @@ function updateChart(convert, addNumber) {
         .attr("r", r*convert)
         .attr("opacity", 1);
 
-    if (addNumber) {
-        let t = g.selectAll("text")
-        .data(spacing, function(d) {return d.position;});
+    c.exit()
+        .transition()
+        .duration(1000)
+        .attr("r", 0)
+        .attr("opacity", 0)
+        .remove();
+}
 
-        t
+
+// Update the number text attributes in the cell
+function updateCellText(convert, addNumber) {
+
+    let opacity;
+
+    if (addNumber) {
+        opacity = 1;
+    } else {
+        opacity = 0;
+    }
+
+    let t = g.selectAll("text")
+    .data(spacing, function(d) {return d.position;});
+
+    t
         .enter()
         .append("text")
         .merge(t)
@@ -259,28 +277,26 @@ function updateChart(convert, addNumber) {
                 return d.y*convert + margin.top*convert + r*convert/2;
             })
             .attr('x', function (d) {
-                return d.x*convert + convert*margin.left/2;
+                return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
             })
             .text(function (d) {
                 return d.position;
             })
             .attr("text-anchor", "middle")
             .attr("font-size", convert)
-            .attr("opacity", 1);
+            .attr("opacity", opacity);
 
         t.exit()
             .transition()
             .duration(1000)
             .attr("opacity", 0)
             .remove();
-    }
+}
 
-    c.exit()
-        .transition()
-        .duration(1000)
-        .attr("r", 0)
-        .attr("opacity", 0)
-        .remove();
+function updateCell(convert, addNumber) {
+
+    updateCellCircle(convert);
+    updateCellText(convert, addNumber);
 }
 
 
