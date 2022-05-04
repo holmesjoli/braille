@@ -190,14 +190,9 @@ function initChart(convert = 1, glyph = " ") {
         .data(spacing)
         .join('circle')
         .attr("role", "listitem")
-        .attr('cy',  function (d) {
-            return d.y*convert + margin.top*convert;
-        })
-        .attr('cx', function (d) {
-            return d.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
-        })
+        .attr('cy', 0)
+        .attr('cx', 0)
         .attr("fill", "#FFFFFF")
-        .attr('stroke', "#000000")
         .attr('r', 0)
         .attr('opacity', 0);
 
@@ -207,30 +202,24 @@ function initChart(convert = 1, glyph = " ") {
         .join('text')
         .attr("role", "listitem")
         .attr("class", "cell-number")
-        .attr('y',  function (d) {
-            return d.y*convert + margin.top*convert + r*convert/2;
-        })
-        .attr('x', function (d) {
-            return d.x*convert + convert*margin.left/2*d.index;
-        })
-        .attr("text-anchor", "middle")
-        .attr("font-size", convert)
+        .attr('y', 0)
+        .attr('x', 0)
         .attr('opacity', 0)
-        .text(function (d) {
-            return d.position;
-        });
+        .attr("text-anchor", "middle")
+        .attr("font-size", 0)
+        .text("");
 
     // Add Glyph
     g
         .append("text")
         .attr("role", "listitem")
         .attr("class", "cell-glyph")
-        .attr('y', convert + margin.top*convert)
-        .attr('x', margin.left*convert)
+        .attr('y', 0)
+        .attr('x', 0)
         .attr("text-anchor", "middle")
-        .attr("font-size", convert)
-        .attr('opacity', 1)
-        .text(glyph);
+        .attr("font-size", 0)
+        .attr('opacity', 0)
+        .text("");
 
 
     // g.selectAll('text')
