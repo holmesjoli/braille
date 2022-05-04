@@ -123,7 +123,7 @@ function handleStepEnter(response) {
     }
 
     if (response.index === 1) {
-        updateCell(convertMM, "a", false, true);
+        updateCell(convertMM, "abc", false, true);
     }
 
     console.log(response)
@@ -252,14 +252,23 @@ function initChart(convert = 1, glyph = " ") {
 function updateCellCircle(convert, glyph) {
 
     let positionFiltered;
+    let nGlyph;
 
     if (glyph != null) {
+        let arrayGlyph =  glyph.split("");
+        nGlyph = arrayGlyph.length;
+        console.log(arrayGlyph)
+
         positionFiltered = position.filter(function(d) {
+            d.index = arrayGlyph.indexOf(d.glyph);
             return glyph.includes(d.glyph);
         });
     } else {
-        positionFiltered = spacing; 
+        nGlyph = 1;
+        positionFiltered = spacing;
     }
+
+    console.log(positionFiltered)
 
     let c = g.selectAll("circle")
     .data(positionFiltered, function(d) {return d.position;});
