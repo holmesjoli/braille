@@ -84,7 +84,11 @@ function handleResize() {
     var chartMargin = 32;
     var textWidth = text.node().offsetWidth;
 
-    chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
+    if (window.innerWidth < 800) {
+        chartWidth = graphic.node().offsetWidth;
+    } else {
+        chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
+    }
 
     // make the height 1/2 of viewport
     chartHeight = Math.floor(window.innerHeight / 2);
