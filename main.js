@@ -268,7 +268,11 @@ function filterPositionData(glyph) {
         });
 
         glyphArray.forEach(function(d) {
-            glyphDataNew.push({glyph: d})
+            glyphDataNew.push({
+                            glyph: d,
+                            x: 0,
+                            y: 0,
+                            index: glyphArray.indexOf(d)})
         })
 
         glyphData = glyphDataNew;
