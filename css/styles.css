@@ -232,6 +232,10 @@ div p:last-child {
         transform: translate3d(0, 0, 0);
     }
 
+    .scroll__graphic #chart {
+        right: 0;
+    }
+
     /* when at bottom of "sticky" area section, remove fixed position */
     .scroll__graphic.is-bottom {
         bottom: 0;
