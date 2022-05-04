@@ -182,12 +182,6 @@ init();
 
 function initChart(convert = 1, glyph = " ") {
 
-    // if (glyph != null) {
-    //     let positionFiltered = position.filter(function(d) {
-    //         return d.glyph === glyph;
-    //     });
-    // }
-
     svg
         .attr('width', chartWidth)
         .attr('height', chartHeight)
@@ -249,7 +243,8 @@ function initChart(convert = 1, glyph = " ") {
         .text(glyph);
 }
 
-// Update the cell circle attributes
+// Title Update the cell circle attributes
+// Description transitions the cells between steps using entry and exit pattern of update
 function updateCellCircle(convert, glyph) {
 
     let positionFiltered;
@@ -268,8 +263,6 @@ function updateCellCircle(convert, glyph) {
         positionFiltered = spacing;
     }
 
-    // console.log(positionFiltered)
-
     let c = g.selectAll("circle")
     .data(positionFiltered, function(d) {return d.position;});
 
@@ -281,7 +274,6 @@ function updateCellCircle(convert, glyph) {
         .duration(1000)
         .delay(function(d) {return 1000*d.index})
         .attr('cy',  function (d) {
-            // console.log(d.index)
             let m = spacing.find(el => el.position === d.position);
             return m.y*convert + margin.top*convert;
         })
@@ -305,6 +297,7 @@ function updateCellCircle(convert, glyph) {
 }
 
 // Update the number text attributes in the cell
+// Description transitions the text between steps using entry and exit pattern of update
 function updateCellText(convert, addNumber) {
 
     let opacity;
