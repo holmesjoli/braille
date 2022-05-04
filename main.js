@@ -119,11 +119,11 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateCell(20, true);
+        updateCell(20, true, true);
     }
 
     if (response.index === 1) {
-        updateCell(convertMM, false);
+        updateCell(convertMM, false, true);
     }
 
     console.log(response)
@@ -179,7 +179,7 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart(convert = 1, glyph = "blank") {
+function initChart(convert = 1, glyph = "a") {
 
     svg
         .attr('width', chartWidth)
@@ -196,7 +196,7 @@ function initChart(convert = 1, glyph = "blank") {
         .attr("aria-label", `braille cell showing the glyph ${glyph}`)
 
     // Add circles
-    g.selectAll('circle')
+    circles = g.selectAll('circle')
         .data(spacing)
         .join('circle')
         .attr("role", "listitem")
@@ -216,18 +216,30 @@ function initChart(convert = 1, glyph = "blank") {
         .data(spacing)
         .join('text')
         .attr("role", "listitem")
+        .attr("class", "cell-number")
         .attr('y',  function (d) {
             return d.y*convert + margin.top*convert + r*convert/2;
         })
         .attr('x', function (d) {
             return d.x*convert + convert*margin.left/2;
         })
-        .text(function (d) {
-            return d.position;
-        })
         .attr("text-anchor", "middle")
         .attr("font-size", convert)
-        .attr('opacity', 0);;
+        .attr('opacity', 0)
+        .text(function (d) {
+            return d.position;
+        });
+
+    g
+        .append("text")
+        .attr("role", "listitem")
+        .attr("class", "cell-glyph")
+        .attr('y', convert + margin.top*convert)
+        .attr('x', margin.left*convert)
+        .attr("text-anchor", "middle")
+        .attr("font-size", convert)
+        .attr('opacity', 1)
+        .text(glyph);
 }
 
 // Update the cell circle attributes
@@ -235,7 +247,7 @@ function updateCellCircle(convert) {
     let c = g.selectAll("circle")
     .data(spacing, function(d) {return d.position;});
 
-    c
+    circles = c
     .enter()
     .append("circle")
     .merge(c)
@@ -269,7 +281,7 @@ function updateCellText(convert, addNumber) {
         opacity = 0;
     }
 
-    let t = g.selectAll("text")
+    let t = g.selectAll(".cell-number")
     .data(spacing, function(d) {return d.position;});
 
     t
@@ -298,10 +310,36 @@ function updateCellText(convert, addNumber) {
             .remove();
 }
 
-function updateCell(convert, addNumber) {
+function updateCellGlyph(convert, addGlyph) {
+    let opacity;
+
+    if (addGlyph) {
+        opacity = .6;
+    } else {
+        opacity = 0;
+    }
+
+    let t = g.select(".cell-glyph")
+
+
+    var bb = circles.node().getBBox();
+    var centery = bb.y + bb.height/2;
+    var centerx = bb.x + bb.width/2;
+    console.log(bb)
+
+
+    t
+        .transition()
+        .duration(1000)
+        .attr('y', 3*convert + margin.top*convert + r*convert)
+        .attr('x', 2*convert + margin.left*convert + margin.right*convert)
+        .attr("font-size", convert*5)
+        .attr("opacity", opacity);
+}
+
+function updateCell(convert, addNumber, addGlyph) {
 
     updateCellCircle(convert);
     updateCellText(convert, addNumber);
+    // updateCellGlyph(convert, addGlyph);
 }
-
-
