@@ -23,6 +23,10 @@ img {
     max-width: 300px;
 }
 
+h1 {
+    padding: 0 20px;
+}
+
 .intro,
 .outro {
     display: flex;
@@ -219,7 +223,7 @@ div p:last-child {
     /* set scroll graphic to absolute and lock in the position */
     .scroll__graphic {
         position: absolute;
-        top: 30%;
+        top: 0;
         left: 0;
         width: 100%;
         z-index: -1;
@@ -240,7 +244,6 @@ div p:last-child {
     
     .step {
         opacity: 0.5;
-        max-width: 800px;
         margin-top: 80px;
         margin-bottom: 80px;
     }
