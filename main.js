@@ -329,6 +329,7 @@ function updateCellText(convert, addNumber) {
     t.exit()
         .transition()
         .duration(1000)
+        .attr("font-size", 0)
         .attr("opacity", 0)
         .remove();
 }
@@ -343,10 +344,8 @@ function updateCellGlyph(convert, addGlyph) {
         opacity = 0;
     }
 
-    console.log(data)
-
     let t = g.selectAll(".cell-glyph")
-    .data(data, function(d) {return d.position;});
+    .data(glyphData, function(d) {return d.position;});
 
     t
         .enter()
@@ -369,6 +368,7 @@ function updateCellGlyph(convert, addGlyph) {
     t.exit()
         .transition()
         .duration(1000)
+        .attr("font-size", 0)
         .attr("opacity", 0)
         .remove();
 }
