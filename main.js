@@ -209,17 +209,17 @@ function initChart(convert = 1, glyph = " ") {
         .text("");
 
     // Add Glyph
-    g.selectAll("text")
-        .data(glyphData)
-        .join('text')
-        .attr("role", "listitem")
-        .attr("class", "cell-glyph")
-        .attr('y', 0)
-        .attr('x', 0)
-        .attr("text-anchor", "middle")
-        .attr("font-size", 0)
-        .attr('opacity', 0)
-        .text("");
+    // g.selectAll("text")
+    //     .data(glyphData)
+    //     .join('text')
+    //     .attr("role", "listitem")
+    //     .attr("class", "cell-glyph")
+    //     .attr('y', 0)
+    //     .attr('x', 0)
+    //     .attr("text-anchor", "middle")
+    //     .attr("font-size", 0)
+    //     .attr('opacity', 0)
+    //     .text("");
 }
 
 // Filter position data
@@ -297,15 +297,16 @@ function updateCellCircle(convert, glyph) {
 function updateCellText(convert, addNumber) {
 
     let opacity;
+    let data;
 
     if (addNumber) {
-        opacity = 1;
+        data = spacing;
     } else {
-        opacity = 0;
+        data = [];
     }
 
     let t = g.selectAll(".cell-number")
-    .data(spacing, function(d) {return d.position;});
+    .data(data, function(d) {return d.position;});
 
     t
         .enter()
@@ -326,11 +327,11 @@ function updateCellText(convert, addNumber) {
             .attr("font-size", convert)
             .attr("opacity", opacity);
 
-        t.exit()
-            .transition()
-            .duration(1000)
-            .attr("opacity", 0)
-            .remove();
+    t.exit()
+        .transition()
+        .duration(1000)
+        .attr("opacity", 0)
+        .remove();
 }
 
 function updateCellGlyph(convert, addGlyph) {
