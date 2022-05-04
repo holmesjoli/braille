@@ -18,7 +18,7 @@ let g;
 let spacing;
 let position;
 let positionFiltered;
-let circles;
+let gCircles;
 let glyphData = [];
 const convertMM = 3.7795275591;
 
@@ -185,7 +185,7 @@ function initChart(convert = 1, glyph = " ") {
         .attr("aria-label", `braille cell showing the glyph ${glyph}`)
 
     // Add circles
-    circles = g
+    gCircles = g
         .append("g")
         .attr("class", "matrix")
         .selectAll('circle')
@@ -266,7 +266,7 @@ function updateCellCircle(convert, glyph) {
     let c = g.selectAll("circle")
     .data(positionFiltered, function(d) {return d.position;});
 
-    circles = c
+    gCircles = c
     .enter()
     .append("circle")
     .merge(c)
