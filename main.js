@@ -118,11 +118,11 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateChart(20);
+        updateChart(20, true);
     }
 
     if (response.index === 1) {
-        updateChart(convertMM);
+        updateChart(convertMM, false);
     }
 
     console.log(response)
@@ -189,7 +189,8 @@ function initChart(convert = 1, glyph = "blank") {
         .attr("role", "list")
         .attr("aria-label", `braille cell showing the glyph ${glyph}`)
 
-    circles = g.selectAll('circle')
+    // Add circles
+    g.selectAll('circle')
         .data(spacing)
         .join('circle')
         .attr("role", "listitem")
@@ -203,9 +204,27 @@ function initChart(convert = 1, glyph = "blank") {
         .attr('fill', '#FFFFFF')
         .attr('stroke', "#000000")
         .attr('opacity', 0);
+
+    // Add text
+    g.selectAll('text')
+        .data(spacing)
+        .join('text')
+        .attr("role", "listitem")
+        .attr('y',  function (d) {
+            return d.y*convert + margin.top*convert + r*convert/2;
+        })
+        .attr('x', function (d) {
+            return d.x*convert + convert*margin.left/2;
+        })
+        .text(function (d) {
+            return d.position;
+        })
+        .attr("text-anchor", "middle")
+        .attr("font-size", convert)
+        .attr('opacity', 0);;
 }
 
-function updateChart(convert) {
+function updateChart(convert, addNumber) {
 
 
     let c = g.selectAll("circle")
@@ -214,14 +233,6 @@ function updateChart(convert) {
     c
     .enter()
     .append("circle")
-        // .attr('cy',  function (d) {
-        //     return d.y*convert + margin.top*convert;
-        // })
-        // .attr('cx', function (d) {
-        //     return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
-        // })
-        // .attr("r", r*convert)
-        // .attr("opacity", 1)
     .merge(c)
         .transition()
         .duration(1000)
@@ -234,11 +245,41 @@ function updateChart(convert) {
         .attr("r", r*convert)
         .attr("opacity", 1);
 
+    if (addNumber) {
+        let t = g.selectAll("text")
+        .data(spacing, function(d) {return d.position;});
+
+        t
+        .enter()
+        .append("text")
+        .merge(t)
+            .transition()
+            .duration(1000)
+            .attr('y',  function (d) {
+                return d.y*convert + margin.top*convert + r*convert/2;
+            })
+            .attr('x', function (d) {
+                return d.x*convert + convert*margin.left/2;
+            })
+            .text(function (d) {
+                return d.position;
+            })
+            .attr("text-anchor", "middle")
+            .attr("font-size", convert)
+            .attr("opacity", 1);
+
+        t.exit()
+            .transition()
+            .duration(1000)
+            .attr("opacity", 0)
+            .remove();
+    }
+
     c.exit()
         .transition()
         .duration(1000)
-        .delay(1000)
         .attr("r", 0)
+        .attr("opacity", 0)
         .remove();
 }
 
