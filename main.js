@@ -181,6 +181,12 @@ init();
 
 function initChart(convert = 1, glyph = " ") {
 
+    // if (glyph != null) {
+    //     let positionFiltered = position.filter(function(d) {
+    //         return d.glyph === glyph;
+    //     });
+    // }
+
     svg
         .attr('width', chartWidth)
         .attr('height', chartHeight)
@@ -245,16 +251,18 @@ function initChart(convert = 1, glyph = " ") {
 // Update the cell circle attributes
 function updateCellCircle(convert, glyph) {
 
-    console.log(glyph)
+    let positionFiltered;
 
     if (glyph != null) {
-        position = position.filter(function(d) {
+        positionFiltered = position.filter(function(d) {
             return d.glyph === glyph;
         });
+    } else {
+        positionFiltered = spacing; 
     }
 
     let c = g.selectAll("circle")
-    .data(spacing, function(d) {return d.position;});
+    .data(positionFiltered, function(d) {return d.position;});
 
     circles = c
     .enter()
@@ -263,18 +271,15 @@ function updateCellCircle(convert, glyph) {
         .transition()
         .duration(1000)
         .attr('cy',  function (d) {
-            return d.y*convert + margin.top*convert;
+            let m = spacing.find(el => el.position === d.position);
+            return m.y*convert + margin.top*convert;
         })
         .attr('cx', function (d) {
-            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+            let m = spacing.find(el => el.position === d.position);
+            return m.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
         })
         .attr("fill", function(d) {
-            if (glyph != null) {
-                let m = position.find(el => el.position === d.position);
-                return fillScale(m.value)
-            } else {
-                return fillScale(0);
-            }
+            return fillScale(d.value);
         })
         .attr("r", r*convert)
         .attr("opacity", 1);
@@ -338,7 +343,6 @@ function updateCellGlyph(convert, addGlyph) {
     }
 
     let t = g.select(".cell-glyph")
-
 
     var bb = circles.node().getBBox();
     var centery = bb.y + bb.height/2;
