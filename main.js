@@ -120,7 +120,7 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateCell(20, null, true, false);
+        updateCell(30, null, true, false);
     }
 
     if (response.index === 1) {
