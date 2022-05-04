@@ -44,7 +44,8 @@ const files = {
             return {
                 position: +j.position,
                 x: +j.x,
-                y: +j.y
+                y: +j.y,
+                index: +j.index
             }
         }
     },
@@ -210,7 +211,7 @@ function initChart(convert = 1, glyph = " ") {
             return d.y*convert + margin.top*convert;
         })
         .attr('cx', function (d) {
-            return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+            return d.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
         })
         .attr("fill", "#FFFFFF")
         .attr('stroke', "#000000")
@@ -227,7 +228,7 @@ function initChart(convert = 1, glyph = " ") {
             return d.y*convert + margin.top*convert + r*convert/2;
         })
         .attr('x', function (d) {
-            return d.x*convert + convert*margin.left/2;
+            return d.x*convert + convert*margin.left/2*d.index;
         })
         .attr("text-anchor", "middle")
         .attr("font-size", convert)
@@ -257,7 +258,6 @@ function updateCellCircle(convert, glyph) {
     if (glyph != null) {
         let arrayGlyph =  glyph.split("");
         nGlyph = arrayGlyph.length;
-        console.log(arrayGlyph)
 
         positionFiltered = position.filter(function(d) {
             d.index = arrayGlyph.indexOf(d.glyph);
@@ -268,7 +268,7 @@ function updateCellCircle(convert, glyph) {
         positionFiltered = spacing;
     }
 
-    console.log(positionFiltered)
+    // console.log(positionFiltered)
 
     let c = g.selectAll("circle")
     .data(positionFiltered, function(d) {return d.position;});
@@ -279,17 +279,20 @@ function updateCellCircle(convert, glyph) {
     .merge(c)
         .transition()
         .duration(1000)
+        .delay(function(d) {return 1000*d.index})
         .attr('cy',  function (d) {
+            // console.log(d.index)
             let m = spacing.find(el => el.position === d.position);
             return m.y*convert + margin.top*convert;
         })
         .attr('cx', function (d) {
             let m = spacing.find(el => el.position === d.position);
-            return m.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+            return m.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
         })
         .attr("fill", function(d) {
             return fillScale(d.value);
         })
+        .attr("stroke", "#000000")
         .attr("r", r*convert)
         .attr("opacity", 1);
 
@@ -325,7 +328,7 @@ function updateCellText(convert, addNumber) {
                 return d.y*convert + margin.top*convert + r*convert/2;
             })
             .attr('x', function (d) {
-                return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+                return d.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
             })
             .text(function (d) {
                 return d.position;
