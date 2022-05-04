@@ -119,11 +119,11 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateCell(20, null, true);
+        updateCell(20, null, true, false);
     }
 
     if (response.index === 1) {
-        updateCell(convertMM, "a", false);
+        updateCell(convertMM, "a", false, true);
     }
 
     console.log(response)
@@ -328,6 +328,7 @@ function updateCellText(convert, addNumber) {
 }
 
 function updateCellGlyph(convert, addGlyph) {
+    console.log(addGlyph)
     let opacity;
 
     if (addGlyph) {
@@ -354,7 +355,7 @@ function updateCellGlyph(convert, addGlyph) {
         .attr("opacity", opacity);
 }
 
-function updateCell(convert, glyph, addNumber) {
+function updateCell(convert, glyph, addNumber, addGlyph) {
 
     updateCellCircle(convert, glyph);
     updateCellText(convert, addNumber);
