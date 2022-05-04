@@ -91,9 +91,8 @@ let svg = d3.select("#chart")
             .attr("aria-labelledby","titleID")
             .append("title")
                 .attr("id", "titleID")
-                .attr("text", `SVG title`);
+                .text("SVG title");
 ```
-
 
 An additional steps a designer can take are to add aria labels to group elements
 
