@@ -19,7 +19,8 @@ function updateData() {
     }
 }
 let svg = chart
-    .append('svg')
+    .append('svg');
+
 let g;
 let spacing;
 let position;
@@ -182,7 +183,12 @@ function initChart(convert = 1, glyph = "blank") {
 
     svg
         .attr('width', chartWidth)
-        .attr('height', chartHeight);
+        .attr('height', chartHeight)
+        .attr("role", "image")
+        .attr("aria-labelledby","titleID")
+        .append("title")
+            .attr("id", "titleID")
+            .text("Braille cell");
 
     g = svg.append("g")
         .attr("id", glyph)
