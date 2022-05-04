@@ -255,7 +255,7 @@ function updateCellCircle(convert, glyph) {
 
     if (glyph != null) {
         positionFiltered = position.filter(function(d) {
-            return d.glyph === glyph;
+            return glyph.includes(d.glyph);
         });
     } else {
         positionFiltered = spacing; 
