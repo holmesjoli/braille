@@ -119,11 +119,11 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateCell(20, true, true);
+        updateCell(20, null, true);
     }
 
     if (response.index === 1) {
-        updateCell(convertMM, false, true);
+        updateCell(convertMM, "a", false);
     }
 
     console.log(response)
@@ -179,7 +179,7 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart(convert = 1, glyph = "a") {
+function initChart(convert = 1, glyph = " ") {
 
     svg
         .attr('width', chartWidth)
@@ -206,9 +206,9 @@ function initChart(convert = 1, glyph = "a") {
         .attr('cx', function (d) {
             return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
         })
-        .attr('r', 0)
-        .attr('fill', '#FFFFFF')
+        .attr("fill", "#FFFFFF")
         .attr('stroke', "#000000")
+        .attr('r', 0)
         .attr('opacity', 0);
 
     // Add text
@@ -243,7 +243,16 @@ function initChart(convert = 1, glyph = "a") {
 }
 
 // Update the cell circle attributes
-function updateCellCircle(convert) {
+function updateCellCircle(convert, glyph) {
+
+    console.log(glyph)
+
+    if (glyph != null) {
+        position = position.filter(function(d) {
+            return d.glyph === glyph;
+        });
+    }
+
     let c = g.selectAll("circle")
     .data(spacing, function(d) {return d.position;});
 
@@ -258,6 +267,14 @@ function updateCellCircle(convert) {
         })
         .attr('cx', function (d) {
             return d.x*convert + margin.left*convert/2 + margin.left*convert + margin.right*convert;
+        })
+        .attr("fill", function(d) {
+            if (glyph != null) {
+                let m = position.find(el => el.position === d.position);
+                return fillScale(m.value)
+            } else {
+                return fillScale(0);
+            }
         })
         .attr("r", r*convert)
         .attr("opacity", 1);
@@ -337,9 +354,9 @@ function updateCellGlyph(convert, addGlyph) {
         .attr("opacity", opacity);
 }
 
-function updateCell(convert, addNumber, addGlyph) {
+function updateCell(convert, glyph, addNumber) {
 
-    updateCellCircle(convert);
+    updateCellCircle(convert, glyph);
     updateCellText(convert, addNumber);
     // updateCellGlyph(convert, addGlyph);
 }
