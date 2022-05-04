@@ -212,6 +212,10 @@ div p:last-child {
         font-size: 11pt;
     }
 
+    .callout {
+        margin-bottom: 20px;
+    }
+
     /*New */
 
     /* all scrolling positions set to relative */
