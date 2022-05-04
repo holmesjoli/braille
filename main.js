@@ -185,9 +185,13 @@ function initChart(convert = 1, glyph = " ") {
         .attr("aria-label", `braille cell showing the glyph ${glyph}`)
 
     // Add circles
-    circles = g.selectAll('circle')
+    circles = g
+        .append("g")
+        .attr("class", "matrix")
+        .selectAll('circle')
         .data(spacing)
         .join('circle')
+        .attr("class", "matrix-unit")
         .attr("role", "listitem")
         .attr('cy', 0)
         .attr('cx', 0)
