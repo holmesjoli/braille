@@ -102,7 +102,7 @@ div p:last-child {
 }
 
 #chart {
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
 }
 
 /* set scroll graphic to absolute and lock in the position */
@@ -132,7 +132,9 @@ div p:last-child {
 .scroll__text {
     padding: 0 1rem;
     max-width: 30rem;
-    /* margin-top: -700px; */
+    transform: translateY(-25%);
+    -moz-transform: translateY(-25%);
+    -webkit-transform: translateY(-25%);
 }
 
 .step {
@@ -156,10 +158,10 @@ div p:last-child {
     position: absolute;
     z-index: 0;
     right: 1rem;
-    top: 50%;
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    top: 0;
+    -moz-transform: translateY(25%);
+    -webkit-transform: translateY(25%);
+    transform: translateY(25%);
 }
 
 .step p {
@@ -254,6 +256,7 @@ div p:last-child {
         opacity: 0.5;
         margin-top: 80px;
         margin-bottom: 80px;
+        margin: 0;
     }
 
     ul.callout {
