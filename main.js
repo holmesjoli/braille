@@ -45,7 +45,8 @@ const files = {
                 position: +j.position,
                 x: +j.x,
                 y: +j.y,
-                index: +j.index
+                index: +j.index, //default index
+                glypth: j.index //default glyph
             }
         }
     },
@@ -251,7 +252,7 @@ function updateCellCircle(convert, glyph) {
     let positionFiltered;
 
     if (glyph != null) {
-        let arrayGlyph =  glyph.split("");
+        let arrayGlyph = glyph.split("");
 
         positionFiltered = position.filter(function(d) {
             d.index = arrayGlyph.indexOf(d.glyph);
