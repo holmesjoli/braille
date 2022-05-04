@@ -315,15 +315,17 @@ function updateCellCircle(convert, glyph) {
 function updateCellText(convert, addNumber) {
 
     let opacity;
+    let data = [];
 
     if (addNumber) {
         opacity = 1;
+        data = spacing;
     } else {
         opacity = 0;
     }
 
-    let t = gNumbers.selectAll(".cell-number")
-    .data(spacing, function(d) {return d.position;});
+    let t = gNumbers.selectAll("text")
+    .data(data, function(d) {return d.position;});
 
     t
         .enter()
@@ -355,15 +357,17 @@ function updateCellText(convert, addNumber) {
 function updateCellGlyph(convert, addGlyph) {
 
     let opacity;
+    let data = [];
 
     if (addGlyph) {
         opacity = .6;
+        data = glyphData;
     } else {
         opacity = 0;
     }
 
-    let t = gGlyphs.selectAll(".cell-glyph")
-    .data(glyphData, function(d) {return d.glyph;});
+    let t = gGlyphs.selectAll("text")
+    .data(data, function(d) {return d.glyph;});
 
     t
         .enter()
@@ -395,5 +399,5 @@ function updateCell(convert, glyph, addNumber, addGlyph) {
 
     updateCellCircle(convert, glyph);
     updateCellText(convert, addNumber);
-    // updateCellGlyph(convert, addGlyph);
+    updateCellGlyph(convert, addGlyph);
 }
