@@ -19,6 +19,8 @@ let spacing;
 let position;
 let positionFiltered;
 let gCircles;
+let gGlyphs;
+let gNumbers;
 let glyphData = [];
 const convertMM = 3.7795275591;
 
@@ -166,7 +168,7 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart(convert = 1, glyph = " ") {
+function initChart(glyph = " ") {
 
     filterPositionData(glyph);
 
@@ -179,14 +181,16 @@ function initChart(convert = 1, glyph = " ") {
             .attr("id", "titleID")
             .text("Braille cell");
 
-    g = svg.append("g")
-        .attr("id", glyph)
+    g = svg
+        .append("g")
         .attr("role", "list")
-        .attr("aria-label", `braille cell showing the glyph ${glyph}`)
+        .attr("aria-label", `initialized chart`)
 
     // Add circles
     gCircles = g
         .append("g")
+
+    gCircles
         .attr("class", "matrix")
         .selectAll('circle')
         .data(spacing)
@@ -200,7 +204,12 @@ function initChart(convert = 1, glyph = " ") {
         .attr('opacity', 0);
 
     // Add Numbers
-    g.selectAll('cell-number')
+    gNumbers = g
+    .append("g")
+
+    gNumbers
+        .attr("class", "cell-numbers")
+        .selectAll('cell-number')
         .data(spacing)
         .join('text')
         .attr("role", "listitem")
@@ -213,7 +222,12 @@ function initChart(convert = 1, glyph = " ") {
         .text("");
 
     // Add Glyph
-    g.selectAll("cell-glyph")
+    gGlyphs = g
+    .append("g")
+
+    gGlyphs
+        .attr("class", "cell-glyphs")
+        .selectAll("cell-glyph")
         .data(glyphData)
         .join('text')
         .attr("role", "listitem")
@@ -263,10 +277,10 @@ function updateCellCircle(convert, glyph) {
 
     filterPositionData(glyph);
 
-    let c = g.selectAll("circle")
+    let c = gCircles.selectAll("circle")
     .data(positionFiltered, function(d) {return d.position;});
 
-    gCircles = c
+    c
     .enter()
     .append("circle")
     .merge(c)
@@ -308,7 +322,7 @@ function updateCellText(convert, addNumber) {
         opacity = 0;
     }
 
-    let t = g.selectAll(".cell-number")
+    let t = gNumbers.selectAll(".cell-number")
     .data(spacing, function(d) {return d.position;});
 
     t
@@ -348,7 +362,7 @@ function updateCellGlyph(convert, addGlyph) {
         opacity = 0;
     }
 
-    let t = g.selectAll(".cell-glyph")
+    let t = gGlyphs.selectAll(".cell-glyph")
     .data(glyphData, function(d) {return d.glyph;});
 
     t
