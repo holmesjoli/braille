@@ -296,16 +296,16 @@ function updateCellCircle(convert, glyph) {
 // Description transitions the text between steps using entry and exit pattern of update
 function updateCellText(convert, addNumber) {
 
-    let data;
+    let opacity;
 
     if (addNumber) {
-        data = spacing;
+        opacity = 1;
     } else {
-        data = [];
+        opacity = 0;
     }
 
     let t = g.selectAll(".cell-number")
-    .data(data, function(d) {return d.position;});
+    .data(spacing, function(d) {return d.position;});
 
     t
         .enter()
@@ -324,7 +324,7 @@ function updateCellText(convert, addNumber) {
             })
             .attr("text-anchor", "middle")
             .attr("font-size", convert)
-            .attr("opacity", 1);
+            .attr("opacity", opacity);
 
     t.exit()
         .transition()
@@ -334,7 +334,7 @@ function updateCellText(convert, addNumber) {
 }
 
 function updateCellGlyph(convert, addGlyph) {
-    console.log(addGlyph)
+
     let opacity;
 
     if (addGlyph) {
@@ -343,26 +343,39 @@ function updateCellGlyph(convert, addGlyph) {
         opacity = 0;
     }
 
-    let t = g.select(".cell-glyph")
+    console.log(data)
 
-    var bb = circles.node().getBBox();
-    var centery = bb.y + bb.height/2;
-    var centerx = bb.x + bb.width/2;
-    console.log(bb)
-
+    let t = g.selectAll(".cell-glyph")
+    .data(data, function(d) {return d.position;});
 
     t
+        .enter()
+        .append("text")
+        .merge(t)
+            .transition()
+            .duration(1000)
+            .delay(function(d) {return 500*d.index})
+            .attr('y',  function (d) {
+                return d.y*convert + margin.top*convert;
+            })
+            .attr('x', function (d) {
+                return d.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
+            })
+            .text(function (d) {return d.glyph; })
+            .attr("text-anchor", "middle")
+            .attr("font-size", convert*5)
+            .attr("opacity", opacity);
+
+    t.exit()
         .transition()
         .duration(1000)
-        .attr('y', 3*convert + margin.top*convert + r*convert)
-        .attr('x', 2*convert + margin.left*convert + margin.right*convert)
-        .attr("font-size", convert*5)
-        .attr("opacity", opacity);
+        .attr("opacity", 0)
+        .remove();
 }
 
 function updateCell(convert, glyph, addNumber, addGlyph) {
 
     updateCellCircle(convert, glyph);
     updateCellText(convert, addNumber);
-    // updateCellGlyph(convert, addGlyph);
+    updateCellGlyph(convert, addGlyph);
 }
