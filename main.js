@@ -210,8 +210,9 @@ function initChart(convert = 1, glyph = " ") {
         .text("");
 
     // Add Glyph
-    g
-        .append("text")
+    g.selectAll("text")
+        .data(glyphData)
+        .join('text')
         .attr("role", "listitem")
         .attr("class", "cell-glyph")
         .attr('y', 0)
