@@ -186,7 +186,8 @@ div p:last-child {
         width: 70%;
     }
 
-    .intro {
+    .intro,
+    .outro {
         display: block;
     }
 
@@ -207,18 +208,7 @@ div p:last-child {
         font-size: 11pt;
     }
 
-
     /*New */
-    .intro {
-        max-width: 500px;
-        padding: 20px;
-    }
-    
-    .outro {
-        max-width: 500px;
-        padding: 20px;
-        margin-bottom: 200px
-    }
 
     /* all scrolling positions set to relative */
     #scroll {
@@ -254,10 +244,8 @@ div p:last-child {
         margin-top: 80px;
         margin-bottom: 80px;
     }
-    
-    /* .step.is-active {
-        opacity: 1;
-        z-index: 1;
-    } */
 
+    ul.callout {
+        margin-bottom: 0;
+    }
 }
