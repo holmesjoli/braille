@@ -60,7 +60,8 @@ div p:last-child {
     margin-bottom: 0;
 }
 
-.callout {
+.callout,
+.step > div {
     padding: 20px;
     border: 1px solid #D7D7D7;
     background-color: rgba(215, 215, 215, .12);
@@ -141,8 +142,8 @@ span {
 .step {
     opacity: 0.5;
     padding: 1rem;
-    background-color: lightgray;
-    border: 1px solid gray;
+    /* background-color: lightgray; */
+    /* border: 1px solid gray; */
     max-width: 800px;
     height: 300px;
     margin: 10px;
@@ -167,6 +168,6 @@ span {
 
 .step p {
     margin: 0 auto;
-    height: 300px;
-    background-color: white;
+    /* height: 300px; */
+    /* background-color: white; */
 }
