@@ -76,8 +76,6 @@ function handleResize() {
     var stepHeight = Math.floor(window.innerHeight * 0.7);
     step.style('height', stepHeight + 'px');
 
-    // 2. update height of graphic element
-    var bodyWidth = d3.select('body').node().offsetWidth;
     graphic.style('height', window.innerHeight + 'px');
 
     // 3. update width of chart by subtracting from text width
@@ -86,12 +84,13 @@ function handleResize() {
 
     if (window.innerWidth < 800) {
         chartWidth = graphic.node().offsetWidth;
+        chartHeight = Math.floor(window.innerHeight*.33);
     } else {
         chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
+        chartHeight = Math.floor(window.innerHeight*.5);
     }
 
     // make the height 1/2 of viewport
-    chartHeight = Math.floor(window.innerHeight / 2);
 
     chart
         .style('width', chartWidth + 'px')
@@ -144,7 +143,7 @@ function init() {
             graphic: '.scroll__graphic', // the graphic
             text: '.scroll__text', // the step container
             step: '.scroll__text .step', // the step elements
-            offset: 0.5, // set the trigger to be 1/2 way down screen
+            offset: .5, // set the trigger to be 1/2 way down screen
             debug: false, // display the trigger offset for testing
             progress: false
         })
