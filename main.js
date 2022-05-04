@@ -345,7 +345,7 @@ function updateCellGlyph(convert, addGlyph) {
     }
 
     let t = g.selectAll(".cell-glyph")
-    .data(glyphData, function(d) {return d.position;});
+    .data(glyphData, function(d) {return d.glyph;});
 
     t
         .enter()
@@ -377,5 +377,5 @@ function updateCell(convert, glyph, addNumber, addGlyph) {
 
     updateCellCircle(convert, glyph);
     updateCellText(convert, addNumber);
-    updateCellGlyph(convert, addGlyph);
+    // updateCellGlyph(convert, addGlyph);
 }
