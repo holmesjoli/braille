@@ -172,3 +172,7 @@ span {
     /* height: 300px; */
     /* background-color: white; */
 }
+
+.step h3 {
+    margin-top: 0;
+}
