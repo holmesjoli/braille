@@ -252,7 +252,6 @@ function updateCellCircle(convert) {
         .remove();
 }
 
-
 // Update the number text attributes in the cell
 function updateCellText(convert, addNumber) {
 
