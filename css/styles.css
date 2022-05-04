@@ -81,12 +81,13 @@ span {
     flex: 0 1 80px;
     text-transform: uppercase;
     font-style: italic;
-    text-align: center;
+    text-align: right;
+    padding-right: 20px;
 }
 
 .quote p {
     border-left: 2px solid #D7D7D7;
-    flex: 0 1 500px;
+    flex: 1 0 200px;
     font-size: 10pt;
     padding-left: 20px;
 }
