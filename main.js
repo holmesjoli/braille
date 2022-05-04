@@ -243,23 +243,33 @@ function initChart(convert = 1, glyph = " ") {
         .text(glyph);
 }
 
+// Number of characters in a glyph
+function nGlyphCharacters(glyph) {
+    if (glyph != null) {
+        return glyph.split("").length;
+    } else {
+        return 1;
+    }
+}
+
+
 // Title Update the cell circle attributes
 // Description transitions the cells between steps using entry and exit pattern of update
 function updateCellCircle(convert, glyph) {
 
     let positionFiltered;
-    let nGlyph;
+    let nGlyph = nGlyphCharacters(glyph);
 
     if (glyph != null) {
         let arrayGlyph =  glyph.split("");
-        nGlyph = arrayGlyph.length;
+        // nGlyph = arrayGlyph.length;
 
         positionFiltered = position.filter(function(d) {
             d.index = arrayGlyph.indexOf(d.glyph);
             return glyph.includes(d.glyph);
         });
     } else {
-        nGlyph = 1;
+        // nGlyph = 1;
         positionFiltered = spacing;
     }
 
@@ -272,7 +282,7 @@ function updateCellCircle(convert, glyph) {
     .merge(c)
         .transition()
         .duration(1000)
-        .delay(function(d) {return 1000*d.index})
+        .delay(function(d) {return 500*d.index})
         .attr('cy',  function (d) {
             let m = spacing.find(el => el.position === d.position);
             return m.y*convert + margin.top*convert;
