@@ -11,30 +11,16 @@ let step = text.selectAll('.step');
 let chartWidth;
 let chartHeight;
 
-let data = [];
-function updateData() {
-    data = [];
-    for (let i = 0; i < 5; i++) {
-        data.push(Math.random() * 800);
-    }
-}
 let svg = chart
     .append('svg');
 
 let g;
 let spacing;
 let position;
+let positionFiltered;
 let circles;
+let glyphData = [];
 const convertMM = 3.7795275591;
-
-
-const newData = [
-    { x: 4, size: 9 },
-    { x: 1, size: 8 },
-    { x: 2, size: 1 },
-    { x: 9, size: 3 },
-    { x: 2, size: 2 }
-]
 
 
 const files = {
@@ -168,7 +154,6 @@ function init() {
     console.log(spacing)
     console.log(position)
 
-    // updateData();
     initChart();
 
     });
@@ -182,6 +167,9 @@ init();
 /////////////////////////////////
 
 function initChart(convert = 1, glyph = " ") {
+
+
+    filterPositionData(glyph);
 
     svg
         .attr('width', chartWidth)
@@ -213,7 +201,7 @@ function initChart(convert = 1, glyph = " ") {
         .attr('r', 0)
         .attr('opacity', 0);
 
-    // Add text
+    // Add Numbers
     g.selectAll('text')
         .data(spacing)
         .join('text')
@@ -232,6 +220,7 @@ function initChart(convert = 1, glyph = " ") {
             return d.position;
         });
 
+    // Add Glyph
     g
         .append("text")
         .attr("role", "listitem")
@@ -242,6 +231,51 @@ function initChart(convert = 1, glyph = " ") {
         .attr("font-size", convert)
         .attr('opacity', 1)
         .text(glyph);
+
+
+    // g.selectAll('text')
+    //     .data(glyphArray)
+    //     .join('text')
+    //     .attr("role", "listitem")
+    //     .attr("class", "cell-number")
+    //     .attr('y',  function (d) {
+    //         return d.y*convert + margin.top*convert + r*convert/2;
+    //     })
+    //     .attr('x', function (d) {
+    //         return d.x*convert + convert*margin.left/2*d.index;
+    //     })
+    //     .attr("text-anchor", "middle")
+    //     .attr("font-size", convert)
+    //     .attr('opacity', 0)
+    //     .text(function (d) {
+    //         return d.position;
+    //     });
+}
+
+// Filter position data
+function filterPositionData(glyph) {
+
+    let glyphArray;
+    let glyphDataNew = [];
+
+    if (glyph != null) {
+        glyphArray = glyph.split("");
+
+        positionFiltered = position.filter(function(d) {
+
+            d.index = glyphArray.indexOf(d.glyph);
+            return glyph.includes(d.glyph);
+        });
+
+        glyphArray.forEach(function(d) {
+            glyphDataNew.push({glyph: d})
+        })
+
+        glyphData = glyphDataNew;
+
+    } else {
+        positionFiltered = spacing;
+    }
 }
 
 
@@ -249,18 +283,7 @@ function initChart(convert = 1, glyph = " ") {
 // Description transitions the cells between steps using entry and exit pattern of update
 function updateCellCircle(convert, glyph) {
 
-    let positionFiltered;
-
-    if (glyph != null) {
-        let arrayGlyph = glyph.split("");
-
-        positionFiltered = position.filter(function(d) {
-            d.index = arrayGlyph.indexOf(d.glyph);
-            return glyph.includes(d.glyph);
-        });
-    } else {
-        positionFiltered = spacing;
-    }
+    filterPositionData(glyph);
 
     let c = g.selectAll("circle")
     .data(positionFiltered, function(d) {return d.position;});
