@@ -456,6 +456,39 @@ function updateCellGlyph(convert, addGlyph) {
         .remove();
 }
 
+function updateRect(convert, addRect) {
+    let opacity;
+    
+    if (addRect) {
+        opacity = .2;
+    } else {
+        opacity = 0;
+    }
+
+    let yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
+    let yMax = yPos(yMaxData[0], convert) + r*convert;
+
+    let xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
+    let xMax = xPos(xMaxData[0], convert) + margin.right;
+
+    let c = gRect.selectAll("rect");
+
+    c
+    .append("rect")
+    .merge(c)
+        .transition()
+        .duration(1000)
+
+    c
+        .attr('y', margin.top)
+        .attr('x', 0)
+        .attr("width", xMax)
+        .attr("height", yMax)
+        .attr("fill", "red")
+        .attr("opacity", opacity);
+}
+
+
 // Title Highlight top four
 // Description Highlights the top four dots in red
 function highlightTopFour(convert) {
@@ -546,6 +579,7 @@ function step0(convert = magnify) {
     updateCellCircle(convert);
     updateCellText(convert, true);
     updateCellGlyph(convert, false);
+    updateRect(convert, false);
 
     svg
         .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
@@ -559,6 +593,7 @@ function step1(convert = convertMM) {
     updateCellCircle(convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
+    updateRect(convert, false);
 
     svg
         .attr("aria-label","The image transitions from a single Braille cell to a set of 10 Braille representing A-J. The numbers have been removed and there is text below each cell that labels the cell A through J.");
@@ -568,20 +603,7 @@ function step1(convert = convertMM) {
 // Description highlighs circles in red
 function step2(convert = convertMM) {
 
-    highlightTopFour(convert);
-
-    let yMax = spacing.find(el => el.position === 5).y;
-    console.log(yMax);
-    // return m.y*convert + margin.top*convert + 14*convert*d.yIndex;
-
-    g
-        .append('rect')
-        .attr('y', 0)
-        .attr('x', 0)
-        .attr("width", 100)
-        .attr("height", 100)
-        .attr("fill", "red")
-        .attr("opacity", .2);
+    updateRect(convert, true);
 
     svg
         .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
@@ -594,6 +616,7 @@ function step3(convert = convertMM) {
     highlightDotFive(convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
+    updateRect(convert, false);
 
     svg
         .attr("aria-label","The image transitions to show 20 Braille cells representing A through T. There are now two rows of Braille cells to show how the Grades are related. ");
