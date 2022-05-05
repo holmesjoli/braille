@@ -318,6 +318,7 @@ function filteredData(glyph) {
             xIndex = xIndex - 10;
         } else {
             yIndex = 2;
+            xIndex = xIndex - 20;
         }
 
         glyphDataNew.push({
@@ -435,6 +436,7 @@ function updateCellGlyph(convert, addGlyph) {
 
     let t = gGlyphs.selectAll("text")
     .data(data, function(d) {return d.glyph;});
+    console.log(data)
 
     t
         .enter()
@@ -443,7 +445,7 @@ function updateCellGlyph(convert, addGlyph) {
             .transition()
             .duration(1000)
             .attr('y',  function (d) {
-                return d.y*convert + margin.top*convert + 14*convert*d.yIndex + 10*convert;
+                return 14*convert*(d.yIndex +1)
             })
             .attr('x', function (d) {
                 return 2*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
