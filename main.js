@@ -193,6 +193,8 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
+// Title Init Chart
+// Description initiates different components of the visualization
 function initChart() {
 
     filteredData(" ")
@@ -262,6 +264,8 @@ function initChart() {
         .text("");
 }
 
+// Filtered Data
+// Filters the data for each step given a glyph
 function filteredData(glyph) {
 
     glyphArray = glyph.split("");
@@ -392,6 +396,7 @@ function updateCellText(convert, addNumber) {
         .remove();
 }
 
+// Adds glyphs below Braille Cells
 function updateCellGlyph(convert, addGlyph) {
 
     let opacity;
@@ -562,11 +567,10 @@ function step2(convert = convertMM) {
 // Description filters data, updates circles, number and glyphs
 function step3(convert = convertMM) {
     filteredData("abcdefghijklmnopqrst");
-    // updateCellCircle(convertMM);
     highlightDotFive(convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
 
     svg
-        .attr("aria-label","The image transitions to show 20 Braille cells representing A through T.");
+        .attr("aria-label","The image transitions to show 20 Braille cells representing A through T. There are now two rows of Braille cells to show how the Grades are related. ");
 }
