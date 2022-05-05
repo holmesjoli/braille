@@ -269,6 +269,7 @@ function initChart() {
 
     gRect
         .append('rect')
+        .attr("class", "dashed")
         .attr('y', margin.top)
         .attr('x', margin.left)
         .attr("width", 0)
@@ -459,22 +460,32 @@ function updateCellGlyph(convert, addGlyph) {
 // Update rects
 function updateRect(convert, addRect) {
     let opacity;
-    let yMaxData;
     let yMax;
-    let xMaxData;
+    let yMin;
     let xMax;
+    let xMin;
 
     if (addRect) {
         opacity = 1;
-        yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
-        yMax = yPos(yMaxData[0], convert) + r*convert;
+
+        let yMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
+        yMin = yPos(yMinData[0], convert) - convert;
+        console.log(yMin)
+
+        let xMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
+        xMin = xPos(xMinData[0], convert) - convert;
+
+        let yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
+        yMax = yPos(yMaxData[0], convert) - convert;
     
-        xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
-        xMax = xPos(xMaxData[0], convert);
+        let xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
+        xMax = xPos(xMaxData[0], convert) + convert;
     } else {
         opacity = 0;
         xMax = 0;
         yMax = 0;
+        yMin = 0;
+        xMin = 0;
     }
 
     let c = gRect.selectAll("rect");
@@ -486,8 +497,8 @@ function updateRect(convert, addRect) {
         .duration(1000)
 
     c
-        .attr('y', margin.top)
-        .attr('x', margin.left)
+        .attr('y', yMin)
+        .attr('x', xMin)
         .attr("width", xMax)
         .attr("height", yMax)
         .attr("stroke", "red")
@@ -513,7 +524,7 @@ function highlightTopFour(convert) {
         .transition()
         .duration(1000)
         .attr("r", function(d) {
-            if (d.position === 5 || d.position === 6) {
+            if (d.value === 0) {
                 return r*convert;
             } else {
                 return r*convert*1.5;
@@ -603,6 +614,7 @@ function step1(convert = 10) {
 // Description highlighs circles in red
 function step2(convert = 10) {
 
+    filteredData("abcdefghij");
     highlightTopFour(convert);
     updateRect(convert, true);
 
