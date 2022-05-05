@@ -18,13 +18,14 @@ let spacing;
 let position;
 let glyphData = [];
 let data;
+let rectData;
 
 // Grouping globals
 let g;
 let gCircles;
 let gGlyphs;
 let gNumbers;
-let gRect;
+let gRects;
 
 // Additional globals
 let glyphArray;
@@ -181,8 +182,8 @@ function init() {
 
     console.log(position)
 
+    defaultRectData();
     initChart();
-
     });
 }
 
@@ -264,11 +265,14 @@ function initChart() {
         .text("");
 
     // Add Rect
-    gRect = g
+    gRects = g
     .append("g")
 
-    gRect
-        .append('rect')
+    gRects
+        .attr("class", "rect-groups")
+        .selectAll("rect-groups")
+        .data(rectData)
+        .join('rect')
         .attr("class", "dashed")
         .attr('y', margin.top)
         .attr('x', margin.left)
@@ -458,37 +462,17 @@ function updateCellGlyph(convert, addGlyph) {
 }
 
 // Update rects
-function updateRect(convert, addRect) {
+function updateRect(addRect) {
     let opacity;
-    let yMax;
-    let yMin;
-    let xMax;
-    let xMin;
 
     if (addRect) {
         opacity = 1;
-
-        let yMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
-        yMin = yPos(yMinData[0], convert) - convert;
-        console.log(yMin)
-
-        let xMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
-        xMin = xPos(xMinData[0], convert) - convert;
-
-        let yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
-        yMax = yPos(yMaxData[0], convert) - convert;
-    
-        let xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
-        xMax = xPos(xMaxData[0], convert) + convert;
     } else {
         opacity = 0;
-        xMax = 0;
-        yMax = 0;
-        yMin = 0;
-        xMin = 0;
     }
 
-    let c = gRect.selectAll("rect");
+    let c = gRects.selectAll("rect")
+    .data(rectData, function(d) {return d.id;});
 
     c
     .append("rect")
@@ -497,15 +481,36 @@ function updateRect(convert, addRect) {
         .duration(1000)
 
     c
-        .attr('y', yMin)
-        .attr('x', xMin)
-        .attr("width", xMax)
-        .attr("height", yMax)
+        .attr('y', function(d) {return d.yMin; })
+        .attr('x',  function(d) {return d.xMin; })
+        .attr("width",  function(d) {return d.xMax; })
+        .attr("height",  function(d) {return d.yMax; })
         .attr("stroke", "#ED1C24")
         .attr("fill", "none")
         .attr("opacity", opacity);
 }
 
+function defaultRectData() {
+    rectData = [{"xMin": 0, "xMax": 0, "yMin": 0, "yMax": 0, "id": 0}];
+}
+
+function step2RectData(convert) { 
+    
+    let yMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
+    let yMin = yPos(yMinData[0], convert) - convert;
+
+    let xMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
+    let xMin = xPos(xMinData[0], convert) - convert;
+
+    let yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
+    let yMax = yPos(yMaxData[0], convert) - convert;
+
+    let xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
+    let xMax = xPos(xMaxData[0], convert) + convert;
+
+    rectData = [{"xMin": xMin, "xMax": xMax, "yMin": yMin, "yMax": yMax, "id": 0}];
+
+}
 
 // Title Highlight top four
 // Description Highlights the top four dots in red
@@ -586,11 +591,15 @@ function highlightDotFive(convert) {
 // Description filters data, updates circles, number and glyphs
 function step0(convert = magnify) {
 
+    // Update data steps
     filteredData(" ");
+    defaultRectData();
+
+    // Update visual attributes
     updateCellCircle(convert);
     updateCellText(convert, true);
     updateCellGlyph(convert, false);
-    updateRect(convert, false);
+    updateRect(false);
 
     svg
         .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
@@ -600,11 +609,15 @@ function step0(convert = magnify) {
 // Description filters data, updates circles, number and glyphs
 function step1(convert = 10) {
 
+    // Update data steps
     filteredData("abcdefghij");
+    defaultRectData();
+
+    // Update visual attributes
     updateCellCircle(convert);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
-    updateRect(convert, false);
+    updateRect(false);
 
     svg
         .attr("aria-label","The image transitions from a single Braille cell to a set of 10 Braille representing A-J. The numbers have been removed and there is text below each cell that labels the cell A through J.");
@@ -614,9 +627,13 @@ function step1(convert = 10) {
 // Description highlighs circles in red
 function step2(convert = 10) {
 
+    // Update data steps
     filteredData("abcdefghij");
+    step2RectData(convert);
+
+    // Update visual attributes
     highlightTopFour(convert);
-    updateRect(convert, true);
+    updateRect(true);
 
     svg
         .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
@@ -625,11 +642,17 @@ function step2(convert = 10) {
 // Title Step 3
 // Description filters data, updates circles, number and glyphs
 function step3(convert = 10) {
+
+    // Update data steps
     filteredData("abcdefghijklmnopqrst");
+    defaultRectData();
+
+
+    // Update visual attributes
     highlightDotFive(convert);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
-    updateRect(convert, false);
+    updateRect(false);
 
     svg
         .attr("aria-label","The image transitions to show 20 Braille cells representing A through T. There are now two rows of Braille cells to show how the Grades are related. ");
