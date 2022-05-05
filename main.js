@@ -123,15 +123,15 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        step0(magnify);
+        step0();
     }
 
     if (response.index === 1) {
-        step1(convertMM);
+        step1();
     }
 
     if (response.index === 2) {
-        step2(convertMM);
+        step2();
     }
 
     console.log(response)
@@ -403,7 +403,7 @@ function updateCellGlyph(convert, addGlyph) {
         .remove();
 }
 
-function step0(convert) {
+function step0(convert = magnify) {
 
     filteredData(" ")
     updateCellCircle(data, convert);
@@ -412,15 +412,14 @@ function step0(convert) {
 
 }
 
-function step1(convert) {
+function step1(convert = convertMM) {
     filteredData("abcdefghij");
-    updateCellCircle(data, convert);
+    updateCellCircle(data, convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
 }
 
-function step2(convert) {
-    filteredData("abcdefghij");
+function step2(convert = convertMM) {
     highlightTopFour(convert)
 }
 
