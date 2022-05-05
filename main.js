@@ -79,6 +79,11 @@ const fillScale = d3.scaleOrdinal()
     .domain([0, 1])
     .range(["#FFFFFF", "#000000"]);
 
+
+const colorScale = d3.scaleOrdinal()
+    .domain([0,1,2,3,4,5,6,7,8,9])
+    .range(["#F2D439", "#FBAA3B", "#F68D71", "#F280A1", "#AB89BF", "#8789C2", "#84B1DF", "#74CEE1", "#82CDBE", "#94CF9C"])
+
 const r = .6;
 const margin = {left: 3.1, right: 3.1, top: 3.1};
 
@@ -363,7 +368,11 @@ function updateCellCircle(convert) {
         .attr('cy',  function (d) { return yPos(d, convert); })
         .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {
-            return fillScale(d.value);
+            if (d.value === 1) {
+                return colorScale(d.xIndex);
+            } else {
+                return "#FFFFFF";
+            }
         })
         .attr("stroke", "#000000")
         .attr("r", r*convert)
@@ -488,7 +497,7 @@ function updateRect(addRect) {
         .attr('x',  function(d) {return d.xMin; })
         .attr("width",  function(d) {return d.xMax; })
         .attr("height",  function(d) {return d.yMax; })
-        .attr("stroke", "#ED1C24")
+        .attr("stroke", "#000000")
         .attr("fill", "none")
         .attr("opacity", opacity);
 }
@@ -559,18 +568,14 @@ function highlightDotFive(convert) {
         .attr('cy',  function (d) { return yPos(d, convert); })
         .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {
-            if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
-                return "#ED1C24";
+            if (d.value === 1) {
+                return colorScale(d.xIndex);
             } else {
-                return fillScale(d.value);
+                return "#FFFFFF"
             }
         })
         .attr("stroke", function(d) {
-            if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
-                return "#ED1C24";
-            } else {
-                return "#000000";
-            }
+                return "#000000"
         })
         .attr("r", function(d) {
             if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
