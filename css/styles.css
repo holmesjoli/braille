@@ -249,6 +249,12 @@ div p:last-child {
         transform: translateY(0%);
     }
 
+    .outro {
+        -moz-transform: translateY(-70%);
+        -webkit-transform: translateY(-70%);
+        transform: translateY(-70%);
+    }
+
     /* all scrolling positions set to relative */
     /* #scroll {
         position: relative;
