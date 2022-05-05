@@ -84,6 +84,11 @@ const colorScale = d3.scaleOrdinal()
     .domain([0,1,2,3,4,5,6,7,8,9])
     .range(["#F2D439", "#FBAA3B", "#F68D71", "#F280A1", "#AB89BF", "#8789C2", "#84B1DF", "#74CEE1", "#82CDBE", "#94CF9C"])
 
+
+const opacityScale = d3.scaleOrdinal()
+    .domain([1, 2, 3, 4, 5, 6])
+    .range([.5, .5, .5, .5, 1, 1])
+
 const r = .6;
 const margin = {left: 3.1, right: 3.1, top: 3.1};
 
@@ -575,9 +580,11 @@ function highlightDotFive(convert) {
     c
     .enter()
     .append("circle")
-        .attr("r", r*convert)
         .attr("stroke", "#000000")
         .attr("fill", "#FFFFFF")
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0)
+        .attr("r", 0)
     .merge(c)
         .transition()
         .duration(1000)
@@ -590,17 +597,19 @@ function highlightDotFive(convert) {
                 return "#FFFFFF"
             }
         })
-        .attr("stroke", function(d) {
-                return "#000000"
-        })
         .attr("r", function(d) {
-            if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
+            if (d.grade === 2 & (d.position === 6 || d.position === 5)) {
+                return r*convert*1.5;
+            } if(d.grade === 2 & d.position === 5) {
                 return r*convert*1.5;
             } else {
                 return r*convert;
             }
         })
-        .attr("opacity", 1);
+        .attr("fill-opacity", function(d) {
+            return opacityScale(d.position);
+        })
+        .attr("stroke-opacity", 1);
 
     c.exit()
         .transition()
