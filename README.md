@@ -109,6 +109,10 @@ let svg = svg
         .attr('aria-label', 'chart type');
 ```
 
+### Mobile adaptivity
+
+To make the visualization somewhat mobile adaptive, I added a breakpoint of 800 pixels in the javascript code. The javascript code resizes the SVG, and the CSS code pivots the layout to be a column-based layout instead of a row-based layout. In the first step, the cell is magnified to show the matrix, which gets resized with a breakpoint.
+
 ## Sources
 
 [^1]: https://www.clintoneye.com/color-blindness.html#:~:text=There%20are%20an%20estimated%20300,are%20color%20blind%20(0.5%25).
