@@ -36,9 +36,9 @@ const convertMM = 3.7795275591;
 let magnify;
 
 if (window.innerWidth < 800) {
-    magnify = 20;
+    magnify = 5;
 } else {
-    magnify = 30;
+    magnify = 10;
 }
 
 const files = {
@@ -101,8 +101,7 @@ var scroller = scrollama();
 function handleResize() {
     // 1. update height of step elements for breathing room between steps
     // changing the multiplier here will define how much white space between steps
-    var stepHeight = Math.floor(window.innerHeight * 0.6);
-    step.style('height', stepHeight + 'px');
+    let stepHeight;
 
     graphic.style('height', window.innerHeight + 'px');
 
@@ -113,13 +112,16 @@ function handleResize() {
     if (window.innerWidth < 800) {
         chartWidth = graphic.node().offsetWidth;
         chartHeight = Math.floor(window.innerHeight*.33);
+        stepHeight = Math.floor(window.innerHeight );
     } else {
         chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
         chartHeight = Math.floor(window.innerHeight*.7);
+        stepHeight = Math.floor(window.innerHeight * 0.6);
     }
 
-    // make the height 1/2 of viewport
+    step.style('height', stepHeight + 'px');
 
+    // make the height 1/2 of viewport
     chart
         .style('width', chartWidth + 'px')
         .style('height', chartHeight + 'px');
@@ -624,7 +626,7 @@ function highlightDotFive(convert) {
 
 // Title Step 0
 // Description filters data, updates circles, number and glyphs
-function step0(convert = magnify) {
+function step0(convert = 30) {
 
     // Update data steps
     filteredData(" ");
@@ -642,7 +644,7 @@ function step0(convert = magnify) {
 
 // Title Step 1
 // Description filters data, updates circles, number and glyphs
-function step1(convert = 10) {
+function step1(convert = magnify) {
 
     // Update data steps
     filteredData("abcdefghij");
@@ -660,7 +662,7 @@ function step1(convert = 10) {
 
 // Title Step 2
 // Description highlighs circles in red
-function step2(convert = 10) {
+function step2(convert = magnify) {
 
     // Update data steps
     filteredData("abcdefghij");
@@ -676,7 +678,7 @@ function step2(convert = 10) {
 
 // Title Step 3
 // Description filters data, updates circles, number and glyphs
-function step3(convert = 10) {
+function step3(convert = magnify) {
 
     // Update data steps
     filteredData("abcdefghijklmnopqrstuvxyz    w");
