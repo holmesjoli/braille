@@ -102,7 +102,7 @@ div p:last-child {
 }
 
 #chart {
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
 }
 
 /* set scroll graphic to absolute and lock in the position */
@@ -132,9 +132,9 @@ div p:last-child {
 .scroll__text {
     padding: 0 1rem;
     max-width: 30rem;
-    transform: translateY(-45%);
-    -moz-transform: translateY(-45%);
-    -webkit-transform: translateY(-45%);
+    transform: translateY(-37%);
+    -moz-transform: translateY(-37%);
+    -webkit-transform: translateY(-37%);
 }
 
 .step {

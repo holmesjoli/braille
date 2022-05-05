@@ -43,8 +43,8 @@ const files = {
                 position: +j.position,
                 x: +j.x,
                 y: +j.y,
-                index: +j.index, //default index
-                glypth: j.index //default glyph
+                xIndex: +j.index, //default index
+                glyph: j.glyph //default glyph
             }
         }
     },
@@ -134,6 +134,10 @@ function handleStepEnter(response) {
         step2();
     }
 
+    if (response.index === 3) {
+        // step3();
+    }
+
     console.log(response)
 }
 
@@ -187,6 +191,8 @@ init();
 
 function initChart() {
 
+    filteredData(" ")
+
     svg
         .attr('width', chartWidth)
         .attr('height', chartHeight)
@@ -205,7 +211,7 @@ function initChart() {
     gCircles
         .attr("class", "matrix")
         .selectAll('circle')
-        .data(spacing)
+        .data(data)
         .join('circle')
         .attr("class", "matrix-unit")
         .attr("role", "listitem")
@@ -258,7 +264,7 @@ function filteredData(glyph) {
 
     data = position.filter(function(d) {
 
-        d.index = glyphArray.indexOf(d.glyph);
+        d.xIndex = glyphArray.indexOf(d.glyph);
 
         return glyph.includes(d.glyph);
     });
@@ -269,7 +275,7 @@ function filteredData(glyph) {
                         glyph: d,
                         x: 0,
                         y: 0,
-                        index: glyphArray.indexOf(d)})
+                        xIndex: glyphArray.indexOf(d)})
     })
 
     glyphData = glyphDataNew;
@@ -288,14 +294,13 @@ function updateCellCircle(data, convert) {
     .merge(c)
         .transition()
         .duration(1000)
-        // .delay(function(d) {return 500*d.index})
         .attr('cy',  function (d) {
             let m = spacing.find(el => el.position === d.position);
             return m.y*convert + margin.top*convert;
         })
         .attr('cx', function (d) {
             let m = spacing.find(el => el.position === d.position);
-            return m.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
+            return m.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
         })
         .attr("fill", function(d) {
             return fillScale(d.value);
@@ -339,7 +344,7 @@ function updateCellText(convert, addNumber) {
                 return d.y*convert + margin.top*convert + r*convert/2;
             })
             .attr('x', function (d) {
-                return d.x*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
+                return d.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
             })
             .text(function (d) {
                 return d.position;
@@ -377,12 +382,11 @@ function updateCellGlyph(convert, addGlyph) {
         .merge(t)
             .transition()
             .duration(1000)
-            // .delay(function(d) {return 500*d.index})
             .attr('y',  function (d) {
                 return 7*convert + margin.top*convert*2;
             })
             .attr('x', function (d) {
-                return 2*convert + margin.left*convert/2 + margin.left*convert*d.index + margin.right*convert*d.index;
+                return 2*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
             })
             .text(function (d) {return d.glyph; })
             .attr("text-anchor", "middle")
@@ -400,7 +404,7 @@ function updateCellGlyph(convert, addGlyph) {
 
 function step0(convert = magnify) {
 
-    filteredData(" ")
+    filteredData(" ");
     updateCellCircle(data, convert);
     updateCellText(convert, true);
     updateCellGlyph(convert, false);
@@ -411,6 +415,7 @@ function step0(convert = magnify) {
 }
 
 function step1(convert = convertMM) {
+
     filteredData("abcdefghij");
     updateCellCircle(data, convertMM);
     updateCellText(convert, false);
@@ -438,7 +443,6 @@ function highlightTopFour(convert) {
     .merge(c)
         .transition()
         .duration(1000)
-        // .delay(function(d) {return 500*d.index})
         .attr("stroke", function(d) {
             if (d.position == 5 || d.position == 6) {
                 return "#000000"
