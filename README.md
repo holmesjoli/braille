@@ -119,7 +119,7 @@ To make the visualization somewhat mobile adaptive, I added a breakpoint of 800 
 
 ### Sketches
 
-I started with sketching out how I thought I could potentially show connections in the system.
+I started with sketching out how I thought I could potentially show connections in the system. Overall, I wanted to keep the design of the page simple. The hope for the visualization is that it is a more accessible design. Complicating the design could reduce the general accessibility.
 
 ![Initial sketch of scrollytelling flow](/images/sketch1.png)
 
