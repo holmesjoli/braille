@@ -410,45 +410,6 @@ function updateCellGlyph(convert, addGlyph) {
         .remove();
 }
 
-function step0(convert = magnify) {
-
-    filteredData(" ");
-    updateCellCircle(convert);
-    updateCellText(convert, true);
-    updateCellGlyph(convert, false);
-
-    svg
-        .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
-
-}
-
-function step1(convert = convertMM) {
-
-    filteredData("abcdefghij");
-    updateCellCircle(convertMM);
-    updateCellText(convert, false);
-    updateCellGlyph(convert, true);
-
-    svg
-        .attr("aria-label","The image transitions from a single Braille cell to a set of 10 Braille representing A-J. The numbers have been removed and there is text below each cell that labels the cell A through J.");
-}
-
-function step2(convert = convertMM) {
-
-    highlightTopFour(convert);
-
-    svg
-        .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
-}
-
-function step3(convert = convertMM) {
-    filteredData("abcdefghijklmnopqrst");
-    updateCellCircle(convertMM);
-    updateCellText(convert, false);
-    updateCellGlyph(convert, true);
-
-}
-
 function highlightTopFour(convert) {
 
     let c = gCircles.selectAll("circle")
@@ -474,4 +435,53 @@ function highlightTopFour(convert) {
                 return r*convert*1.5;
             }
         });
+}
+
+// Title Step 0
+// Description filters data, updates circles, number and glyphs
+function step0(convert = magnify) {
+
+    filteredData(" ");
+    updateCellCircle(convert);
+    updateCellText(convert, true);
+    updateCellGlyph(convert, false);
+
+    svg
+        .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
+
+}
+
+// Title Step 1
+// Description filters data, updates circles, number and glyphs
+function step1(convert = convertMM) {
+
+    filteredData("abcdefghij");
+    updateCellCircle(convertMM);
+    updateCellText(convert, false);
+    updateCellGlyph(convert, true);
+
+    svg
+        .attr("aria-label","The image transitions from a single Braille cell to a set of 10 Braille representing A-J. The numbers have been removed and there is text below each cell that labels the cell A through J.");
+}
+
+// Title Step 2
+// Description highlighs circles in red
+function step2(convert = convertMM) {
+
+    highlightTopFour(convert);
+
+    svg
+        .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
+}
+
+// Title Step 3
+// Description filters data, updates circles, number and glyphs
+function step3(convert = convertMM) {
+    filteredData("abcdefghijklmnopqrst");
+    updateCellCircle(convertMM);
+    updateCellText(convert, false);
+    updateCellGlyph(convert, true);
+
+    svg
+        .attr("aria-label","The image transitions to show 20 Braille cells representing A through T.");
 }
