@@ -291,7 +291,7 @@ function filteredData(glyph) {
 
 // Title Update the cell circle attributes
 // Description transitions the cells between steps using entry and exit pattern of update
-function updateCellCircle(data, convert) {
+function updateCellCircle(convert) {
 
     let c = gCircles.selectAll("circle")
     .data(data, function(d) {return d.id;});
@@ -413,7 +413,7 @@ function updateCellGlyph(convert, addGlyph) {
 function step0(convert = magnify) {
 
     filteredData(" ");
-    updateCellCircle(data, convert);
+    updateCellCircle(convert);
     updateCellText(convert, true);
     updateCellGlyph(convert, false);
 
@@ -425,7 +425,7 @@ function step0(convert = magnify) {
 function step1(convert = convertMM) {
 
     filteredData("abcdefghij");
-    updateCellCircle(data, convertMM);
+    updateCellCircle(convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
 
@@ -443,7 +443,7 @@ function step2(convert = convertMM) {
 
 function step3(convert = convertMM) {
     filteredData("abcdefghijklmnopqrst");
-    updateCellCircle(data, convertMM);
+    updateCellCircle(convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
 
