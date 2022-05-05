@@ -191,15 +191,12 @@ function initChart() {
         .attr('width', chartWidth)
         .attr('height', chartHeight)
         .attr("role", "image")
-        .attr("aria-labelledby","titleID")
-        .append("title")
-            .attr("id", "titleID")
-            .text("Braille cell");
+        .attr("aria-label", "Braille cell");
 
     g = svg
         .append("g")
         .attr("role", "list")
-        .attr("aria-label", `initialized chart`)
+        .attr("aria-label", "initialized chart")
 
     // Add circles
     gCircles = g
@@ -408,6 +405,9 @@ function step0(convert = magnify) {
     updateCellText(convert, true);
     updateCellGlyph(convert, false);
 
+    svg
+        .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
+
 }
 
 function step1(convert = convertMM) {
@@ -415,10 +415,16 @@ function step1(convert = convertMM) {
     updateCellCircle(data, convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
+
+    svg
+        .attr("aria-label","The image transitions from a single Braille cell to a set of 10 Braille representing A-J. The numbers have been removed and there is text below each cell that labels the cell A through J.");
 }
 
 function step2(convert = convertMM) {
-    highlightTopFour(convert)
+    highlightTopFour(convert);
+
+    svg
+        .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
 }
 
 function highlightTopFour(convert) {
