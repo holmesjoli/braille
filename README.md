@@ -109,9 +109,25 @@ let svg = svg
         .attr('aria-label', 'chart type');
 ```
 
+I've also added alt tags to each image in this markdown file for added accessiblity to the documentation of this process.
+
 ### Mobile adaptivity
 
 To make the visualization somewhat mobile adaptive, I added a breakpoint of 800 pixels in the javascript code. The javascript code resizes the SVG, and the CSS code pivots the layout to be a column-based layout instead of a row-based layout. In the first step, the cell is magnified to show the matrix, which gets resized with a breakpoint. Additionally, I modified CSS properties, e.g. font-size, to adapt the overall fit of the content to a smaller screen.
+
+### Design process
+
+### Sketches
+
+I started with sketching out how I thought I could potentially show connections in the system.
+
+![Initial sketch of scrollytelling flow](/images/sketch1.png)
+
+![Sketch showing connections between dots with color.](/images/sketch2.jpg)
+
+![Sketch showing connections in the system with lines.](/images/sketch4.png)
+
+
 
 ## Sources
 
