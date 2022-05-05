@@ -31,6 +31,7 @@ let gRects;
 let glyphArray;
 let grade1GlyphArray = "abcdefghij".split("");
 let grade2GlyphArray = "klmnopqrst".split("");
+let grade3GlyphArray = "uvxyz    w".split("");
 const convertMM = 3.7795275591;
 let magnify;
 
@@ -103,7 +104,7 @@ function handleResize() {
         chartHeight = Math.floor(window.innerHeight*.33);
     } else {
         chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
-        chartHeight = Math.floor(window.innerHeight*.5);
+        chartHeight = Math.floor(window.innerHeight*.7);
     }
 
     // make the height 1/2 of viewport
@@ -644,7 +645,7 @@ function step2(convert = 10) {
 function step3(convert = 10) {
 
     // Update data steps
-    filteredData("abcdefghijklmnopqrst");
+    filteredData("abcdefghijklmnopqrstuvxyz    w");
     defaultRectData();
 
 
