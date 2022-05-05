@@ -185,9 +185,7 @@ init();
 // SOME D3 CODE FOR OUR GRAPHIC //
 /////////////////////////////////
 
-function initChart(glyph = " ") {
-
-    // filterPositionData(glyph);
+function initChart() {
 
     svg
         .attr('width', chartWidth)
