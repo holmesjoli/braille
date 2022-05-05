@@ -135,7 +135,7 @@ function handleStepEnter(response) {
     }
 
     if (response.index === 3) {
-        // step3();
+        step3();
     }
 
     console.log(response)
@@ -265,6 +265,14 @@ function filteredData(glyph) {
     data = position.filter(function(d) {
 
         d.xIndex = glyphArray.indexOf(d.glyph);
+
+        if (d.xIndex < 10) {
+            d.yIndex = 0;
+        } else if (d.xIndex > 10 & d.xIndex <=19) {
+            d.yIndex = 1;
+        } else (
+            d.yIndex = 2
+        )
 
         return glyph.includes(d.glyph);
     });
@@ -426,10 +434,19 @@ function step1(convert = convertMM) {
 }
 
 function step2(convert = convertMM) {
+
     highlightTopFour(convert);
 
     svg
         .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
+}
+
+function step3(convert = convertMM) {
+    filteredData("abcdefghijklmnopqrst");
+    updateCellCircle(data, convertMM);
+    updateCellText(convert, false);
+    updateCellGlyph(convert, true);
+
 }
 
 function highlightTopFour(convert) {
