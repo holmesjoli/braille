@@ -25,6 +25,15 @@ let glyphData = [];
 const convertMM = 3.7795275591;
 
 
+let magnify;
+
+if (window.innerWidth < 800) {
+    magnify = 20;
+} else {
+    magnify = 30;
+}
+
+
 const files = {
     spacing: {
         pth: "./data/spacing.csv",
@@ -112,7 +121,7 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateCell(30, null, true, false);
+        updateCell(magnify, null, true, false);
     }
 
     if (response.index === 1) {
