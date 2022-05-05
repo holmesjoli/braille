@@ -61,7 +61,8 @@ const files = {
                 glyph: j.glyph,
                 position: +j.position,
                 value: +j.value,
-                id: j.id
+                id: j.id,
+                grade: +j.grade
             }
         }
     }
@@ -82,7 +83,7 @@ const fillScale = d3.scaleOrdinal()
 
 const colorScale = d3.scaleOrdinal()
     .domain([0,1,2,3,4,5,6,7,8,9])
-    .range(["#F2D439", "#FBAA3B", "#F68D71", "#F280A1", "#AB89BF", "#8789C2", "#84B1DF", "#74CEE1", "#82CDBE", "#94CF9C"])
+    .range(["#f0a96a", "#cde7b0", "#a3bfa8", "#7286a0", "#59594a", "#f0a96a", "#cde7b0", "#a3bfa8", "#7286a0", "#59594a"])
 
 
 const opacityScale = d3.scaleOrdinal()
@@ -598,9 +599,10 @@ function highlightDotFive(convert) {
             }
         })
         .attr("r", function(d) {
-            if (d.grade === 2 & (d.position === 6 || d.position === 5)) {
+            console.log(d)
+            if (d.grade === 3 && (d.position === 5 || d.position === 6)) {
                 return r*convert*1.5;
-            } if(d.grade === 2 & d.position === 5) {
+            } if(d.grade === 2 && d.position === 5) {
                 return r*convert*1.5;
             } else {
                 return r*convert;
