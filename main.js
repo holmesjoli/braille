@@ -273,6 +273,7 @@ function initChart() {
         .attr('x', margin.left)
         .attr("width", 0)
         .attr("height", 0)
+        .attr("opacity", 0)
 }
 
 // Filtered Data
@@ -324,6 +325,18 @@ function filteredData(glyph) {
     glyphData = glyphDataNew;
 }
 
+// Title y Position
+function yPos(d, convert) {
+    let m = spacing.find(el => el.position === d.position);
+    return m.y*convert + margin.top*convert + 14*convert*d.yIndex;
+}
+
+// Title x Position
+function xPos(d, convert) {
+    let m = spacing.find(el => el.position === d.position);
+    return m.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
+}
+
 // Title Update the cell circle attributes
 // Description transitions the cells between steps using entry and exit pattern of update
 function updateCellCircle(convert) {
@@ -340,14 +353,8 @@ function updateCellCircle(convert) {
     .merge(c)
         .transition()
         .duration(1000)
-        .attr('cy',  function (d) {
-            let m = spacing.find(el => el.position === d.position);
-            return m.y*convert + margin.top*convert;
-        })
-        .attr('cx', function (d) {
-            let m = spacing.find(el => el.position === d.position);
-            return m.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
-        })
+        .attr('cy',  function (d) { return yPos(d, convert); })
+        .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {
             return fillScale(d.value);
         })
@@ -497,14 +504,8 @@ function highlightDotFive(convert) {
     .merge(c)
         .transition()
         .duration(1000)
-        .attr('cy',  function (d) {
-            let m = spacing.find(el => el.position === d.position);
-            return m.y*convert + margin.top*convert + 14*convert*d.yIndex;
-        })
-        .attr('cx', function (d) {
-            let m = spacing.find(el => el.position === d.position);
-            return m.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
-        })
+        .attr('cy',  function (d) { return yPos(d, convert); })
+        .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {
             if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
                 return "red";
@@ -568,6 +569,19 @@ function step1(convert = convertMM) {
 function step2(convert = convertMM) {
 
     highlightTopFour(convert);
+
+    let yMax = spacing.find(el => el.position === 5).y;
+    console.log(yMax);
+    // return m.y*convert + margin.top*convert + 14*convert*d.yIndex;
+
+    g
+        .append('rect')
+        .attr('y', 0)
+        .attr('x', 0)
+        .attr("width", 100)
+        .attr("height", 100)
+        .attr("fill", "red")
+        .attr("opacity", .2);
 
     svg
         .attr("aria-label","The image transitions to highlight the top four dots in each of the ten Braille cells. A red stroke appears around each of the top four cells and the dot radius is enlarged for emphasis.");
