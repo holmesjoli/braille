@@ -459,18 +459,23 @@ function updateCellGlyph(convert, addGlyph) {
 // Update rects
 function updateRect(convert, addRect) {
     let opacity;
-    
+    let yMaxData;
+    let yMax;
+    let xMaxData;
+    let xMax;
+
     if (addRect) {
         opacity = 1;
+        yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
+        yMax = yPos(yMaxData[0], convert) + r*convert;
+    
+        xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
+        xMax = xPos(xMaxData[0], convert);
     } else {
         opacity = 0;
+        xMax = 0;
+        yMax = 0;
     }
-
-    let yMaxData = data.filter((d) => d.glyph === "j" & d.position === 3);
-    let yMax = yPos(yMaxData[0], convert) + r*convert;
-
-    let xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
-    let xMax = xPos(xMaxData[0], convert);
 
     let c = gRect.selectAll("rect");
 
