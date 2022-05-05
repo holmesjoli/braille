@@ -410,6 +410,8 @@ function updateCellGlyph(convert, addGlyph) {
         .remove();
 }
 
+// Title Highlight top four
+// Description Highlights the top four dots in red
 function highlightTopFour(convert) {
 
     let c = gCircles.selectAll("circle")
@@ -422,20 +424,72 @@ function highlightTopFour(convert) {
         .transition()
         .duration(1000)
         .attr("stroke", function(d) {
-            if (d.position == 5 || d.position == 6) {
+            if (d.position === 5 || d.position === 6) {
                 return "#000000"
             } else {
                 return "red"
             }
         })
         .attr("r", function(d) {
-            if (d.position == 5 || d.position == 6) {
+            if (d.position === 5 || d.position === 6) {
                 return r*convert;
             } else {
                 return r*convert*1.5;
             }
         });
 }
+
+// Title Highlight fifth dot
+// Description Highlights the fifth dot
+function highlightDotFive(convert) {
+
+    let c = gCircles.selectAll("circle")
+    .data(data, function(d) {return d.id;});
+
+    c
+    .enter()
+    .append("circle")
+        .attr("r", r*convert)
+        .attr("stroke", "#000000")
+    .merge(c)
+        .transition()
+        .duration(1000)
+        .attr('cy',  function (d) {
+            let m = spacing.find(el => el.position === d.position);
+            return m.y*convert + margin.top*convert;
+        })
+        .attr('cx', function (d) {
+            let m = spacing.find(el => el.position === d.position);
+            return m.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
+        })
+        .attr("fill", function(d) {
+            return fillScale(d.value);
+        })
+        .attr("stroke", function(d) {
+            if (d.position === 5) {
+                return "red"
+            } else {
+                return "#000000"
+            }
+        })
+        .attr("r", function(d) {
+            console.log(d.position)
+            if (d.position === 5) {
+                return r*convert*1.5;
+            } else {
+                return r*convert;
+            }
+        })
+        .attr("opacity", 1);
+
+    c.exit()
+        .transition()
+        .duration(1000)
+        .attr("r", 0)
+        .attr("opacity", 0)
+        .remove();
+}
+
 
 // Title Step 0
 // Description filters data, updates circles, number and glyphs
@@ -478,7 +532,8 @@ function step2(convert = convertMM) {
 // Description filters data, updates circles, number and glyphs
 function step3(convert = convertMM) {
     filteredData("abcdefghijklmnopqrst");
-    updateCellCircle(convertMM);
+    // updateCellCircle(convertMM);
+    highlightDotFive(convertMM);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
 
