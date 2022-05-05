@@ -268,22 +268,38 @@ function filteredData(glyph) {
 
         if (d.xIndex < 10) {
             d.yIndex = 0;
-        } else if (d.xIndex > 10 & d.xIndex <=19) {
+        } else if (d.xIndex >= 10 & d.xIndex <=19) {
             d.yIndex = 1;
-        } else (
-            d.yIndex = 2
-        )
+            d.xIndex = d.xIndex - 10;
+        } else {
+            d.yIndex = 2;
+            d.xIndex = d.xIndex - 20;
+        }
 
         return glyph.includes(d.glyph);
     });
 
     let glyphDataNew = [];
     glyphArray.forEach(function(d) {
+
+        let xIndex = glyphArray.indexOf(d);
+        let yIndex;
+
+        if (xIndex < 10) {
+            yIndex = 0;
+        } else if (xIndex >= 10 & xIndex <=19) {
+            yIndex = 1;
+            xIndex = xIndex - 10;
+        } else {
+            yIndex = 2;
+        }
+
         glyphDataNew.push({
                         glyph: d,
                         x: 0,
                         y: 0,
-                        xIndex: glyphArray.indexOf(d)})
+                        xIndex: xIndex,
+                        yIndex: yIndex})
     })
 
     glyphData = glyphDataNew;
@@ -391,7 +407,7 @@ function updateCellGlyph(convert, addGlyph) {
             .transition()
             .duration(1000)
             .attr('y',  function (d) {
-                return 7*convert + margin.top*convert*2;
+                return d.y*convert + margin.top*convert + 14*convert*d.yIndex + 10*convert;
             })
             .attr('x', function (d) {
                 return 2*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
@@ -456,7 +472,7 @@ function highlightDotFive(convert) {
         .duration(1000)
         .attr('cy',  function (d) {
             let m = spacing.find(el => el.position === d.position);
-            return m.y*convert + margin.top*convert;
+            return m.y*convert + margin.top*convert + 14*convert*d.yIndex;
         })
         .attr('cx', function (d) {
             let m = spacing.find(el => el.position === d.position);
@@ -473,7 +489,6 @@ function highlightDotFive(convert) {
             }
         })
         .attr("r", function(d) {
-            console.log(d.position)
             if (d.position === 5) {
                 return r*convert*1.5;
             } else {
