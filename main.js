@@ -456,11 +456,12 @@ function updateCellGlyph(convert, addGlyph) {
         .remove();
 }
 
+// Update rects
 function updateRect(convert, addRect) {
     let opacity;
     
     if (addRect) {
-        opacity = .2;
+        opacity = 1;
     } else {
         opacity = 0;
     }
@@ -469,7 +470,7 @@ function updateRect(convert, addRect) {
     let yMax = yPos(yMaxData[0], convert) + r*convert;
 
     let xMaxData = data.filter((d) => d.glyph === "j" & d.position === 4);
-    let xMax = xPos(xMaxData[0], convert) + margin.right;
+    let xMax = xPos(xMaxData[0], convert);
 
     let c = gRect.selectAll("rect");
 
@@ -481,10 +482,11 @@ function updateRect(convert, addRect) {
 
     c
         .attr('y', margin.top)
-        .attr('x', 0)
+        .attr('x', margin.left)
         .attr("width", xMax)
         .attr("height", yMax)
-        .attr("fill", "red")
+        .attr("stroke", "red")
+        .attr("fill", "none")
         .attr("opacity", opacity);
 }
 
@@ -505,13 +507,6 @@ function highlightTopFour(convert) {
     .merge(c)
         .transition()
         .duration(1000)
-        .attr("stroke", function(d) {
-            if (d.position === 5 || d.position === 6) {
-                return "#000000"
-            } else {
-                return "red"
-            }
-        })
         .attr("r", function(d) {
             if (d.position === 5 || d.position === 6) {
                 return r*convert;
@@ -603,6 +598,7 @@ function step1(convert = convertMM) {
 // Description highlighs circles in red
 function step2(convert = convertMM) {
 
+    highlightTopFour(convert);
     updateRect(convert, true);
 
     svg
