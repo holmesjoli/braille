@@ -173,7 +173,7 @@ function init() {
             graphic: '.scroll__graphic', // the graphic
             text: '.scroll__text', // the step container
             step: '.scroll__text .step', // the step elements
-            offset: .35, // set the trigger to be 1/2 way down screen
+            offset: .55, // set the trigger to be 1/2 way down screen
             debug: false, // display the trigger offset for testing
             progress: false
         })
@@ -521,7 +521,23 @@ function step2RectData(convert) {
     let xMax = xPos(xMaxData[0], convert) + convert;
 
     rectData = [{"xMin": xMin, "xMax": xMax, "yMin": yMin, "yMax": yMax, "id": 0}];
+}
 
+function step3RectData(convert) { 
+
+    let yMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
+    let yMin = yPos(yMinData[0], convert) - convert;
+
+    let yMaxData = data.filter((d) => d.glyph === "u" & d.position === 5);
+    let yMax = yPos(yMaxData[0], convert) + 7*convert;
+
+    let xMinData = data.filter((d) => d.glyph === "a" & d.position === 1);
+    let xMin = xPos(xMinData[0], convert) - convert;
+
+    let xMaxData = data.filter((d) => d.glyph === "a" & d.position === 2);
+    let xMax = xPos(xMaxData[0], convert) + convert;
+
+    rectData = [{"xMin": xMin, "xMax": xMax, "yMin": yMin, "yMax": yMax, "id": 0}];
 }
 
 // Title Highlight top four
@@ -653,14 +669,13 @@ function step3(convert = 10) {
 
     // Update data steps
     filteredData("abcdefghijklmnopqrstuvxyz    w");
-    defaultRectData();
-
+    step3RectData(convert);
 
     // Update visual attributes
     highlightDotFive(convert);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
-    updateRect(false);
+    updateRect(true);
 
     svg
         .attr("aria-label","The image transitions to show 20 Braille cells representing A through T. There are now two rows of Braille cells to show how the Grades are related. ");
