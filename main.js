@@ -501,7 +501,7 @@ function updateRect(convert, addRect) {
         .attr('x', xMin)
         .attr("width", xMax)
         .attr("height", yMax)
-        .attr("stroke", "red")
+        .attr("stroke", "#ED1C24")
         .attr("fill", "none")
         .attr("opacity", opacity);
 }
@@ -552,14 +552,14 @@ function highlightDotFive(convert) {
         .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {
             if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
-                return "red";
+                return "#ED1C24";
             } else {
                 return fillScale(d.value);
             }
         })
         .attr("stroke", function(d) {
             if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
-                return "red";
+                return "#ED1C24";
             } else {
                 return "#000000";
             }
