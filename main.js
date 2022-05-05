@@ -268,19 +268,11 @@ function initChart() {
     .append("g")
 
     gRect
-        .attr("class", "cell-glyphs")
-        .selectAll("cell-glyph")
-        .data(glyphData)
-        .join('text')
-        .attr("role", "listitem")
-        .attr("class", "cell-glyph")
-        .attr('y', 0)
-        .attr('x', 0)
-        .attr("text-anchor", "middle")
-        .attr("font-size", 0)
-        .attr('opacity', 0)
-        .text("");
-
+        .append('rect')
+        .attr('y', margin.top)
+        .attr('x', margin.left)
+        .attr("width", 0)
+        .attr("height", 0)
 }
 
 // Filtered Data
