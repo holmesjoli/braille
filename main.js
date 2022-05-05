@@ -17,11 +17,12 @@ let svg = chart
 let g;
 let spacing;
 let position;
-let positionFiltered;
 let gCircles;
 let gGlyphs;
 let gNumbers;
 let glyphData = [];
+let data;
+
 const convertMM = 3.7795275591;
 
 
@@ -53,7 +54,8 @@ const files = {
             return {
                 glyph: j.glyph,
                 position: +j.position,
-                value: +j.value
+                value: +j.value,
+                id: j.id
             }
         }
     }
@@ -121,11 +123,15 @@ function handleStepEnter(response) {
     })
 
     if (response.index === 0) {
-        updateCell(magnify, null, true, false);
+        step0(magnify);
     }
 
     if (response.index === 1) {
-        updateCell(convertMM, "abcdefghij", false, true);
+        step1(convertMM);
+    }
+
+    if (response.index === 2) {
+        step2(convertMM);
     }
 
     console.log(response)
@@ -165,7 +171,6 @@ function init() {
     spacing = values[0];
     position = values[1];
 
-    console.log(spacing)
     console.log(position)
 
     initChart();
@@ -182,7 +187,7 @@ init();
 
 function initChart(glyph = " ") {
 
-    filterPositionData(glyph);
+    // filterPositionData(glyph);
 
     svg
         .attr('width', chartWidth)
@@ -252,45 +257,35 @@ function initChart(glyph = " ") {
         .text("");
 }
 
-// Filter position data
-function filterPositionData(glyph) {
+function filteredData(glyph) {
 
-    let glyphArray;
+    let glyphArray = glyph.split("");
+
+    data = position.filter(function(d) {
+
+        d.index = glyphArray.indexOf(d.glyph);
+
+        return glyph.includes(d.glyph);
+    });
+
     let glyphDataNew = [];
+    glyphArray.forEach(function(d) {
+        glyphDataNew.push({
+                        glyph: d,
+                        x: 0,
+                        y: 0,
+                        index: glyphArray.indexOf(d)})
+    })
 
-    if (glyph != null) {
-        glyphArray = glyph.split("");
-
-        positionFiltered = position.filter(function(d) {
-
-            d.index = glyphArray.indexOf(d.glyph);
-            return glyph.includes(d.glyph);
-        });
-
-        glyphArray.forEach(function(d) {
-            glyphDataNew.push({
-                            glyph: d,
-                            x: 0,
-                            y: 0,
-                            index: glyphArray.indexOf(d)})
-        })
-
-        glyphData = glyphDataNew;
-
-    } else {
-        positionFiltered = spacing;
-    }
+    glyphData = glyphDataNew;
 }
-
 
 // Title Update the cell circle attributes
 // Description transitions the cells between steps using entry and exit pattern of update
-function updateCellCircle(convert, glyph) {
-
-    filterPositionData(glyph);
+function updateCellCircle(data, convert) {
 
     let c = gCircles.selectAll("circle")
-    .data(positionFiltered, function(d) {return d.position;});
+    .data(data, function(d) {return d.id;});
 
     c
     .enter()
@@ -298,7 +293,7 @@ function updateCellCircle(convert, glyph) {
     .merge(c)
         .transition()
         .duration(1000)
-        .delay(function(d) {return 500*d.index})
+        // .delay(function(d) {return 500*d.index})
         .attr('cy',  function (d) {
             let m = spacing.find(el => el.position === d.position);
             return m.y*convert + margin.top*convert;
@@ -387,7 +382,7 @@ function updateCellGlyph(convert, addGlyph) {
         .merge(t)
             .transition()
             .duration(1000)
-            .delay(function(d) {return 500*d.index})
+            // .delay(function(d) {return 500*d.index})
             .attr('y',  function (d) {
                 return 7*convert + margin.top*convert*2;
             })
@@ -408,9 +403,51 @@ function updateCellGlyph(convert, addGlyph) {
         .remove();
 }
 
-function updateCell(convert, glyph, addNumber, addGlyph) {
+function step0(convert) {
 
-    updateCellCircle(convert, glyph);
-    updateCellText(convert, addNumber);
-    updateCellGlyph(convert, addGlyph);
+    filteredData(" ")
+    updateCellCircle(data, convert);
+    updateCellText(convert, true);
+    updateCellGlyph(convert, false);
+
+}
+
+function step1(convert) {
+    filteredData("abcdefghij");
+    updateCellCircle(data, convert);
+    updateCellText(convert, false);
+    updateCellGlyph(convert, true);
+}
+
+function step2(convert) {
+    filteredData("abcdefghij");
+    highlightTopFour(convert)
+}
+
+function highlightTopFour(convert) {
+
+    let c = gCircles.selectAll("circle")
+    .data(data, function(d) {return d.id;});
+
+    c
+    .enter()
+    .append("circle")
+    .merge(c)
+        .transition()
+        .duration(1000)
+        // .delay(function(d) {return 500*d.index})
+        .attr("stroke", function(d) {
+            if (d.position == 5 || d.position == 6) {
+                return "#000000"
+            } else {
+                return "red"
+            }
+        })
+        .attr("r", function(d) {
+            if (d.position == 5 || d.position == 6) {
+                return r*convert;
+            } else {
+                return r*convert*1.5;
+            }
+        });
 }
