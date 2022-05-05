@@ -587,10 +587,10 @@ function step0(convert = magnify) {
 
 // Title Step 1
 // Description filters data, updates circles, number and glyphs
-function step1(convert = convertMM) {
+function step1(convert = 10) {
 
     filteredData("abcdefghij");
-    updateCellCircle(convertMM);
+    updateCellCircle(convert);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
     updateRect(convert, false);
@@ -601,7 +601,7 @@ function step1(convert = convertMM) {
 
 // Title Step 2
 // Description highlighs circles in red
-function step2(convert = convertMM) {
+function step2(convert = 10) {
 
     highlightTopFour(convert);
     updateRect(convert, true);
@@ -612,9 +612,9 @@ function step2(convert = convertMM) {
 
 // Title Step 3
 // Description filters data, updates circles, number and glyphs
-function step3(convert = convertMM) {
+function step3(convert = 10) {
     filteredData("abcdefghijklmnopqrst");
-    highlightDotFive(convertMM);
+    highlightDotFive(convert);
     updateCellText(convert, false);
     updateCellGlyph(convert, true);
     updateRect(convert, false);
