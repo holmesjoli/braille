@@ -128,6 +128,15 @@ I started with sketching out how I thought I could potentially show connections 
 ![Sketch showing connections in the system with lines.](/images/sketch4.png)
 
 
+### Color
+
+I added color to show connections between groups. I started with the pastel color palette from one of the visualizations I drew inspiration from. However, that palette relies on the rainbow, which is not color-blind accessible.
+
+![Image showing a non-color-blind friendly palette on the visualization](/images/design-process.png)
+
+I used coolors to develop a new palette which is color-blind accessible. 
+![Image showing a non-color-blind friendly palette on the visualization](/images/checking-for-color-blindness.png)
+
 
 ## Sources
 
