@@ -84,7 +84,7 @@ var scroller = scrollama();
 function handleResize() {
     // 1. update height of step elements for breathing room between steps
     // changing the multiplier here will define how much white space between steps
-    var stepHeight = Math.floor(window.innerHeight * 0.7);
+    var stepHeight = Math.floor(window.innerHeight * 0.6);
     step.style('height', stepHeight + 'px');
 
     graphic.style('height', window.innerHeight + 'px');
@@ -158,7 +158,7 @@ function init() {
             graphic: '.scroll__graphic', // the graphic
             text: '.scroll__text', // the step container
             step: '.scroll__text .step', // the step elements
-            offset: .5, // set the trigger to be 1/2 way down screen
+            offset: .35, // set the trigger to be 1/2 way down screen
             debug: false, // display the trigger offset for testing
             progress: false
         })
