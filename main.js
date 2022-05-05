@@ -1,35 +1,36 @@
 import * as Helper from "./modules/helper.js"
 
-// using d3 for convenience, and storing a selected elements
+// Scrollama globals
 let container = d3.select('#scroll');
 let graphic = container.select('.scroll__graphic');
 let chart = graphic.select('#chart');
 let text = container.select('.scroll__text');
 let step = text.selectAll('.step');
 
-// define some global vars
+// Visualization globals
+let svg = chart
+    .append('svg');
 let chartWidth;
 let chartHeight;
 
-let svg = chart
-    .append('svg');
-
-let g;
+// Data globals
 let spacing;
 let position;
+let glyphData = [];
+let data;
+
+// Grouping globals
+let g;
 let gCircles;
 let gGlyphs;
 let gNumbers;
-let glyphData = [];
-let data;
+let gRect;
+
+// Additional globals
 let glyphArray;
 let grade1GlyphArray = "abcdefghij".split("");
 let grade2GlyphArray = "klmnopqrst".split("");
-
-
 const convertMM = 3.7795275591;
-
-
 let magnify;
 
 if (window.innerWidth < 800) {
@@ -37,7 +38,6 @@ if (window.innerWidth < 800) {
 } else {
     magnify = 30;
 }
-
 
 const files = {
     spacing: {
@@ -262,6 +262,25 @@ function initChart() {
         .attr("font-size", 0)
         .attr('opacity', 0)
         .text("");
+
+    // Add Rect
+    gRect = g
+    .append("g")
+
+    gRect
+        .attr("class", "cell-glyphs")
+        .selectAll("cell-glyph")
+        .data(glyphData)
+        .join('text')
+        .attr("role", "listitem")
+        .attr("class", "cell-glyph")
+        .attr('y', 0)
+        .attr('x', 0)
+        .attr("text-anchor", "middle")
+        .attr("font-size", 0)
+        .attr('opacity', 0)
+        .text("");
+
 }
 
 // Filtered Data
@@ -537,7 +556,6 @@ function step0(convert = magnify) {
 
     svg
         .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
-
 }
 
 // Title Step 1
