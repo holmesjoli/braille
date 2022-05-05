@@ -137,6 +137,9 @@ I added color to show connections between groups. I started with the pastel colo
 I used coolors to develop a new palette which is color-blind accessible. Although it would be nice to have a ten-color palette because there are ten groups, it is challenging to construct palettes with 10 different colors that are color-blind accessible.
 ![Image showing coolors color-blind friendly checking tool](/images/checking-for-color-blindness.png)
 
+The updated visualization looks like:
+![Image showing visualization with a color-blind friendyl palette](/images/design-process2.png)
+
 
 ## Sources
 
