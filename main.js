@@ -22,6 +22,10 @@ let gGlyphs;
 let gNumbers;
 let glyphData = [];
 let data;
+let glyphArray;
+let grade1GlyphArray = "abcdefghij".split("");
+let grade2GlyphArray = "klmnopqrst".split("");
+
 
 const convertMM = 3.7795275591;
 
@@ -260,7 +264,7 @@ function initChart() {
 
 function filteredData(glyph) {
 
-    let glyphArray = glyph.split("");
+    glyphArray = glyph.split("");
 
     data = position.filter(function(d) {
 
@@ -315,6 +319,9 @@ function updateCellCircle(convert) {
     c
     .enter()
     .append("circle")
+        .attr("r", r*convert)
+        .attr("stroke", "#000000")
+        .attr("fill", "#FFFFFF")
     .merge(c)
         .transition()
         .duration(1000)
@@ -436,6 +443,9 @@ function highlightTopFour(convert) {
     c
     .enter()
     .append("circle")
+        .attr("r", r*convert)
+        .attr("stroke", "#000000")
+        .attr("fill", "#FFFFFF")
     .merge(c)
         .transition()
         .duration(1000)
@@ -467,6 +477,7 @@ function highlightDotFive(convert) {
     .append("circle")
         .attr("r", r*convert)
         .attr("stroke", "#000000")
+        .attr("fill", "#FFFFFF")
     .merge(c)
         .transition()
         .duration(1000)
@@ -479,17 +490,21 @@ function highlightDotFive(convert) {
             return m.x*convert + margin.left*convert/2 + margin.left*convert*d.xIndex + margin.right*convert*d.xIndex;
         })
         .attr("fill", function(d) {
-            return fillScale(d.value);
+            if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
+                return "red";
+            } else {
+                return fillScale(d.value);
+            }
         })
         .attr("stroke", function(d) {
-            if (d.position === 5) {
-                return "red"
+            if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
+                return "red";
             } else {
-                return "#000000"
+                return "#000000";
             }
         })
         .attr("r", function(d) {
-            if (d.position === 5) {
+            if (d.position === 5 && grade2GlyphArray.includes(d.glyph)) {
                 return r*convert*1.5;
             } else {
                 return r*convert;
