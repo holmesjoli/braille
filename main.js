@@ -111,12 +111,12 @@ function handleResize() {
 
     if (window.innerWidth < 800) {
         chartWidth = graphic.node().offsetWidth;
-        chartHeight = Math.floor(window.innerHeight*.33);
-        stepHeight = Math.floor(window.innerHeight );
+        chartHeight = Math.floor(window.innerHeight*.5);
+        stepHeight = Math.floor(window.innerHeight*.6);
     } else {
         chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
         chartHeight = Math.floor(window.innerHeight*.7);
-        stepHeight = Math.floor(window.innerHeight * 0.6);
+        stepHeight = Math.floor(window.innerHeight *.6);
     }
 
     step.style('height', stepHeight + 'px');
