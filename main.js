@@ -372,7 +372,7 @@ function updateCellCircle(convert) {
         .attr("fill", "#FFFFFF")
     .merge(c)
         .transition()
-        .duration(1000)
+        // .duration(1000)
         .attr('cy',  function (d) { return yPos(d, convert); })
         .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {
@@ -416,7 +416,7 @@ function updateCellText(convert, addNumber) {
         .append("text")
         .merge(t)
             .transition()
-            .duration(1000)
+            // .duration(1000)
             .attr('y',  function (d) {
                 return d.y*convert + margin.top*convert + r*convert/2;
             })
@@ -460,7 +460,7 @@ function updateCellGlyph(convert, addGlyph) {
         .append("text")
         .merge(t)
             .transition()
-            .duration(1000)
+            // .duration(1000)
             .attr('y',  function (d) {
                 return 14*convert*(d.yIndex +1)
             })
@@ -498,9 +498,7 @@ function updateRect(addRect) {
     .append("rect")
     .merge(c)
         .transition()
-        .duration(1000)
-
-    c
+        // .duration(1000)
         .attr('y', function(d) {return d.yMin; })
         .attr('x',  function(d) {return d.xMin; })
         .attr("width",  function(d) {return d.xMax; })
@@ -563,7 +561,7 @@ function highlightTopFour(convert) {
         .attr("fill", "#FFFFFF")
     .merge(c)
         .transition()
-        .duration(1000)
+        // .duration(1000)
         .attr("r", function(d) {
             if (d.value === 0) {
                 return r*convert;
@@ -590,7 +588,7 @@ function highlightDotFive(convert) {
         .attr("r", 0)
     .merge(c)
         .transition()
-        .duration(1000)
+        // .duration(1000)
         .attr('cy',  function (d) { return yPos(d, convert); })
         .attr('cx', function (d) { return xPos(d, convert); })
         .attr("fill", function(d) {

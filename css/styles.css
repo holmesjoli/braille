@@ -270,9 +270,9 @@ div p:last-child {
     }
 
     .outro {
-        -moz-transform: translateY(-10%);
-        -webkit-transform: translateY(-10%);
-        transform: translateY(-10%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
     }
 
     #chart {
