@@ -598,6 +598,13 @@ function highlightDotFive(convert) {
         .duration(1000)
         .attr('cy',  function (d) { return yPos(d, convert); })
         .attr('cx', function (d) { return xPos(d, convert); })
+        .attr("stroke", function(d) {
+            if (d.glyph === " ") {
+                return "#FFFFFF";
+            } else {
+                return "#000000";
+            }
+        })
         .attr("fill", function(d) {
             if (d.value === 1) {
                 return colorScale(d.xIndex);
