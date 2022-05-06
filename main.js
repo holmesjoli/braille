@@ -115,7 +115,7 @@ function handleResize() {
         stepHeight = Math.floor(window.innerHeight*.6);
     } else {
         chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
-        chartHeight = Math.floor(window.innerHeight*.7);
+        chartHeight = Math.floor(window.innerHeight*.8);
         stepHeight = Math.floor(window.innerHeight *.6);
         // step.style('height', stepHeight + 'px');
     }
