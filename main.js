@@ -286,9 +286,10 @@ function initChart() {
         .selectAll("rect-groups")
         .data(rectData)
         .join('rect')
+        .attr("role", "listitem")
         .attr("class", "dashed")
-        .attr('y', margin.top)
-        .attr('x', margin.left)
+        .attr('y', 0)
+        .attr('x', 0)
         .attr("width", 0)
         .attr("height", 0)
         .attr("opacity", 0)
@@ -494,6 +495,7 @@ function updateRect(addRect) {
     .data(rectData, function(d) {return d.id;});
 
     c
+    .enter()
     .append("rect")
     .merge(c)
         .transition()
@@ -505,6 +507,12 @@ function updateRect(addRect) {
         .attr("stroke", "#000000")
         .attr("fill", "none")
         .attr("opacity", opacity);
+
+    c.exit()
+        .transition()
+        .duration(1000)
+        .attr("opacity", 0)
+        .remove();
 }
 
 function defaultRectData() {
