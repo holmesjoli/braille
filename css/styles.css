@@ -271,7 +271,7 @@ div p:last-child {
         -moz-transform: translateY(-15%);
         -webkit-transform: translateY(-15%);
         transform: translateY(-15%);
-        margin-bottom: 150px
+        margin-bottom: 300px
     }
 
     #chart {

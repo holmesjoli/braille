@@ -637,6 +637,9 @@ function step0(convert = 30) {
 
     svg
         .attr("aria-label","Image shows an enlarged 2 by 3 Braille cell. The cells are numbered 1 through 6.");
+
+    g
+        .attr("transform", `translate(${0},${-50})`); //TODO change this, last minute hack to get it on the page for mobile version
 }
 
 // Title Step 1
