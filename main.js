@@ -658,6 +658,9 @@ function step1(convert = magnify) {
 
     svg
         .attr("aria-label","The image transitions from a single Braille cell to a set of 10 Braille representing A-J. The numbers have been removed and there is text below each cell that labels the cell A through J.");
+
+    g
+        .attr("transform", `translate(${0},${50})`); //TODO change this, last minute hack to get it on the page for mobile version
 }
 
 // Title Step 2
