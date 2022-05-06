@@ -140,11 +140,8 @@ div p:last-child {
 .step {
     opacity: 0.5;
     padding: 1rem;
-    /* background-color: lightgray; */
-    /* border: 1px solid gray; */
     max-width: 800px;
-    height: 300px;
-    margin: 10px;
+    max-height: 80%;
     margin-top: 80px;
     margin-bottom: 80px;
 }
@@ -267,12 +264,13 @@ div p:last-child {
 
     .step {
         z-index: -2;
+        max-height: 60%;
     }
 
     .outro {
-        -moz-transform: translateY(-50%);
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
+        -moz-transform: translateY(-15%);
+        -webkit-transform: translateY(-15%);
+        transform: translateY(-15%);
     }
 
     #chart {

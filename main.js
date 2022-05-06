@@ -117,9 +117,8 @@ function handleResize() {
         chartWidth = graphic.node().offsetWidth - textWidth - chartMargin; // left
         chartHeight = Math.floor(window.innerHeight*.7);
         stepHeight = Math.floor(window.innerHeight *.6);
+        // step.style('height', stepHeight + 'px');
     }
-
-    step.style('height', stepHeight + 'px');
 
     // make the height 1/2 of viewport
     chart
@@ -688,6 +687,8 @@ function step3(convert = magnify) {
     updateCellGlyph(convert, true);
     updateRect(true);
 
+    // g.attr("transform", `translate(0,0)`)
+
     svg
-        .attr("aria-label","The image transitions to show 20 Braille cells representing A through T. There are now two rows of Braille cells to show how the Grades are related. ");
+        .attr("aria-label","The image transitions to show 20 Braille cells representing A through T. There are now two rows of Braille cells to show how the grades are related. ");
 }
