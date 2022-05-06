@@ -111,10 +111,6 @@ let svg = svg
 
 I've also added alt tags to each image in this markdown file for added accessiblity to the documentation of this process.
 
-### Mobile adaptivity
-
-To make the visualization somewhat mobile adaptive, I added a breakpoint of 800 pixels in the javascript code. The javascript code resizes the SVG, and the CSS code pivots the layout to be a column-based layout instead of a row-based layout. In the first step, the cell is magnified to show the matrix, which gets resized with a breakpoint. Additionally, I modified CSS properties, e.g. font-size, to adapt the overall fit of the content to a smaller screen.
-
 ### Design process
 
 ### Sketches
@@ -126,6 +122,8 @@ I started with sketching out how I thought I could potentially show connections 
 ![Sketch showing connections between dots with color.](/images/sketch2.jpg)
 
 ![Sketch showing connections in the system with lines.](/images/sketch4.png)
+
+I ended up using the dotted line idea in my final visualization, but as box rather than a line connecting two points. The box changes shape and size to highlight different connections in the system.
 
 
 ### Color
@@ -140,6 +138,13 @@ I used coolors to develop a new palette which is color-blind accessible. Althoug
 The updated visualization looks like:
 ![Image showing visualization with a color-blind friendyl palette](/images/design-process2.png)
 
+
+### Mobile adaptivity
+
+To make the visualization somewhat mobile adaptive, I added a breakpoint of 800 pixels in the javascript code. The javascript code resizes the SVG, and the CSS code pivots the layout to be a column-based layout instead of a row-based layout. In the first step, the cell is magnified to show the matrix, which gets resized with a breakpoint. Additionally, I modified CSS properties, e.g. font-size, to adapt the overall fit of the content to a smaller screen. Adapting the scrollitelling to mobile was a bit tricky, since the text was set-up to scroll over the visualization. To get around this issue, I anchored the visualization to the bottom of the screen and moved the text to scroll behind the visualization. 
+
+The mobile adapted screen looks like this:
+![Image showing visualization which has been adapted for mobile. The layout is in a column and the visualization is anchored to the bottom of the screen.](/images/design-process3.png)
 
 ## Sources
 
