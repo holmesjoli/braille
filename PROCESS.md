@@ -16,7 +16,6 @@ For this project, all of my data were hand-collected. The most important part of
 
 [Image source](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mkdesign.uk%2Fbraille-specifications.html&psig=AOvVaw02UPCiaC8gpEuYXovWpJwt&ust=1651672533226000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCJj2pui9w_cCFQAAAAAdAAAAABAD)
 
-I ended up not using the Braille API for this project. It wouldn't have added anything to the project since I collected the data. 
 
 ## Research
 
@@ -110,7 +109,7 @@ let svg = svg
         .attr('aria-label', 'chart type');
 ```
 
-At each step I update the aria-label to describe what the visualization is showing because it is not static.
+I've also added alt tags to each image in this markdown file for added accessiblity to the documentation of this process.
 
 ### Design process
 
@@ -125,6 +124,7 @@ I started with sketching out how I thought I could potentially show connections 
 ![Sketch showing connections in the system with lines.](/images/sketch4.png)
 
 I ended up using the dotted line idea in my final visualization, but as box rather than a line connecting two points. The box changes shape and size to highlight different connections in the system.
+
 
 ### Color
 
@@ -145,10 +145,6 @@ To make the visualization somewhat mobile adaptive, I added a breakpoint of 800 
 
 The mobile adapted screen looks like this:
 ![Image showing visualization which has been adapted for mobile. The layout is in a column and the visualization is anchored to the bottom of the screen.](/images/design-process3.png)
-
-### Whitespace
-
-I also encountered lots of issues with too much white space. I used the CSS property `translateY()` to reduce whitespace in some areas and increase whitespace in other areas. I also adapated the initial scrollama code which set a height for each step. Hardcoding a height works well if the text in each step are similiar lengths. However, my text is not consistent this resulted in inconsistent whitespace between steps. To get around this I set a maximum step height and removed the hardcoded step-height in the scrollama code.
 
 ## Sources
 
