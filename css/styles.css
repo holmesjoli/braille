@@ -105,10 +105,6 @@ div p:last-child {
     position: relative;
 }
 
-#chart {
-    /* background-color: blanchedalmond; */
-}
-
 /* set scroll graphic to absolute and lock in the position */
 .scroll__graphic {
     position: absolute;
